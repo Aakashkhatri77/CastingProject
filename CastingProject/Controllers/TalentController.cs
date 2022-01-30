@@ -19,7 +19,7 @@ namespace CastingProject.Controllers
         // GET: TalentController
         public ActionResult Index(string Search_Data)
         {
-            var talent = from _talent in _context.talents select _talent;
+            var talent = from _talent in _context.talents.Include(tp=>tp.talentProfiles) select _talent;
             if (!String.IsNullOrEmpty(Search_Data))
             {
                 talent = talent.Where(_talent => _talent.Name.ToLower().Contains(Search_Data.ToLower()));
@@ -34,7 +34,7 @@ namespace CastingProject.Controllers
             {
                 return NotFound();
             }
-            var talent = _context.talents.Find(id);
+            var talent = _context.talents.Include(tp=>tp.talentProfiles).FirstOrDefault(x=>x.Id==id);
             return View(talent);
         }
 
@@ -51,26 +51,32 @@ namespace CastingProject.Controllers
         {
             try
             {
-                string webRootPath = _hostEnvironment.WebRootPath;
-                string filename = Path.GetFileNameWithoutExtension(talent.ImageFile.FileName);
-                string extension = Path.GetExtension(talent.ImageFile.FileName);
-                IFormFile postedFile = talent.ImageFile;
-                long length = postedFile.Length;
-                if (extension.ToLower() == ".jpg" || extension.ToLower() == ".png" || extension.ToLower() == ".jpeg")
+                foreach (var item in talent.ImageFile)
                 {
-                    if (length <= 1000000)
+                    string webRootPath = _hostEnvironment.WebRootPath;
+                    string filename = Path.GetFileNameWithoutExtension(item.FileName);
+                    filename = filename + Guid.NewGuid();
+                    string extension = Path.GetExtension(item.FileName);
+                    IFormFile postedFile = item;
+                    long length = postedFile.Length;
+                    if (extension.ToLower() == ".jpg" || extension.ToLower() == ".png" || extension.ToLower() == ".jpeg")
                     {
-                        talent.Profile = filename = filename + extension;
-                        string path = Path.Combine(webRootPath + "/Profile/" + filename);
-                        using (var fileStream = new FileStream(path, FileMode.Create))
+                        if (length <= 1000000)
                         {
-                            talent.ImageFile.CopyTo(fileStream);
+                            var profile = filename = filename + extension;
+                            string path = Path.Combine(webRootPath + "/Profile/" + filename);
+                            using (var fileStream = new FileStream(path, FileMode.Create))
+                            {
+                                item.CopyTo(fileStream);
+                            }
+
+                            //Insert Record
+                            talent.talentProfiles.Add(new TalentProfile { ProfileName = profile });
                         }
-                        //Insert Record
-                        _context.talents.Add(talent);
-                        _context.SaveChanges();
                     }
                 }
+                _context.talents.Add(talent);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -93,50 +99,51 @@ namespace CastingProject.Controllers
         {
             try
             {
-                if (talent.ImageFile != null)
-                {
-                    var oldTalent = _context.talents.Find(id);
-                    string webRootPath = _hostEnvironment.WebRootPath;
-                    string filename = Path.GetFileNameWithoutExtension(talent.ImageFile.FileName);
-                    string extension = Path.GetExtension(talent.ImageFile.FileName);
-                    IFormFile postedFile = talent.ImageFile;
-                    long length = postedFile.Length;
-                    if (extension.ToLower() == ".jpg" || extension.ToLower() == ".png" || extension.ToLower() == ".jpeg")
-                    {
-                        if (length <= 1000000)
-                        {
-                            talent.Profile = filename = filename + extension;
-                            string path = Path.Combine(webRootPath + "/Profile/" + filename);
-                            using (var fileStream = new FileStream(path, FileMode.Create))
-                            {
-                                talent.ImageFile.CopyTo(fileStream);
-                            }
-                            /* _context.Entry(talent).State = EntityState.Modified;*/
-                            if (oldTalent.Profile != null)
-                            {
-                                string imagePath = Path.Combine(_hostEnvironment.WebRootPath, "Profile/", oldTalent.Profile);
-                                if (System.IO.File.Exists(imagePath))
-                                {
-                                    System.IO.File.Delete(imagePath);
-                                }
-                            }
-                            /*     oldTalent.Name = talent.Name;
-                                 oldTalent.Age = talent.Age;*/
+                //if (talent.ImageFile != null)
+                //{
+                //    var oldTalent = _context.talents.Find(id);
+                //    string webRootPath = _hostEnvironment.WebRootPath;
+                //    string filename = Path.GetFileNameWithoutExtension(talent.ImageFile.FileName);
+                //    string extension = Path.GetExtension(talent.ImageFile.FileName);
+                //    IFormFile postedFile = talent.ImageFile;
+                //    long length = postedFile.Length;
+                //    if (extension.ToLower() == ".jpg" || extension.ToLower() == ".png" || extension.ToLower() == ".jpeg")
+                //    {
+                //        if (length <= 1000000)
+                //        {
+                //            talent.Profile = filename = filename + extension;
+                //            string path = Path.Combine(webRootPath + "/Profile/" + filename);
+                //            using (var fileStream = new FileStream(path, FileMode.Create))
+                //            {
+                //                talent.ImageFile.CopyTo(fileStream);
+                //            }
+                //            /* _context.Entry(talent).State = EntityState.Modified;*/
+                //            if (oldTalent.Profile != null)
+                //            {
+                //                string imagePath = Path.Combine(_hostEnvironment.WebRootPath, "Profile/", oldTalent.Profile);
+                //                if (System.IO.File.Exists(imagePath))
+                //                {
+                //                    System.IO.File.Delete(imagePath);
+                //                }
+                //            }
+                //            /*     oldTalent.Name = talent.Name;
+                //                 oldTalent.Age = talent.Age;*/
 
-                            oldTalent.Profile = talent.Profile;
-                            _context.SaveChanges();
+                //            oldTalent.Profile = talent.Profile;
+                //            _context.SaveChanges();
 
-                        }
-                    }
-                    return RedirectToAction(nameof(Index));
-                }
-                else
-                {
-                    _context.Entry(talent).State = EntityState.Modified;
-                    _context.SaveChanges();
-                    return RedirectToAction(nameof(Index));
+                //        }
+                //    }
+                //    return RedirectToAction(nameof(Index));
+                //}
+                //else
+                //{
+                //    _context.Entry(talent).State = EntityState.Modified;
+                //    _context.SaveChanges();
+                //    return RedirectToAction(nameof(Index));
 
-                }
+                //}
+                return View();
             }
             catch
             {
@@ -147,7 +154,7 @@ namespace CastingProject.Controllers
         // GET: TalentController/Delete/5
         public ActionResult Delete(int id)
         {
-            var talent = _context.talents.Find(id);
+            var talent = _context.talents.Include(tp=>tp.talentProfiles).FirstOrDefault(x=>x.Id==id);
             return View(talent);
         }
 
@@ -158,16 +165,21 @@ namespace CastingProject.Controllers
         {
             try
             {
-                var talent = _context.talents.Find(id);
-                _context.talents.Remove(talent);
-                if (talent.Profile != null)
+                var talent = _context.talents.Include(tp=>tp.talentProfiles).FirstOrDefault(x=>x.Id == id);
+                var profiles = talent.talentProfiles.Where(x => x.TalentId == id);
+                foreach (var item in profiles)
                 {
-                    string imagePath = Path.Combine(_hostEnvironment.WebRootPath, "Profile/", talent.Profile);
+                if (item.ProfileName != null)
+                {
+                    string imagePath = Path.Combine(_hostEnvironment.WebRootPath, "Profile/", item.ProfileName);
                     if (System.IO.File.Exists(imagePath))
                     {
                         System.IO.File.Delete(imagePath);
                     }
                 }
+
+                }
+                _context.talents.Remove(talent);
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
