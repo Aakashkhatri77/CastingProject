@@ -35,7 +35,7 @@
                 <td>
                     @foreach (var image in item.talentProfiles)
                     {
-                        <img src= "~/Profile/@image.ProfileName" height="20px" width="20px"/>
+                        <img src= "~/@image.ProfileName" height="20px" width="20px"/>
                     }
                 </td>
                 <td>
@@ -48,6 +48,7 @@
                     @Html.DisplayFor(modelItem => item.Age)
                 </td>
                 <td>
+                    <a asp-action="EditGallery" asp-route-id="@item.Id">Edit Image</a> |
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>

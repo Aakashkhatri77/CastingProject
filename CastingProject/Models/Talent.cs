@@ -24,10 +24,11 @@ namespace CastingProject.Models
         [NotMapped]
         public List<IFormFile> ImageFile { get; set; }
 
-        public ICollection<TalentProfile> talentProfiles { get; set; }
-        public Talent()
-        {
-            talentProfiles = new Collection<TalentProfile>();
-        }
+        public ICollection<TalentProfile> talentProfiles { get; set; } = new HashSet<TalentProfile>();
+        
+        //public Talent()
+        //{
+        //    talentProfiles = new Collection<TalentProfile>();
+        //}
     }
 }
