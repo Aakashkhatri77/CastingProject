@@ -1,0 +1,43 @@
+﻿@model CastingProject.Models.Artist;
+
+@*<div id="modal-container" uk-modal class="row">
+    <form asp-action="GalleryUpdate" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id">
+    <input type="hidden" name="Name" value="@Model.Name">
+    <div class="col-md-4">
+    <label asp-for="GalleryFile">Image</label>
+    <input multiple asp-for="GalleryFile" class="form-control">
+    </div>
+    <br>
+    <div class="col-md-4">
+    <input type="submit" class="btn btn-primary" value="Upload">
+    </div>
+    </form>
+    </div>*@
+
+<div id="modal-container" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <form asp-action="GalleryUpdate" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id">
+            <input type="hidden" name="Name" value="@Model.Name">
+            <button class="uk-modal-close-default" type="button" onclick="PageReload()" uk-close></button>
+            <h2 class="uk-modal-title">Upload Image</h2>
+            <div class="uk-width-1-2@s">
+                <label class="uk-form-label" for="form-stacked-text">Gallery</label>
+                <div class="uk-width" uk-form-custom="target: true">
+                    <input type="file" multiple asp-for="GalleryFile">
+                    <input class="uk-input" type="text" placeholder="Select file" disabled>
+                </div>
+            </div>
+            <div>
+                <input type="submit" value="upload" data-save="modal" class="btn uk-button uk-button-primary" style="border-radius: 6px; margin: 20px 0; padding: 0 39px; background: #d79605;" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function PageReload(){
+        location.reload();
+    }
+</script>

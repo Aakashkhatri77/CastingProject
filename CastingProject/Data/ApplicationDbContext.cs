@@ -11,7 +11,8 @@ namespace CastingProject.Data
         {
         }
 
-        public DbSet<Talent> talents { get; set; }
-        public DbSet<TalentProfile> talentProfiles { get; set; }
+        public DbSet<Artist> Artists { get; set; }
+        public DbSet<ArtistGallery> ArtistGalleries { get; set; }
+        public DbSet<Ethnicity> Ethnicities{ get; set; }
     }
 }

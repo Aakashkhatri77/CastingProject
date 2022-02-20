@@ -1,0 +1,74 @@
+﻿
+
+<div id="Gallery">
+</div>
+@*<button class="uk-button uk-button-primary" data-url="@Url.Action($"GalleryUpdate")" uk-toggle="target: #modal-container">Upload Image</button>
+*@
+
+@*<div class="uk-child-width-1-4 uk-grid-small uk-text-center" uk-grid>
+    @foreach (var item in Model.ArtistGalleries)
+    {
+    <div>
+    <div class="uk-card uk-card-default uk-card-body" style="height: 200px;">
+    <a onclick="Confirm()" asp-action="DeleteGallery"  asp-route-id="@item.Id" class="uk-position-top gallery-close" type="button" uk-close></a>
+
+    <div class="content">
+    <a href="~/@item.Gallery" target="_blank">
+    <img src="~/@item.Gallery" style="height:200px;">
+    </a>
+    </div>
+    </div>
+    </div>
+    }
+    </div>*@
+
+
+
+
+<div class="talent">
+    <dd class="image-btn" style="margin-top:15px; margin-bottom:-10px;"><a class="uk-button uk-button-default" data-url="@Url.Action($"GalleryUpdate/{@Model.Id}")" uk-toggle="target: #modal-container">Upload</a></dd>
+
+    <div class="uk-grid-small uk-child-width-1-4 uk-text-center" uk-grid>
+        @foreach (var item in Model.ArtistGalleries)
+        {
+            <div>
+                <div class="for-img uk-inline-clip uk-transition-toggle talent-image" tabindex="0">
+                    <div class="content uk-margin-remove" uk-lightbox="animation: scale">
+                        <a class="uk-inline" href="~/@item.Gallery" target="_blank">
+                            <img src="~/@item.Gallery" class="uk-transition-scale-up uk-transition-opaque" alt="">
+                        </a>
+                    </div>
+                    <a onclick="Confirm()" asp-action="DeleteGallery" asp-controller="Artist" asp-route-id="@item.Id">
+                        <i id="close" uk-icon="icon: close"></i>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@*
+    <div class="gallery">
+    @foreach (var item in Model.ArtistGalleries)
+    {
+
+    <img class="big" src="~/@item.Gallery" />
+
+    }
+    </div>*@
+
+
+
+<script>
+
+        function Confirm() {
+        confirm("Are you sure you want to delete this?")
+    }
+
+    //  $(document).ready(function () {
+    //    $('.content').magnificPopup({
+    //        type: 'image',
+    //        delegate: 'a'
+    //    });
+    //});
+</script>

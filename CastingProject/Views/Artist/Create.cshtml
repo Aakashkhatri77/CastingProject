@@ -1,0 +1,107 @@
+﻿@model CastingProject.Models.Artist
+
+@{
+    ViewData["Title"] = "Create";
+    var ethnicities = ViewBag.Ethnicity as IEnumerable<Ethnicity>;
+}
+
+<div style="margin-top:50px">
+    <h4 style="background-color:#ffcc33;"> Personal Information</h4>
+</div>
+<form class="uk-grid-small" uk-grid style="margin-bottom:100px" asp-action="Create" enctype="multipart/form-data">
+    <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Name</label>
+        <input asp-for="Name" class="uk-input" placeholder="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Ethnicity</label>
+        <select asp-for="EthnicityId" class="uk-input" asp-items="@(new SelectList(ethnicities, "id", "Name"))"></select>
+        @*<span asp-validation-for="EthnicityId" class="text-danger"></span>*@
+    </div>
+
+    <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Gender</label>
+        <select asp-for="Gender" class="uk-input" asp-items="Html.GetEnumSelectList<EnumField.Gender>()"></select>
+        <span asp-validation-for="Gender" class="text-danger"></span>
+
+    </div>
+
+    <div class="uk-width-1-4@s" uk-form>
+        <label class="uk-form-label" for="form-stacked-text">Date-of-Birth</label>
+        <input asp-for="DOB" class="uk-input" data-uk-datepicker="{format:'DD.MM.YYYY'}" placeholder="DOB">
+        <span asp-validation-for="DOB" class="text-danger"></span>
+
+    </div>
+    <div class="uk-width-1.1" style="margin-top:40px">
+        <h4 style="background-color:#ffcc33;">Attributes</h4>
+    </div>
+    <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Hair Length</label>
+        <select asp-for="Hair_Length" class="uk-input" asp-items="Html.GetEnumSelectList<EnumField.HairLength>()"></select>
+        <span asp-validation-for="Hair_Length" class="text-danger"></span>
+    </div>
+    <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Hair Type</label>
+        <select asp-for="Hair_Type" class="uk-input" asp-items="Html.GetEnumSelectList<EnumField.HairType>()"></select>
+        <span asp-validation-for="Hair_Type" class="text-danger"></span>
+    </div>
+    <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Hair Colour</label>
+        <select asp-for="Hair_Color" class="uk-input" asp-items="Html.GetEnumSelectList<EnumField.HairColor>()"></select>
+        <span asp-validation-for="Hair_Color" class="text-danger"></span>
+    </div>
+    <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Skin Colour</label>
+        <select asp-for="Skin_Color" class="uk-input" asp-items="Html.GetEnumSelectList<EnumField.SkinColor>()"></select>
+        <span asp-validation-for="Skin_Color" class="text-danger"></span>
+    </div>
+    <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Skin Type</label>
+        <select asp-for="Skin_Type" class="uk-input" asp-items="Html.GetEnumSelectList<EnumField.SkinType>()"></select>
+        <span asp-validation-for="Skin_Type" class="text-danger"></span>
+    </div>
+    <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Eye Colour</label>
+        <select asp-for="Eye_Color" class="uk-input" asp-items="Html.GetEnumSelectList<EnumField.EyeColor>()"></select>
+        <span asp-validation-for="Eye_Color" class="text-danger"></span>
+    </div>
+    <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Height</label>
+        <input asp-for="Height" class="uk-input" type="text" placeholder="Height">
+        <span asp-validation-for="Height" class="text-danger"></span>
+
+    </div>
+    <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Weight</label>
+        <input asp-for="Weight" class="uk-input" type="text" placeholder="Weight">
+        <span asp-validation-for="Weight" class="text-danger"></span>
+
+    </div>
+    <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Profile</label>
+        <div class="uk-width" uk-form-custom="target: true">
+            <input type="file" asp-for="ImageFile">
+            <input class="uk-input" type="text" placeholder="Select file" disabled>
+        </div>
+    </div>
+
+    <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Gallery</label>
+        <div class="uk-width" uk-form-custom="target: true">
+            <input type="file" multiple asp-for="GalleryFile">
+            <input class="uk-input" type="text" placeholder="Select file" disabled>
+        </div>
+    </div>
+
+    <div class="uk-width-1-1">
+        <input type="submit" value="save" class="btn uk-button uk-button-primary" style="border-radius: 6px; margin: 20px 0; padding: 0 39px; background: #d79605;" />
+        <input type="submit" value="back" asp-action="Index" asp-controller="Artist" class="btn uk-button uk-button-primary" style="border-radius: 6px; margin: 20px 0; padding: 0 39px; background: #bf202f;" />
+    </div>
+
+</form>
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

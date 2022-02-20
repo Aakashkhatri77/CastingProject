@@ -1,0 +1,109 @@
+﻿@*@model IEnumerable<CastingProject.Models.Artist>*@
+    @model Artist
+
+@{
+    ViewData["Title"] = "Index";
+    var artist = ViewBag.Artist as IEnumerable<Artist>;
+    var ethnicities = ViewBag.Ethnicity as IEnumerable<Ethnicity>;
+    var ethnicitiess = ViewBag.Ethnicity;
+
+    var dd = ViewBag.Ethnicity;
+
+
+    //var ethnicity = new List<string> { ViewBag.Ethnicity };
+    //var dayValues = dd.Select(s => (dd).Enum.Parse(typeof(dd), s)).ToList();
+
+
+
+
+    //var eth = from dd d in Enum.GetValues(typeof(dd))
+    //             select new { ID = (int)d, Name = d.ToString() };
+
+
+    var gender = from EnumField.Gender d in Enum.GetValues(typeof(EnumField.Gender))
+                 select new { ID = (int)d, Name = d.ToString() };
+}
+
+    @*@foreach (string s in Enum.GetNames(typeof(EnumField.Gender)))
+        {
+        ds = s;
+        }*@
+
+    <input type="hidden" id="details">
+    <div class="talent">
+        <p style="font-size:1.8rem; font-weight:Bold;color:black; margin: 3% 0px 1% 0; ">Find Local Actors & Talent for Hire</p>
+        <div class="filter" uk-accordion style="padding: 20px; padding-bottom:20px;">
+            <div class="uk-open">
+                <a class="uk-accordion-title" href="#">Filter Results</a>
+                <div class="uk-accordion-content">
+                    <form id="filterform" asp-action="Index" class="uk-grid-small" uk-grid method="get">
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label" for="form-stacked-text">Gender</label>
+                            <select asp-for="Gender" class="uk-input" asp-items="@(new SelectList(gender, "Name", "Name"))">
+                                @*<select asp-for="Gender" class="uk-input" asp-items="Html.GetEnumSelectList<>()">*@
+                                @*<option value="0">Male</option>*@
+                            </select>
+                        </div>
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label" for="form-stacked-text">Ethnicity</label>
+                            <select asp-for="EthnicityId" class="uk-input" asp-items="@(new SelectList(ethnicities, "Name", "Name"))"></select>
+
+                        </div>
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label" for="form-stacked-text">Skin Color</label>
+                            <select asp-for="Skin_Color" class="uk-input" asp-items="Html.GetEnumSelectList<EnumField.SkinColor>()"></select>
+                        </div>
+                        <div class="uk-width-1-2@s">
+                            <label class="uk-form-label" for="form-stacked-text">Height</label>
+                            <input class="uk-input" asp-for="Height" id="ethnicity" placeholder="Height">
+                        </div>
+                        <div class="uk-width-1-2@s" style=" margin-top:20px;">
+                            <button class=" uk-button uk-button-default uk-button-small" id="filter-btn">Filter</button>
+                            <button onclick="ClearFilter()" class=" uk-button uk-button-default uk-button-small">Reset</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <p style="font-size:1.8rem; font-weight:Bold;color:black; margin: 3% 0px 1% 0; ">Our Talents</p>
+
+        <div class="uk-grid-column-small uk-grid-row-small uk-child-width-1-4 uk-text-center" uk-grid>
+            @foreach (var item in artist)
+            {
+            <div class="uk-text-center">
+                <div class="for-img uk-inline-clip uk-transition-toggle talent-image" tabindex="0">
+                    <img src="~/@item.Dp" class="uk-transition-scale-up uk-transition-opaque" alt="">
+
+                    <div class="link-tag uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary">
+                        <div class="uk-overlay uk-position-bottom uk-light">
+                            <a onclick="addPage(@item.Id)" id="showdetails" asp-action="Details" asp-route-id="@item.Id" class="uk-h4 uk-margin-remove">@item.Name</a>
+                        </div>
+                    </div>
+                </div>
+                <a onclick="Confirm()" asp-action="Delete" asp-controller="Artist" asp-route-id="@item.Id">
+                    <i id="close" uk-icon="icon: close"></i>
+                </a>
+            </div>
+            }
+        </div>
+    </div>
+
+    <div class="float-btn">
+        <a asp-action="Create" asp-controller="Artist" class="Create-btn">
+            <i id="my-float" uk-icon="icon: plus"></i>
+        </a>
+    </div>
+
+
+
+
+
+    <script>
+        function Confirm() {
+            confirm("Are you sure you want to delete this?");
+        }
+    </script>
+
+

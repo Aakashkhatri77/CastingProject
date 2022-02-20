@@ -1,0 +1,35 @@
+﻿@*model CastingProject.Models.Artist;*@
+
+@*<div id="modal-container" class="uk-modal-container" uk-modal>*@
+<div id="modal-container" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <button class="uk-modal-close-default" type="button" uk-close></button>
+        <a asp-action="GalleryUpdate" asp-route-id="@Model.Id">Upload Image</a>
+        <hr>
+        <table class="table">
+            <thead class="black">
+            <td>Image</td>
+            <td>Action</td>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ArtistGalleries)
+                {
+                    <tr>
+                        <td>
+                            <img src="~/@item.Gallery" width="100" height="100">
+                        </td>
+                        <td>
+                            <a asp-action="DeleteGallery" onclick="Confirmation()" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@*<script>
+    function Confirmation() {
+        confirm("Are you sure! you want to delete?");
+    }
+</script>*@

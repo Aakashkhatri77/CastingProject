@@ -1,0 +1,17 @@
+﻿@model CastingProject.Models.Artist;
+<h3>Upload Image in Gallery</h3>
+<hr>
+<div  class="row">
+    <form asp-action="GalleryUpdate" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id">
+        <input type="hidden" name="Name" value="@Model.Name">
+        <div class="col-md-4">
+            <label asp-for="GalleryFile">Image</label>
+            <input multiple asp-for="GalleryFile" class="form-control">
+        </div>
+        <br>
+        <div class="col-md-4">
+            <input type="submit" class="btn btn-primary" value="Upload">
+        </div>
+    </form>
+</div>

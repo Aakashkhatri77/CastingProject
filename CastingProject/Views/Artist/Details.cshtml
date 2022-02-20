@@ -1,0 +1,203 @@
+﻿@model CastingProject.Models.Artist
+
+@{
+    ViewData["Title"] = "Details";
+    var Age = int.Parse(DateTime.Now.ToString("yyyy")) - int.Parse(@Model.DOB.ToString("yyyy"));
+}
+@*<div id="Gallery">
+    </div>*@
+<div style="max-width:1340px;">
+
+
+    <div class="float-btn">
+        <a asp-action="Edit" asp-controller="Artist" asp-route-id="@Model.Id" class="Create-btn">
+            <i id="my-float" uk-icon="icon: file-edit"></i>
+        </a>
+    </div>
+
+    <div class="uk-grid-small uk-flex-middle uk-margin-large-left uk-margin-top" uk-grid>
+        <div class="uk-width-auto">
+            <img id="main-cover" src="~/@Model.Dp" />
+        </div>
+        <div class="uk-width-expand">
+            <h3 class="uk-card-title uk-margin-remove-bottom">@Model.Name</h3>
+            <p class="uk-text-meta uk-margin-remove-top"> @Model.DOB.ToString("MMMMM yyyy")</p>
+        </div>
+        <a asp-action="Index" asp-controller="Artist" class="uk-close-large uk-margin-right" uk-close></a>
+    </div>
+
+    <div class="uk-child-width-expand@s uk-margin-left uk-margin-right uk-margin-large-bottom" uk-grid>
+        <div class="uk-grid-item-match">
+            <div class="uk-card uk-card-default uk-card-body">
+                <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1"  uk-slideshow="autoplay: true; autoplay-interval: 3000; pause-on-hover: true;">
+                    <ul class="uk-slideshow-items">
+                        @foreach (var img in Model.ArtistGalleries)
+                        {
+                            <li>
+                                <img src="~/@img.Gallery" uk-cover />
+                            </li>
+                        }
+                    </ul>
+                    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
+                       uk-slideshow-item="previous"></a>
+                    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+                       uk-slideshow-item="next"></a>
+                </div>
+            </div>
+        </div>
+        <div>
+            <dl class="uk-description-list uk-description-list-divider">
+                <dt><strong>Age</strong></dt>
+                <dd>@Age</dd>
+                <dt><strong>Attributes</strong></dt>
+                <dd>Height: @Model.Height</dd>
+                <dd>Weight: @Model.Weight </dd>
+                <dd>Skin Color: @Model.Skin_Color</dd>
+                <dd>Eye Color: @Model.Eye_Color</dd>
+                <dd>Hair Color: @Model.Hair_Color</dd>
+                <dd>Skin Type: @Model.Skin_Type</dd>
+                <dd>Hair Length: @Model.Hair_Length</dd>
+                <dd>Hair Type: @Model.Hair_Type</dd>
+
+                <dt><strong>View Gallery</strong></dt>
+                <dd class="image-btn"><a class="btn uk-botton uk-button-primary" asp-action="GalleryIndex" asp-controller="Artist" asp-route-id="@Model.Id">View</a></dd>
+                @*<dd><a  data-url="@Url.Action($"GalleryIndex/{@Model.Id}")" uk-toggle="target: #modal-container">View</a></dd>*@
+            </dl>
+        </div>
+    </div>
+</div>
+
+@*
+    <div>
+    <a asp-action="Index" asp-controller="Artist" class="back">
+    <i id="my-floatback" uk-icon="icon: arrow-left"></i>
+    </a>
+    </div>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@model CastingProject.Models.Artist
+
+    @{
+    ViewData["Title"] = "Details";
+    }
+
+    <h1>Details</h1>
+
+    <div>
+    <h4>Talent</h4>
+    <hr />
+    <dl class="row">
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Name)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Name)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Gender)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Gender)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Ethnicity)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Ethnicity)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Height)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Height)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Weight)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Weight)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Skin_Color)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Skin_Color)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Eye_Color)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Eye_Color)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Hair_Color)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Hair_Color)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Skin_Type)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Skin_Type)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Hair_Length)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Hair_Length)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.Hair_Type)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.Hair_Type)
+    </dd>
+    <dt class = "col-sm-2">
+    @Html.DisplayNameFor(model => model.DOB)
+    </dt>
+    <dd class = "col-sm-10">
+    @Html.DisplayFor(model => model.DOB)
+    </dd>
+    <dt class = "col-sm-2">
+    Profile
+    </dt>
+    <dd class = "col-sm-10">
+    @foreach (var item in Model.ArtistGalleries)
+    {
+    <img src="~/@item.Gallery" height="30px" width="30px" />
+    }
+    </dd>
+    </dl>
+    </div>
+    <div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+    </div>
+*@

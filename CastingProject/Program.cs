@@ -38,7 +38,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Talent}/{action=Index}/{id?}");
+    pattern: "{controller=Artist}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.Run();
