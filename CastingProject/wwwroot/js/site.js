@@ -31,8 +31,12 @@ function ClearFilter() {
 }*/
 
 function ClearFilter() {
-    $('#filterform').find("input:text").val("");
+        
+/*    $('#filter').find("input:text").val("");
     $("#filterform select").prop("selectedIndex", 0)
+*/
+    $('.clear').find("input:text").val("");
+    $(".clear select").prop("selectedIndex", 0)
 
 }
 

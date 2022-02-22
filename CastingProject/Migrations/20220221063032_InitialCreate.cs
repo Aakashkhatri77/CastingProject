@@ -174,11 +174,11 @@ namespace CastingProject.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EthnicityId = table.Column<int>(type: "int", nullable: false),
-                    Gender = table.Column<int>(type: "int", nullable: false),
-                    Height = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EthnicityId = table.Column<int>(type: "int", nullable: true),
+                    Gender = table.Column<int>(type: "int", nullable: true),
+                    Height = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Weight = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Skin_Color = table.Column<int>(type: "int", nullable: false),
+                    Skin_Color = table.Column<int>(type: "int", nullable: true),
                     Eye_Color = table.Column<int>(type: "int", nullable: false),
                     Hair_Color = table.Column<int>(type: "int", nullable: false),
                     Skin_Type = table.Column<int>(type: "int", nullable: false),
@@ -194,8 +194,7 @@ namespace CastingProject.Migrations
                         name: "FK_Artists_Ethnicities_EthnicityId",
                         column: x => x.EthnicityId,
                         principalTable: "Ethnicities",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(

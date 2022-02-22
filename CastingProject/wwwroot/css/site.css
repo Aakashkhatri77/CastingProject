@@ -19,7 +19,7 @@ body {
 }
 
 .container{
-    max-width: 1200px;
+    max-width: 1100px;
 }
 
 /*Navigation Bar*/
@@ -179,8 +179,8 @@ body {
 
 /*Delete btn*/
 #close {
-    top: -171px;
-    left: 113px;
+    top: -176px;
+    left: 105px;
     position: relative;
     color: black;
 }

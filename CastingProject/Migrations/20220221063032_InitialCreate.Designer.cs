@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CastingProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220220040101_InitialCreate")]
+    [Migration("20220221063032_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,13 +38,13 @@ namespace CastingProject.Migrations
                     b.Property<string>("Dp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EthnicityId")
+                    b.Property<int?>("EthnicityId")
                         .HasColumnType("int");
 
                     b.Property<int>("Eye_Color")
                         .HasColumnType("int");
 
-                    b.Property<int>("Gender")
+                    b.Property<int?>("Gender")
                         .HasColumnType("int");
 
                     b.Property<int>("Hair_Color")
@@ -56,13 +56,13 @@ namespace CastingProject.Migrations
                     b.Property<int>("Hair_Type")
                         .HasColumnType("int");
 
-                    b.Property<string>("Height")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal?>("Height")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Skin_Color")
+                    b.Property<int?>("Skin_Color")
                         .HasColumnType("int");
 
                     b.Property<int>("Skin_Type")
@@ -321,9 +321,7 @@ namespace CastingProject.Migrations
                 {
                     b.HasOne("CastingProject.Models.Ethnicity", "Ethnicity")
                         .WithMany()
-                        .HasForeignKey("EthnicityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EthnicityId");
 
                     b.Navigation("Ethnicity");
                 });

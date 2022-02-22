@@ -19,16 +19,70 @@ namespace CastingProject.Controllers
             this.context = context;
         }
 
-        public IActionResult Index(Artist filterResult)
+        public IActionResult Index(Artist filter, string Ethnicity, string height, string searchText, int? page)
         {
+            ViewBag.Ethnicity = context.Ethnicities.ToList();
+            var query = context.Artists.Include(x => x.Ethnicity).AsQueryable();
+            if (!String.IsNullOrEmpty(searchText))
+            {
+                query = query.Where(s => s.Name.ToLower().Contains(searchText.ToLower()));
+                ViewData["CurrentFilter"] = searchText;
+            }
+            if (filter.Gender is not null)
+            {
+                query = query.Where(x => x.Gender == filter.Gender);
+            }
+            if (filter.Skin_Color is not null)
+            {
+                query = query.Where(x => x.Skin_Color == filter.Skin_Color);
+            }
+            if (Ethnicity is not null)
+            {
+                query = query.Where(x =>x.Ethnicity.Name == Ethnicity);
+            }
+            if (height is not null)
+            {
+                if (height == "3-4")
+                {
+                    query = query.Where(x => x.Height >= 3 && x.Height <= 4);
+                }
+                else if (height == "4-5")
+                {
+                    query = query.Where(x => x.Height >= 4 && x.Height <= 5);
+                }
+                else if (height == "5-6")
+                {
+                    query = query.Where(x => x.Height >= 5 && x.Height <= 6);
+                }
+                else if (height == "6-7")
+                {
+                    query = query.Where(x => x.Height >= 6 && x.Height <= 7);
+                }
+                else if (height == "7-8")
+                {
+                    query = query.Where(x => x.Height >= 7 && x.Height <= 8);
+                }
+            }
+            int pageSize = 4;
+            return View(PaginatedList<Artist>.CreateAsync(query.AsNoTracking(), page ?? 1, pageSize));
+
+            //ViewBag.Artist = query.ToList();
+
+         /* 
             if (ModelState.IsValid && filterResult.Ethnicity != null)
             {
+
+
                 var result = from s in context.Artists select s;
+                result = result.Where(s => s.Gender == filterResult.Gender);
+
                 result = result.Where(
                     s => s.Gender == filterResult.Gender
                     && s.EthnicityId == filterResult.EthnicityId
                     || s.Skin_Color == filterResult.Skin_Color
                     || s.Height.Contains(filterResult.Height));
+
+
                 ViewBag.Artist = result;
                 return View();
             }
@@ -39,7 +93,7 @@ namespace CastingProject.Controllers
                 ViewBag.Ethnicity = context.Ethnicities.ToList();
                 ViewBag.Artist = artist;
             return View();
-            }
+            }*/
         }
 
         public IActionResult Create()
