@@ -6,7 +6,6 @@
     //var artist = ViewBag.Artist;
     var ethnicities = ViewBag.Ethnicity as IEnumerable<Ethnicity>;
 
-    var dd = ViewBag.Ethnicity;
 
     var gender = from EnumField.Gender d in Enum.GetValues(typeof(EnumField.Gender))
                  select new { ID = (int)d, Name = d.ToString() };
@@ -18,42 +17,41 @@
 
 <input type="hidden" id="details">
 <div class="talent">
-    <div class="uk-margin clear" style="margin:20px 0; display:flex; justify-content:end;">
-        <form asp-action="Index" class="uk-search uk-search-default" method="get">
-            <button type="submit" class="uk-search-icon-flip" uk-search-icon> </button>
-            <input class="uk-search-input" type="text" value="@ViewData["CurrentFilter"]" name="searchText" placeholder="Search by Name">
-        </form>
-        @*<button onclick="ClearFilter()" class=" uk-button uk-button-default uk-button-small">Reset</button>*@
-
-    </div>
-    @*            <button onclick="ClearFilter()" class=" uk-button uk-button-default uk-button-small">Reset</button>
-    *@
     <p style="font-size:1.8rem; font-weight:Bold;color:black; margin: 3% 0px 1% 0; ">Find Local Actors & Talent for Hire</p>
     <div class="filter" uk-accordion style="padding: 20px; padding-bottom:20px;">
         <div class="uk-open">
             <a class="uk-accordion-title" href="#">Filter Results</a>
             <div class="uk-accordion-content">
                 <form id="filterform" class="clear" asp-action="Index" class="uk-grid-small" uk-grid method="get">
+                    <div class="uk-width-1-1 " style="width:94%">
+                        <input class="uk-input " type="text" value="@ViewData["CurrentFilter"]" name="searchText" placeholder="Search by Name">
+                    </div>
+                        <button type="submit" class="uk-search-icon-flip" uk-search-icon> </button>
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label" for="form-stacked-text">Gender</label>
+                        @*<select name="Gender" class="uk-input" asp-items="Html.GetEnumSelectList<EnumField.Gender>()">*@
                         <select name="Gender" class="uk-input" asp-items="@(new SelectList(gender, "Name", "Name"))">
-                            <option value="">--Select--</option>
-                            @*<select asp-for="Gender" class="uk-input" asp-items="Html.GetEnumSelectList<>()">*@
-                            @*<option value="0">Male</option>*@
+                            <option value="">Select</option>
                         </select>
                     </div>
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label" for="form-stacked-text">Ethnicity</label>
-                        <select name="Ethnicity" name="ethnicity" class="uk-input" asp-items="@(new SelectList(ethnicities,"Name", "Name"))">
-                            <option value="">--Select--</option>
+                        <select name="ethnicity" class="uk-input" asp-items="@(new SelectList(ethnicities,"Name", "Name"))">
+                            <option value="">Select</option>
                         </select>
 
                     </div>
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label" for="form-stacked-text">Skin Color</label>
-                        <select name="Skin_Color" class="uk-input" asp-items="@(new SelectList(skinColor,"Name","Name"))">
-                            <option value="">--Select--</option>
-
+                        <select name="SkinColor" class="uk-input" asp-items="@(new SelectList(skinColor,"Name","Name"))">
+                            <option value="">Select</option>
+                            @*    @if (ViewBag.SkinColor == null)
+                                {
+                                }
+                                else
+                                {
+                                <option value="@ViewBag.SkinColor">@ViewBag.SkinColor</option>
+                                }*@
                         </select>
                         @*<select asp-for="Skin_Color" class="uk-input" asp-items="Html.GetEnumSelectList<EnumField.SkinColor>()"></select>*@
                     </div>
@@ -107,6 +105,7 @@
 </div>
 
 
+@*Previous and Next Button*@
 
 @{
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
@@ -114,19 +113,21 @@
 }
 
 <a asp-action="Index"
-  
    asp-route-page="@(Model.PageIndex - 1)"
    asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   class="btn btn-default @prevDisabled">
-    Previous
+   asp-route-Height="@ViewBag.Height"
+   asp-route-Gender="@ViewBag.Gender"
+   asp-route-SkinColor="@ViewBag.SkinColor">
+    <button class="uk-button uk-button-default" @prevDisabled>Previous</button>
 </a>
 <a asp-action="Index"
    asp-route-page="@(Model.PageIndex + 1)"
    asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   class="btn btn-default @nextDisabled">
-    Next
+   asp-route-Height="@ViewBag.Height"
+   asp-route-Gender="@ViewBag.Gender"
+   asp-route-SkinColor="@ViewBag.SkinColor">
+    <button class="uk-button uk-button-default" @nextDisabled>Next</button>
 </a>
-
 
 <script>
     function Confirm() {

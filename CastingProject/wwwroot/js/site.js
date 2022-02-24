@@ -1,6 +1,10 @@
 ﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
+/*const tagify = require("./tagify");
+const tagify = require("./tagify");*/
+
+
 // Write your JavaScript code
 
 $(function () {
@@ -25,22 +29,135 @@ $(function () {
         })
     })
 })
-/*
-function ClearFilter() {
-    document.getElementById("formm").input = "";
-}*/
 
 function ClearFilter() {
-        
-/*    $('#filter').find("input:text").val("");
-    $("#filterform select").prop("selectedIndex", 0)
-*/
     $('.clear').find("input:text").val("");
     $(".clear select").prop("selectedIndex", 0)
-
 }
 
 
-            /*gallery.find('.uk-modal-container').modal('show');*/
-            //UIkit.modal(gallery).show();
-            //$('#modal-container').uk-modal('show');
+/*Tags Input*/
+var skills = document.getElementById("skill")
+var skill = new Tagify(skills, { originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')})
+var hobbies = document.getElementById("hobby")
+var hobby = new Tagify(hobbies, { originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',') })
+
+
+//for tag input select option
+$(document).ready(function () {
+    $('.s2').select2();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*<div class="tag">
+    <span>Javascript</span>
+    <i href="" uk-icon="close"></i>
+</div>*/
+/*
+const tagContainer = document.querySelector('.tag-container');
+const input = document.querySelector('.tag-container .input-tag');
+
+var tags = [];
+
+function createTag(label) {
+    const div = document.createElement('div');
+    div.setAttribute('class', 'tag');
+    const span = document.createElement('span');
+    span.innerHTML = label;
+    const closeBtn = document.createElement('i');
+    closeBtn.setAttribute('class', 'uk-icon');
+    closeBtn.setAttribute('data-item', label);
+    closeBtn.innerHTML = 'X';
+
+    div.appendChild(span);
+    div.appendChild(closeBtn);
+    return div;
+
+
+}
+
+function reset() {
+    document.querySelectorAll('.tag').forEach(function (tag) {
+        tag.parentElement.removeChild(tag);
+    })
+}
+
+function addTags() {
+    reset();
+    tags.slice().reverse().forEach(function (tag) {
+        const input = createTag(tag);
+        tagContainer.prepend(input);
+    })
+}
+
+input.addEventListener('keyup', function (e) {
+    if (e.key === "Enter") {
+        tags.push(input.value);
+        addTags();
+        input.value = "";
+    }
+})
+
+document.addEventListener('click', function (e) {
+    if (e.target.tagName === 'I') {
+        const value = e.target.getAttribute('data-item');
+        const index = tags.indexOf(value);
+        tags = [...tags.slice(0, index), ...tags.slice(index + 1)];
+        console.log(tags);
+        addTags();
+    }
+})*/

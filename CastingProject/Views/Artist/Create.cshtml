@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Create";
+    var roles = ViewBag.Role as IEnumerable<Role>;
     var ethnicities = ViewBag.Ethnicity as IEnumerable<Ethnicity>;
 }
 
@@ -14,6 +15,11 @@
         <input asp-for="Name" class="uk-input" placeholder="Name">
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
+     <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Roles</label>
+        <select multiple class="uk-input s2" name="SelectedRoleId" asp-items="@(new SelectList (roles,"Id", "Name"))"></select>
+    </div>
+
     <div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Ethnicity</label>
         <select asp-for="EthnicityId" class="uk-input" asp-items="@(new SelectList(ethnicities, "id", "Name"))"></select>
@@ -70,13 +76,20 @@
         <label class="uk-form-label" for="form-stacked-text">Height</label>
         <input asp-for="Height" class="uk-input" type="number" placeholder="Height in ft.">
         <span asp-validation-for="Height" class="text-danger"></span>
-
     </div>
     <div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Weight</label>
-        <input asp-for="Weight" class="uk-input" type="text" placeholder="Weight">
+        <input asp-for="Weight" class="uk-input" type="number" placeholder="Weight">
         <span asp-validation-for="Weight" class="text-danger"></span>
+    </div>
 
+    <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="form-stacked-text">Skills</label>
+            <input class="uk-input" id="skill" asp-for="skills" placeholder="Write some tags" />
+    </div>
+    <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Hobbies</label>
+        <input type="text" class="uk-input" id="hobby" asp-for="hobbies" placeholder="Write some tags"/>
     </div>
     <div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Profile</label>
@@ -85,7 +98,6 @@
             <input class="uk-input" type="text" placeholder="Select file" disabled>
         </div>
     </div>
-
     <div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Gallery</label>
         <div class="uk-width" uk-form-custom="target: true">
@@ -94,14 +106,34 @@
         </div>
     </div>
 
+
+
     <div class="uk-width-1-1">
         <input type="submit" value="save" class="btn uk-button uk-button-primary" style="border-radius: 6px; margin: 20px 0; padding: 0 39px; background: #d79605;" />
         <input type="submit" value="back" asp-action="Index" asp-controller="Artist" class="btn uk-button uk-button-primary" style="border-radius: 6px; margin: 20px 0; padding: 0 39px; background: #bf202f;" />
     </div>
-
 </form>
+@*<div class="tagField">
+    <div class="tag-container">
+    <input class="input-tag"/>
+    </div>
+    </div>
+*@
+
+
 @section Scripts {
+
+
+    <script>
+      
+    </script>
     @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
 }
 }
+
+
+
+
+

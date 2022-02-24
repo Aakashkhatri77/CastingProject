@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Details";
     var Age = int.Parse(DateTime.Now.ToString("yyyy")) - int.Parse(@Model.DOB.ToString("yyyy"));
+
 }
 @*<div id="Gallery">
     </div>*@
@@ -29,7 +30,7 @@
     <div class="uk-child-width-expand@s uk-margin-left uk-margin-right uk-margin-large-bottom" uk-grid>
         <div class="uk-grid-item-match">
             <div class="uk-card uk-card-default uk-card-body">
-                <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1"  uk-slideshow="autoplay: true; autoplay-interval: 3000; pause-on-hover: true;">
+                <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="autoplay: true; autoplay-interval: 3000; pause-on-hover: true;">
                     <ul class="uk-slideshow-items">
                         @foreach (var img in Model.ArtistGalleries)
                         {
@@ -49,7 +50,7 @@
             <dl class="uk-description-list uk-description-list-divider">
                 <dt><strong>Age</strong></dt>
                 <dd>@Age</dd>
-           
+
                 <dt><strong>Attributes</strong></dt>
                 <dd>Height: @Model.Height</dd>
                 <dd>Weight: @Model.Weight </dd>
@@ -60,6 +61,23 @@
                 <dd>Hair Length: @Model.Hair_Length</dd>
                 <dd>Hair Type: @Model.Hair_Type</dd>
 
+                <dt><strong>Skills</strong></dt>
+                @foreach (var item in Model.Skills)
+                {
+                    <div class="tagStyle" >
+                        <span>@item.Skills</span>
+                    </div>
+
+                }
+
+                  <dt><strong>Hobbies</strong></dt>
+                @foreach (var item in Model.Hobbies)
+                {
+                    <div class="tagStyle" >
+                        <span>@item.Hobbies</span>
+                    </div>
+
+                }
                 <dt><strong>View Gallery</strong></dt>
                 <dd class="image-btn"><a class="btn uk-botton uk-button-primary" asp-action="GalleryIndex" asp-controller="Artist" asp-route-id="@Model.Id">View</a></dd>
                 @*<dd><a  data-url="@Url.Action($"GalleryIndex/{@Model.Id}")" uk-toggle="target: #modal-container">View</a></dd>*@
@@ -68,12 +86,6 @@
     </div>
 </div>
 
-@*
-    <div>
-    <a asp-action="Index" asp-controller="Artist" class="back">
-    <i id="my-floatback" uk-icon="icon: arrow-left"></i>
-    </a>
-    </div>*@
 
 
 

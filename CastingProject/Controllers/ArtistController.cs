@@ -1,4 +1,5 @@
 ﻿using CastingProject.Data;
+using CastingProject.Filter;
 using CastingProject.Helper;
 using CastingProject.Models;
 using Microsoft.AspNetCore.Http;
@@ -19,97 +20,62 @@ namespace CastingProject.Controllers
             this.context = context;
         }
 
-        public IActionResult Index(Artist filter, string Ethnicity, string height, string searchText, int? page)
+        public IActionResult Index(GeneralFilter filter, int? page)
         {
+            ViewBag.Gender = filter.Gender;
+            ViewBag.SkinColor = filter.SkinColor;
+            ViewBag.Height = filter.Height;
             ViewBag.Ethnicity = context.Ethnicities.ToList();
             var query = context.Artists.Include(x => x.Ethnicity).AsQueryable();
-            if (!String.IsNullOrEmpty(searchText))
+            if (!String.IsNullOrEmpty(filter.searchText))
             {
-                query = query.Where(s => s.Name.ToLower().Contains(searchText.ToLower()));
-                ViewData["CurrentFilter"] = searchText;
+                query = query.Where(s => s.Name.ToLower().Contains(filter.searchText.ToLower()));
+                ViewData["CurrentFilter"] = filter.searchText;
             }
             if (filter.Gender is not null)
             {
                 query = query.Where(x => x.Gender == filter.Gender);
             }
-            if (filter.Skin_Color is not null)
+            if (filter.SkinColor is not null)
             {
-                query = query.Where(x => x.Skin_Color == filter.Skin_Color);
+                query = query.Where(x => x.Skin_Color == filter.SkinColor);
             }
-            if (Ethnicity is not null)
+            if (filter.Ethnicity is not null)
             {
-                query = query.Where(x =>x.Ethnicity.Name == Ethnicity);
+                query = query.Where(x => x.Ethnicity.Name == filter.Ethnicity);
             }
-            if (height is not null)
+            if (filter.Height is not null)
             {
-                if (height == "3-4")
-                {
-                    query = query.Where(x => x.Height >= 3 && x.Height <= 4);
-                }
-                else if (height == "4-5")
-                {
-                    query = query.Where(x => x.Height >= 4 && x.Height <= 5);
-                }
-                else if (height == "5-6")
-                {
-                    query = query.Where(x => x.Height >= 5 && x.Height <= 6);
-                }
-                else if (height == "6-7")
-                {
-                    query = query.Where(x => x.Height >= 6 && x.Height <= 7);
-                }
-                else if (height == "7-8")
-                {
-                    query = query.Where(x => x.Height >= 7 && x.Height <= 8);
-                }
+                var height = filter.Height.Split("-");
+
+                int from = Convert.ToInt32(height[0]);
+                int to = Convert.ToInt32(height[1]);
+                query = query.Where(x => x.Height >= from && x.Height <= to);
             }
-            int pageSize = 4;
+            int pageSize = 8;
             return View(PaginatedList<Artist>.CreateAsync(query.AsNoTracking(), page ?? 1, pageSize));
 
             //ViewBag.Artist = query.ToList();
 
-         /* 
-            if (ModelState.IsValid && filterResult.Ethnicity != null)
-            {
 
-
-                var result = from s in context.Artists select s;
-                result = result.Where(s => s.Gender == filterResult.Gender);
-
-                result = result.Where(
-                    s => s.Gender == filterResult.Gender
-                    && s.EthnicityId == filterResult.EthnicityId
-                    || s.Skin_Color == filterResult.Skin_Color
-                    || s.Height.Contains(filterResult.Height));
-
-
-                ViewBag.Artist = result;
-                return View();
-            }
-            else
-            {
-                var artist = context.Artists.ToList();
-                var ethnicity = context.Ethnicities.ToList();
-                ViewBag.Ethnicity = context.Ethnicities.ToList();
-                ViewBag.Artist = artist;
-            return View();
-            }*/
         }
 
         public IActionResult Create()
         {
             var artist = new Artist();
             ViewBag.Ethnicity = context.Ethnicities.ToList();
+            ViewBag.Role = context.Roles.ToList();
             return View(artist);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Artist artist)
+        public IActionResult Create(Artist artist, int[] SelectedRoleId)
         {
             try
             {
+                ViewData["Ethnicity"] = context.Ethnicities.ToList();
                 if (ModelState.IsValid)
                 {
                     IFormFile postedFile;
@@ -148,6 +114,32 @@ namespace CastingProject.Controllers
                             }
                         }
                     }
+                    if (artist.skills != null)
+                    {
+                        var artistSkills = artist.skills;
+                        string[] skillsSplit = artistSkills.Split(",");
+                        foreach (var item in skillsSplit)
+                        {
+                            artist.Skills.Add(new Skill { Skills = item });
+                        }
+                    }
+
+                    if (artist.hobbies != null)
+                    {
+                        var artistHobbies = artist.hobbies;
+                        string[] hobbiesSplit = artistHobbies.Split(",");
+                        foreach (var item in hobbiesSplit)
+                        {
+                            artist.Hobbies.Add(new Hobby { Hobbies = item });
+                        }
+                    }
+                    if (SelectedRoleId != null)
+                    {
+                        foreach (var roleId in SelectedRoleId)
+                        {
+                            artist.ArtistRoles.Add(new ArtistRole { RoleId = roleId });
+                        }
+                    }
                     context.Artists.Add(artist);
                     context.SaveChanges();
                 }
@@ -162,27 +154,28 @@ namespace CastingProject.Controllers
         //Details
         public IActionResult Details(int id)
         {
-            var artist = context.Artists.Include(x => x.ArtistGalleries).FirstOrDefault(x => x.Id == id);
+            var artist = context.Artists.Include(x => x.ArtistGalleries).Include(x=>x.Hobbies).Include(x=>x.Skills).FirstOrDefault(x => x.Id == id);
             return View(artist);
         }
 
         //Edit
         public IActionResult Edit(int id)
         {
-            var artist = context.Artists.Find(id);
+            var artist = context.Artists.Include(x=>x.ArtistRoles).FirstOrDefault(x => x.Id == id);
             ViewBag.Ethnicity = context.Ethnicities.ToList();
+            ViewBag.Role = context.Roles.ToList();
             return View(artist);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Artist artist)
+        public IActionResult Edit(int id, Artist artist, int[] SelectedRoleId)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var oldArtist = context.Artists.Find(id);
+                    var oldArtist = context.Artists.Include(x=>x.ArtistRoles).FirstOrDefault(x=>x.Id == id);
                     IFormFile postedFile;
                     string artistName = artist.Name.ToString();
                     if (oldArtist != null)
@@ -210,6 +203,34 @@ namespace CastingProject.Controllers
                                 }
                             }
                             oldArtist.Dp = artist.Dp;
+                        }
+
+
+                        if (SelectedRoleId != null)
+                        {
+                            //Remove Artist Role
+                            var removedArtistRole = new List<ArtistRole>();
+                            foreach (var artistRoleId in oldArtist.ArtistRoles)
+                            {
+                                if (!SelectedRoleId.Contains(artistRoleId.RoleId))
+                                    removedArtistRole.Add(artistRoleId);
+                            }
+
+                            //removing old Roles
+                            foreach (var artistRoleId in removedArtistRole)
+                            {
+                                context.ArtistRoles.Remove(artistRoleId);
+                            }
+
+                            //add newly selected Roles
+                            foreach (var selectedRoleId in SelectedRoleId)
+                            {
+                                if (!oldArtist.ArtistRoles.Any(x=>x.RoleId == selectedRoleId))
+                                {
+                                    context.ArtistRoles.Add(new ArtistRole { RoleId = selectedRoleId, ArtistId = artist.Id });
+                                }
+                            }
+
                         }
                         oldArtist.Name = artist.Name;
                         oldArtist.Gender = artist.Gender;
@@ -239,7 +260,7 @@ namespace CastingProject.Controllers
                var artist = context.Artists.Include(x => x.ArtistGalleries).FirstOrDefault(x => x.Id == id);
                return View(artist);
            }
-   */
+    */
         [ActionName("Delete")]
         public IActionResult DeleteConfirm(int id)
         {
@@ -394,15 +415,7 @@ namespace CastingProject.Controllers
 
         }
 
-        public string EnumNames()
-        {
-            var enums = "";
-            foreach (var item in Enum.GetNames(typeof(EnumField.Gender)))
-            {
-                enums = item.ToString();
-            }
-            return enums;
-        }
+
 
     }
 
