@@ -49,6 +49,19 @@ namespace CastingProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Ethnicities",
                 columns: table => new
                 {
@@ -62,6 +75,19 @@ namespace CastingProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Hobbies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Hobbies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -72,6 +98,19 @@ namespace CastingProject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Skills",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Skills", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -200,11 +239,18 @@ namespace CastingProject.Migrations
                     Experience = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Wages = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DOB = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Dp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Dp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Artists", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Artists_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Artists_Ethnicities_EthnicityId",
                         column: x => x.EthnicityId,
@@ -234,6 +280,30 @@ namespace CastingProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ArtistHobbies",
+                columns: table => new
+                {
+                    ArtistId = table.Column<int>(type: "int", nullable: false),
+                    HobbyId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArtistHobbies", x => new { x.ArtistId, x.HobbyId });
+                    table.ForeignKey(
+                        name: "FK_ArtistHobbies_Artists_ArtistId",
+                        column: x => x.ArtistId,
+                        principalTable: "Artists",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ArtistHobbies_Hobbies_HobbyId",
+                        column: x => x.HobbyId,
+                        principalTable: "Hobbies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ArtistRoles",
                 columns: table => new
                 {
@@ -258,41 +328,25 @@ namespace CastingProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Hobbies",
+                name: "ArtistSkills",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Hobbies = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ArtistId = table.Column<int>(type: "int", nullable: false)
+                    ArtistId = table.Column<int>(type: "int", nullable: false),
+                    SkillId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Hobbies", x => x.Id);
+                    table.PrimaryKey("PK_ArtistSkills", x => new { x.ArtistId, x.SkillId });
                     table.ForeignKey(
-                        name: "FK_Hobbies_Artists_ArtistId",
+                        name: "FK_ArtistSkills_Artists_ArtistId",
                         column: x => x.ArtistId,
                         principalTable: "Artists",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Skills",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Skills = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ArtistId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Skills", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Skills_Artists_ArtistId",
-                        column: x => x.ArtistId,
-                        principalTable: "Artists",
+                        name: "FK_ArtistSkills_Skills_SkillId",
+                        column: x => x.SkillId,
+                        principalTable: "Skills",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -303,14 +357,29 @@ namespace CastingProject.Migrations
                 column: "ArtistId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ArtistHobbies_HobbyId",
+                table: "ArtistHobbies",
+                column: "HobbyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ArtistRoles_RoleId",
                 table: "ArtistRoles",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Artists_CategoryId",
+                table: "Artists",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Artists_EthnicityId",
                 table: "Artists",
                 column: "EthnicityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtistSkills_SkillId",
+                table: "ArtistSkills",
+                column: "SkillId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -350,16 +419,6 @@ namespace CastingProject.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Hobbies_ArtistId",
-                table: "Hobbies",
-                column: "ArtistId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Skills_ArtistId",
-                table: "Skills",
-                column: "ArtistId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -368,7 +427,13 @@ namespace CastingProject.Migrations
                 name: "ArtistGalleries");
 
             migrationBuilder.DropTable(
+                name: "ArtistHobbies");
+
+            migrationBuilder.DropTable(
                 name: "ArtistRoles");
+
+            migrationBuilder.DropTable(
+                name: "ArtistSkills");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -389,10 +454,13 @@ namespace CastingProject.Migrations
                 name: "Hobbies");
 
             migrationBuilder.DropTable(
-                name: "Skills");
+                name: "Roles");
 
             migrationBuilder.DropTable(
-                name: "Roles");
+                name: "Artists");
+
+            migrationBuilder.DropTable(
+                name: "Skills");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -401,7 +469,7 @@ namespace CastingProject.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Artists");
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Ethnicities");

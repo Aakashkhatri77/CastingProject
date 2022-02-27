@@ -6,7 +6,6 @@
     <title>@ViewData["Title"] - CastingProject</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CastingProject.styles.css" asp-append-version="true" />
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.10.1/dist/css/uikit.min.css" />
@@ -14,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter&family=Source+Serif+Pro:wght@300&family=Ubuntu:wght@300&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <link href="~/css/tagify.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
 
 </head>
@@ -29,8 +29,11 @@
                 <div class="uk-navbar-left uk-margin-remove nav-header">
                     <ul class="uk-navbar-nav">
                         <li><a asp-action="Index" asp-controller="Artist">Artist</a></li>
-                        <li><a asp-action="Index" asp-controller="Artist">Contact</a></li>
-                        <li><a asp-action="Index" asp-controller="Artist">About Us</a></li>
+                        <li><a asp-action="Index" asp-controller="Ethnicity">Ethnicity</a></li>
+                        <li><a asp-action="Index" asp-controller="Category">Category</a></li>
+                        <li><a asp-action="Index" asp-controller="Roles">Role</a></li>
+                        <li><a asp-action="Index" asp-controller="Hobby">Hobbies</a></li>
+                        <li><a asp-action="Index" asp-controller="Skill">Skills</a></li>
                     </ul>
                 </div>
                 <div class="uk-navbar-right uk-grid account">
@@ -61,7 +64,6 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
 
 </body>

@@ -1,13 +1,4 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-/*const tagify = require("./tagify");
-const tagify = require("./tagify");*/
-
-
-// Write your JavaScript code
-
-$(function () {
+﻿$(function () {
     var gallery = $('#Gallery');
     $('a[uk-toggle="target: #modal-container"]').click(function (event) {
         var url = $(this).data('url');
@@ -30,6 +21,7 @@ $(function () {
     })
 })
 
+/*Search Text*/
 function ClearFilter() {
     $('.clear').find("input:text").val("");
     $(".clear select").prop("selectedIndex", 0)
@@ -43,7 +35,7 @@ var hobbies = document.getElementById("hobby")
 var hobby = new Tagify(hobbies, { originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',') })
 
 
-//for tag input select option
+/*for tag input select option*/
 $(document).ready(function () {
     $('.s2').select2();
 });

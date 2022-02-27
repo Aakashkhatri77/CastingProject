@@ -26,6 +26,8 @@ namespace CastingProject.Controllers
             ViewBag.SkinColor = filter.SkinColor;
             ViewBag.Height = filter.Height;
             ViewBag.Ethnicity = context.Ethnicities.ToList();
+            ViewBag.Category = context.Categories.ToList();
+
             var query = context.Artists.Include(x => x.Ethnicity).AsQueryable();
             if (!String.IsNullOrEmpty(filter.searchText))
             {
@@ -44,6 +46,10 @@ namespace CastingProject.Controllers
             {
                 query = query.Where(x => x.Ethnicity.Name == filter.Ethnicity);
             }
+            if (filter.Category is not null)
+            {
+                query = query.Where(x => x.Category.Name == filter.Category);
+            }
             if (filter.Height is not null)
             {
                 var height = filter.Height.Split("-");
@@ -55,6 +61,7 @@ namespace CastingProject.Controllers
             int pageSize = 8;
             return View(PaginatedList<Artist>.CreateAsync(query.AsNoTracking(), page ?? 1, pageSize));
 
+
             //ViewBag.Artist = query.ToList();
         }
 
@@ -62,14 +69,17 @@ namespace CastingProject.Controllers
         {
             var artist = new Artist();
             ViewBag.Ethnicity = context.Ethnicities.ToList();
+            ViewBag.Category = context.Categories.ToList();
             ViewBag.Role = context.Roles.ToList();
+            ViewBag.Hobby = context.Hobbies.ToList();
+            ViewBag.Skill = context.Skills.ToList();
             return View(artist);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Artist artist, int[] SelectedRoleId)
+        public IActionResult Create(Artist artist, int[] SelectedRoleId, int[] SelectedHobbyId, int[] SelectedSkillID)
         {
             try
             {
@@ -112,30 +122,27 @@ namespace CastingProject.Controllers
                             }
                         }
                     }
-                    if (artist.skills != null)
+                    if (SelectedHobbyId != null)
                     {
-                        var artistSkills = artist.skills;
-                        string[] skillsSplit = artistSkills.Split(",");
-                        foreach (var item in skillsSplit)
+                        foreach (var hobbyId in SelectedHobbyId)
                         {
-                            artist.Skills.Add(new Skill { Skills = item });
+                            artist.ArtistHobbies.Add(new ArtistHobbies { HobbyId = hobbyId });
                         }
                     }
 
-                    if (artist.hobbies != null)
-                    {
-                        var artistHobbies = artist.hobbies;
-                        string[] hobbiesSplit = artistHobbies.Split(",");
-                        foreach (var item in hobbiesSplit)
-                        {
-                            artist.Hobbies.Add(new Hobby { Hobbies = item });
-                        }
-                    }
                     if (SelectedRoleId != null)
                     {
                         foreach (var roleId in SelectedRoleId)
                         {
                             artist.ArtistRoles.Add(new ArtistRole { RoleId = roleId });
+                        }
+                    }
+
+                    if (SelectedSkillID != null)
+                    {
+                        foreach (var skillId in SelectedSkillID)
+                        {
+                            artist.ArtistSkills.Add(new ArtistSkills { SkillId = skillId });
                         }
                     }
                     context.Artists.Add(artist);
@@ -152,28 +159,32 @@ namespace CastingProject.Controllers
         //Details
         public IActionResult Details(int id)
         {
-            var artist = context.Artists.Include(x => x.ArtistGalleries).Include(x=>x.Hobbies).Include(x=>x.Skills).FirstOrDefault(x => x.Id == id);
+            var artist = context.Artists.Include(x => x.ArtistGalleries).Include(x=>x.Category).FirstOrDefault(x => x.Id == id);
+
             return View(artist);
         }
 
         //Edit
         public IActionResult Edit(int id)
         {
-            var artist = context.Artists.Include(x=>x.ArtistRoles).FirstOrDefault(x => x.Id == id);
+            var artist = context.Artists.Include(x=>x.ArtistRoles).Include(x=>x.ArtistHobbies).Include(x=>x.ArtistSkills).FirstOrDefault(x => x.Id == id);
             ViewBag.Ethnicity = context.Ethnicities.ToList();
+            ViewBag.Category = context.Categories.ToList();
             ViewBag.Role = context.Roles.ToList();
+            ViewBag.Hobby = context.Hobbies.ToList();
+            ViewBag.Skill = context.Skills.ToList();
             return View(artist);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Artist artist, int[] SelectedRoleId)
+        public IActionResult Edit(int id, Artist artist, int[] SelectedRoleId, int[] SelectedHobbyId, int[] SelectedSkillId)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var oldArtist = context.Artists.Include(x=>x.ArtistRoles).FirstOrDefault(x=>x.Id == id);
+                    var oldArtist = context.Artists.Include(x=>x.ArtistRoles).Include(x=>x.ArtistHobbies).Include(x=>x.ArtistSkills).FirstOrDefault(x=>x.Id == id);
                     IFormFile postedFile;
                     string artistName = artist.Name.ToString();
                     if (oldArtist != null)
@@ -229,9 +240,70 @@ namespace CastingProject.Controllers
                                 }
                             }
                         }
+
+                        //Artist Hobby
+                        if (SelectedHobbyId != null)
+                        {
+                            //Remove Artis Hobby
+                            var removedArtistHobby = new List<ArtistHobbies>();
+                            foreach (var artistHobbyId in oldArtist.ArtistHobbies)
+                            {
+                                if (!SelectedHobbyId.Contains(artistHobbyId.HobbyId))
+                                {
+                                    removedArtistHobby.Add(artistHobbyId);
+                                }
+                            }
+
+                            //removing old Hobbies
+                            foreach (var artistHobbyId in removedArtistHobby)
+                            {
+                                context.ArtistHobbies.Remove(artistHobbyId);
+                            }
+
+                            //add newly selected Roles
+                            foreach (var selectedHobbyId in SelectedHobbyId)
+                            {
+                                if (!oldArtist.ArtistHobbies.Any(x => x.HobbyId == selectedHobbyId))
+                                {
+                                    context.ArtistHobbies.Add(new ArtistHobbies { HobbyId = selectedHobbyId, ArtistId = artist.Id });
+                                }
+                            }
+
+                        }
+
+                        //Artist Skill
+                        if (SelectedSkillId != null)
+                        {
+                            //Remove Artis Hobby
+                            var removedArtistSkill = new List<ArtistSkills>();
+                            foreach (var artistSkillId in oldArtist.ArtistSkills)
+                            {
+                                if (!SelectedSkillId.Contains(artistSkillId.SkillId))
+                                {
+                                    removedArtistSkill.Add(artistSkillId);
+                                }
+                            }
+
+                            //removing old Hobbies
+                            foreach (var artistSkillId in removedArtistSkill)
+                            {
+                                context.ArtistSkills.Remove(artistSkillId);
+                            }
+
+                            //add newly selected Roles
+                            foreach (var selectedSkillId in SelectedSkillId)
+                            {
+                                if (!oldArtist.ArtistSkills.Any(x => x.SkillId == selectedSkillId))
+                                {
+                                    context.ArtistSkills.Add(new ArtistSkills { SkillId = selectedSkillId, ArtistId = artist.Id });
+                                }
+                            }
+
+                        }
                         oldArtist.Name = artist.Name;
                         oldArtist.Gender = artist.Gender;
                         oldArtist.EthnicityId = artist.EthnicityId;
+                        oldArtist.CategoryId = artist.CategoryId;
                         oldArtist.Height = artist.Height;
                         oldArtist.Weight = artist.Weight;
                         oldArtist.Skin_Color = artist.Skin_Color;

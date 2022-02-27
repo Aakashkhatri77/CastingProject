@@ -5,6 +5,7 @@
     ViewData["Title"] = "Index";
     //var artist = ViewBag.Artist;
     var ethnicities = ViewBag.Ethnicity as IEnumerable<Ethnicity>;
+    var categories = ViewBag.Category as IEnumerable<Category>;
 
 
     var gender = from EnumField.Gender d in Enum.GetValues(typeof(EnumField.Gender))
@@ -26,14 +27,20 @@
                     <div class="uk-width-1-1 " style="width:94%">
                         <input class="uk-input " type="text" value="@ViewData["CurrentFilter"]" name="searchText" placeholder="Search by Name">
                     </div>
-                        <button type="submit" class="uk-search-icon-flip" uk-search-icon> </button>
+                    <button type="submit" class="uk-search-icon-flip" uk-search-icon> </button>
+                    <div class="uk-width-1-2@s">
+                        <label class="uk-form-label" for="form-stacked-text">Category</label>
+                        <select name="category" class="uk-input" asp-items="@(new SelectList(categories,"Name", "Name"))">
+                            <option value="">Select</option>
+                        </select>
+                    </div>
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label" for="form-stacked-text">Gender</label>
-                        @*<select name="Gender" class="uk-input" asp-items="Html.GetEnumSelectList<EnumField.Gender>()">*@
                         <select name="Gender" class="uk-input" asp-items="@(new SelectList(gender, "Name", "Name"))">
                             <option value="">Select</option>
                         </select>
                     </div>
+
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label" for="form-stacked-text">Ethnicity</label>
                         <select name="ethnicity" class="uk-input" asp-items="@(new SelectList(ethnicities,"Name", "Name"))">
@@ -58,7 +65,7 @@
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label" for="form-stacked-text">Height</label>
                         <select name="Height" id="" class="uk-input">
-                            <option value="">--Select--</option>
+                            <option value="">Select</option>
                             <option value="3-4">3-4</option>
                             <option value="4-5">4-5</option>
                             <option value="5-6">5-6</option>
@@ -66,7 +73,7 @@
                             <option value="7-8">7-8</option>
                         </select>
                     </div>
-                    <div class="uk-width-1-2@s" style=" margin-top:20px;">
+                    <div class="uk-width-1-1@s" style=" margin-top:20px;">
                         <button class=" uk-button uk-button-default uk-button-small" id="filter-btn">Filter</button>
                         <button onclick="ClearFilter()" class=" uk-button uk-button-default uk-button-small">Reset</button>
                     </div>

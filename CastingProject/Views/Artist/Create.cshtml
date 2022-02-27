@@ -3,7 +3,10 @@
 @{
     ViewData["Title"] = "Create";
     var roles = ViewBag.Role as IEnumerable<Role>;
+    var hobbies = ViewBag.Hobby as IEnumerable<Hobby>;
+    var skills = ViewBag.Skill as IEnumerable<Skill>;
     var ethnicities = ViewBag.Ethnicity as IEnumerable<Ethnicity>;
+    var categories = ViewBag.Category as IEnumerable<Category>;
 }
 
 <div style="margin-top:50px">
@@ -15,24 +18,31 @@
         <input asp-for="Name" class="uk-input" placeholder="Name">
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-     <div class="uk-width-1-2@s">
-        <label class="uk-form-label" for="form-stacked-text">Roles</label>
-        <select multiple class="uk-input s2" name="SelectedRoleId" asp-items="@(new SelectList (roles,"Id", "Name"))"></select>
-    </div>
-
     <div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Ethnicity</label>
         <select asp-for="EthnicityId" class="uk-input" asp-items="@(new SelectList(ethnicities, "id", "Name"))"></select>
-        @*<span asp-validation-for="EthnicityId" class="text-danger"></span>*@
     </div>
-
+    <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Category</label>
+        <select asp-for="CategoryId" class="uk-input" asp-items="@(new SelectList(categories, "Id", "Name"))"></select>
+    </div>
     <div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Gender</label>
         <select asp-for="Gender" class="uk-input" asp-items="Html.GetEnumSelectList<EnumField.Gender>()"></select>
         <span asp-validation-for="Gender" class="text-danger"></span>
-
     </div>
-
+    <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Roles</label>
+        <select multiple class="uk-input s2" name="SelectedRoleId" asp-items="@(new SelectList (roles,"Id", "Name"))"></select>
+    </div>
+    <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Hobbies</label>
+        <select multiple class="uk-input s2" name="SelectedHobbyId" asp-items="@(new SelectList (hobbies,"Id", "Name"))"></select>
+    </div>
+      <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Skills</label>
+        <select multiple class="uk-input s2" name="SelectedSkillID" asp-items="@(new SelectList (skills,"Id", "Name"))"></select>
+    </div>
     <div class="uk-width-1-4@s" uk-form>
         <label class="uk-form-label" for="form-stacked-text">Date-of-Birth</label>
         <input asp-for="DOB" class="uk-input" data-uk-datepicker="{format:'DD.MM.YYYY'}" placeholder="DOB">
@@ -79,17 +89,17 @@
     </div>
     <div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Weight</label>
-        <input asp-for="Weight" class="uk-input" type="number" placeholder="Weight in kg.">
-        <span asp-validation-for="Weight" class="text-danger"></span>
+        <input asp-for="Weight" class="uk-input" type="number"  placeholder="Weight in kg.">
+        @*<span asp-validation-for="Weight" class="text-danger"></span>*@
     </div>
-    <div class="uk-width-1-2@s">
-            <label class="uk-form-label" for="form-stacked-text">Skills</label>
-            <input class="uk-input" id="skill" asp-for="skills" placeholder="Write some tags" />
-    </div>
-    <div class="uk-width-1-2@s">
+   @* <div class="uk-width-1-2@s">
+        <label class="uk-form-label" for="form-stacked-text">Skills</label>
+        <input class="uk-input" id="skill" asp-for="skills" placeholder="Write some tags" />
+    </div>*@
+    @*<div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Hobbies</label>
         <input type="text" class="uk-input" id="hobby" asp-for="hobbies" placeholder="Write some tags"/>
-    </div>
+        </div>*@
     <div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Profile</label>
         <div class="uk-width" uk-form-custom="target: true">

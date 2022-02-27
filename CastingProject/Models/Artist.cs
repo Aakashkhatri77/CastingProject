@@ -22,7 +22,8 @@ namespace CastingProject.Models
         public string Wages { get; set; }
         public DateTime DOB { get; set; }
         public string Dp { get; set; }
-
+        public int CategoryId { get; set; } 
+        public Category Category { get; set; } 
 
         [NotMapped]
         public IFormFile ImageFile { get; set; }
@@ -32,12 +33,9 @@ namespace CastingProject.Models
 
         public ICollection<ArtistGallery> ArtistGalleries { get; set; } = new HashSet<ArtistGallery>();
 
-        [NotMapped]
-        public string hobbies { get; set; }
-        public ICollection<Hobby> Hobbies { get; set; } = new HashSet<Hobby>();
-        [NotMapped]
-        public string skills { get; set; }
-        public ICollection<Skill> Skills { get; set; } = new HashSet<Skill>();
+       
+        public ICollection<ArtistHobbies> ArtistHobbies { get; set; } = new HashSet<ArtistHobbies>();
+        public ICollection<ArtistSkills> ArtistSkills { get; set; } = new HashSet<ArtistSkills>();
         public ICollection<ArtistRole> ArtistRoles { get; set; } = new HashSet<ArtistRole>();
     }
 }

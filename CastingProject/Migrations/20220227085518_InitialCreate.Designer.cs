@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CastingProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220224090328_InitialCreate")]
+    [Migration("20220227085518_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,9 @@ namespace CastingProject.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DOB")
                         .HasColumnType("datetime2");
@@ -79,6 +82,8 @@ namespace CastingProject.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.HasIndex("EthnicityId");
 
                     b.ToTable("Artists");
@@ -105,6 +110,21 @@ namespace CastingProject.Migrations
                     b.ToTable("ArtistGalleries");
                 });
 
+            modelBuilder.Entity("CastingProject.Models.ArtistHobbies", b =>
+                {
+                    b.Property<int>("ArtistId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HobbyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ArtistId", "HobbyId");
+
+                    b.HasIndex("HobbyId");
+
+                    b.ToTable("ArtistHobbies");
+                });
+
             modelBuilder.Entity("CastingProject.Models.ArtistRole", b =>
                 {
                     b.Property<int>("ArtistId")
@@ -118,6 +138,37 @@ namespace CastingProject.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("ArtistRoles");
+                });
+
+            modelBuilder.Entity("CastingProject.Models.ArtistSkills", b =>
+                {
+                    b.Property<int>("ArtistId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SkillId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ArtistId", "SkillId");
+
+                    b.HasIndex("SkillId");
+
+                    b.ToTable("ArtistSkills");
+                });
+
+            modelBuilder.Entity("CastingProject.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("CastingProject.Models.Ethnicity", b =>
@@ -144,15 +195,10 @@ namespace CastingProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ArtistId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Hobbies")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ArtistId");
 
                     b.ToTable("Hobbies");
                 });
@@ -181,15 +227,10 @@ namespace CastingProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ArtistId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Skills")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ArtistId");
 
                     b.ToTable("Skills");
                 });
@@ -398,11 +439,19 @@ namespace CastingProject.Migrations
 
             modelBuilder.Entity("CastingProject.Models.Artist", b =>
                 {
+                    b.HasOne("CastingProject.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("CastingProject.Models.Ethnicity", "Ethnicity")
                         .WithMany()
                         .HasForeignKey("EthnicityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
 
                     b.Navigation("Ethnicity");
                 });
@@ -414,6 +463,25 @@ namespace CastingProject.Migrations
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CastingProject.Models.ArtistHobbies", b =>
+                {
+                    b.HasOne("CastingProject.Models.Artist", "Artist")
+                        .WithMany("ArtistHobbies")
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CastingProject.Models.Hobby", "Hobby")
+                        .WithMany()
+                        .HasForeignKey("HobbyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Artist");
+
+                    b.Navigation("Hobby");
                 });
 
             modelBuilder.Entity("CastingProject.Models.ArtistRole", b =>
@@ -435,22 +503,23 @@ namespace CastingProject.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("CastingProject.Models.Hobby", b =>
+            modelBuilder.Entity("CastingProject.Models.ArtistSkills", b =>
                 {
-                    b.HasOne("CastingProject.Models.Artist", null)
-                        .WithMany("Hobbies")
+                    b.HasOne("CastingProject.Models.Artist", "Artist")
+                        .WithMany("ArtistSkills")
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("CastingProject.Models.Skill", b =>
-                {
-                    b.HasOne("CastingProject.Models.Artist", null)
-                        .WithMany("Skills")
-                        .HasForeignKey("ArtistId")
+                    b.HasOne("CastingProject.Models.Skill", "Skill")
+                        .WithMany()
+                        .HasForeignKey("SkillId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Artist");
+
+                    b.Navigation("Skill");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -508,11 +577,11 @@ namespace CastingProject.Migrations
                 {
                     b.Navigation("ArtistGalleries");
 
+                    b.Navigation("ArtistHobbies");
+
                     b.Navigation("ArtistRoles");
 
-                    b.Navigation("Hobbies");
-
-                    b.Navigation("Skills");
+                    b.Navigation("ArtistSkills");
                 });
 #pragma warning restore 612, 618
         }
