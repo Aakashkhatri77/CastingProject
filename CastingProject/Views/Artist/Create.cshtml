@@ -79,10 +79,9 @@
     </div>
     <div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Weight</label>
-        <input asp-for="Weight" class="uk-input" type="number" placeholder="Weight">
+        <input asp-for="Weight" class="uk-input" type="number" placeholder="Weight in kg.">
         <span asp-validation-for="Weight" class="text-danger"></span>
     </div>
-
     <div class="uk-width-1-2@s">
             <label class="uk-form-label" for="form-stacked-text">Skills</label>
             <input class="uk-input" id="skill" asp-for="skills" placeholder="Write some tags" />
@@ -122,11 +121,6 @@
 
 
 @section Scripts {
-
-
-    <script>
-      
-    </script>
     @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
 

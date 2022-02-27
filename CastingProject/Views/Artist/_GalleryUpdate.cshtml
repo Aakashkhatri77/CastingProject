@@ -1,20 +1,5 @@
 ﻿@model CastingProject.Models.Artist;
 
-@*<div id="modal-container" uk-modal class="row">
-    <form asp-action="GalleryUpdate" enctype="multipart/form-data">
-    <input type="hidden" asp-for="Id">
-    <input type="hidden" name="Name" value="@Model.Name">
-    <div class="col-md-4">
-    <label asp-for="GalleryFile">Image</label>
-    <input multiple asp-for="GalleryFile" class="form-control">
-    </div>
-    <br>
-    <div class="col-md-4">
-    <input type="submit" class="btn btn-primary" value="Upload">
-    </div>
-    </form>
-    </div>*@
-
 <div id="modal-container" uk-modal>
     <div class="uk-modal-dialog uk-modal-body">
         <form asp-action="GalleryUpdate" enctype="multipart/form-data">
