@@ -58,9 +58,21 @@ namespace CastingProject.Controllers
                 int to = Convert.ToInt32(height[1]);
                 query = query.Where(x => x.Height >= from && x.Height <= to);
             }
+
+            if (filter.Age is not null)
+            {
+                var age = filter.Age.Split("-");
+                int ageFrom = Convert.ToInt32(age[0]);
+                int ageTo = Convert.ToInt32(age[1]);
+                var ageFromDate = (Convert.ToInt32(DateTime.Now.ToString("yyyy")) - ageTo).ToString() + "-1-1";
+                var ageToDate = (Convert.ToInt32(DateTime.Now.ToString("yyyy")) - ageFrom).ToString() + "-12-31";
+                DateTime From = DateTime.Parse(ageFromDate);
+                DateTime To = DateTime.Parse(ageToDate);
+                query = query.Where(x => x.DOB.Date >= From && x.DOB.Date <= To);
+            }
+
             int pageSize = 8;
             return View(PaginatedList<Artist>.CreateAsync(query.AsNoTracking(), page ?? 1, pageSize));
-
 
             //ViewBag.Artist = query.ToList();
         }
@@ -75,7 +87,6 @@ namespace CastingProject.Controllers
             ViewBag.Skill = context.Skills.ToList();
             return View(artist);
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -159,8 +170,7 @@ namespace CastingProject.Controllers
         //Details
         public IActionResult Details(int id)
         {
-            var artist = context.Artists.Include(x => x.ArtistGalleries).Include(x=>x.Category).FirstOrDefault(x => x.Id == id);
-
+            var artist = context.Artists.Include(x => x.ArtistGalleries).Include(x => x.Category).FirstOrDefault(x => x.Id == id);
             return View(artist);
         }
 
@@ -409,12 +419,12 @@ namespace CastingProject.Controllers
                         TempData["message.filevalidation"] = "File not valid";
                         return View();
                     }
-                }
+                }   
             }
             newArtist = artist;
             context.SaveChanges();
             return RedirectToAction(nameof(GalleryIndex), new { Id = id });
-            return PartialView("_GalleryUpdate", newArtist);
+            //return PartialView("_GalleryUpdate", newArtist);
             // }
         }
 
@@ -479,5 +489,7 @@ namespace CastingProject.Controllers
 
             return image;
         }
+
+     
     }
 }

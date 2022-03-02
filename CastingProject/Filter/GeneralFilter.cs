@@ -10,6 +10,7 @@ namespace CastingProject.Filter
         public string Ethnicity { get; set; }
         public string searchText { get; set; }
         public string Category { get; set; }
+        public string Age { get; set; }
 
     }
 }

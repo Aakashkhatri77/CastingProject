@@ -4,18 +4,18 @@
     ViewData["Title"] = "Details";
     var Age = int.Parse(DateTime.Now.ToString("yyyy")) - int.Parse(@Model.DOB.ToString("yyyy"));
 
-
 }
 @*<div id="Gallery">
     </div>*@
 <div style="max-width:1340px;">
-
 
     <div class="float-btn">
         <a asp-action="Edit" asp-controller="Artist" asp-route-id="@Model.Id" class="Create-btn">
             <i id="my-float" uk-icon="icon: file-edit"></i>
         </a>
     </div>
+
+    <vc: category></vc: category>
 
     <div class="uk-grid-small uk-flex-middle uk-margin-large-left uk-margin-top" uk-grid>
         <div class="uk-width-auto">

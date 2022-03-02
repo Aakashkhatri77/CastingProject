@@ -1,4 +1,6 @@
-﻿$(function () {
+﻿
+
+$(function () {
     var gallery = $('#Gallery');
     $('a[uk-toggle="target: #modal-container"]').click(function (event) {
         var url = $(this).data('url');
