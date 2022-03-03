@@ -1,5 +1,6 @@
 ﻿using CastingProject.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CastingProject.Components
 {
@@ -13,10 +14,11 @@ namespace CastingProject.Components
             this.context = context;
         }
 
-        private IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            var categories = context.Categories.ToList();
-            return View(categories);
+            var category = await context.Categories.ToListAsync();
+            ViewBag.Ethnicity = await context.Ethnicities.ToListAsync();
+            return View(category);
         }
     }
 }

@@ -13,9 +13,13 @@
 
     var skinColor = from EnumField.SkinColor d in Enum.GetValues(typeof(EnumField.SkinColor))
                     select new { ID = (int)d, Name = d.ToString() };
+
+    var filter = ViewBag.Filter as CastingProject.Filter.GeneralFilter;
+
+
+    //filter = filter == null ? new CastingProject.Filter.GeneralFilter() : filter;
+
 }
-
-
 <input type="hidden" id="details">
 <div class="talent">
     <p style="font-size:1.8rem; font-weight:Bold;color:black; margin: 3% 0px 1% 0; ">Find Local Actors & Talent for Hire</p>
@@ -28,54 +32,50 @@
                         <input class="uk-input " type="text" value="@ViewData["CurrentFilter"]" name="searchText" placeholder="Search by Name">
                     </div>
                     <button type="submit" class="uk-search-icon-flip" uk-search-icon> </button>
-                    <div class="uk-width-1-2@s">
+
+
+                    @await Component.InvokeAsync("Category", filter.Category)
+
+                    @* <div class="uk-width-1-2@s">
                         <label class="uk-form-label" for="form-stacked-text">Category</label>
-                        <select name="category" class="uk-input" asp-items="@(new SelectList(categories,"Name", "Name"))">
-                            <option value="">Select</option>
+                        <select name="category" class="uk-input" asp-items="@(new SelectList(categories,"Name", "Name",filter.Category))">
+                        <option value="">Select</option>
                         </select>
-                    </div>
+                        </div>*@
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label" for="form-stacked-text">Gender</label>
-                        <select name="Gender" class="uk-input" asp-items="@(new SelectList(gender, "Name", "Name"))">
+                        <select name="Gender" class="uk-input" asp-items="@(new SelectList(gender, "Name", "Name",filter.Gender))">
                             <option value="">Select</option>
                         </select>
                     </div>
 
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label" for="form-stacked-text">Ethnicity</label>
-                        <select name="ethnicity" class="uk-input" asp-items="@(new SelectList(ethnicities,"Name", "Name"))">
+                        <select name="ethnicity" class="uk-input" asp-items="@(new SelectList(ethnicities,"Name", "Name", filter.Ethnicity))">
                             <option value="">Select</option>
                         </select>
-
                     </div>
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label" for="form-stacked-text">Skin Color</label>
-                        <select name="SkinColor" class="uk-input" asp-items="@(new SelectList(skinColor,"Name","Name"))">
+                        <select name="SkinColor" class="uk-input" asp-items="@(new SelectList(skinColor,"Name","Name", filter.SkinColor))">
                             <option value="">Select</option>
-                            @*    @if (ViewBag.SkinColor == null)
-                                {
-                                }
-                                else
-                                {
-                                <option value="@ViewBag.SkinColor">@ViewBag.SkinColor</option>
-                                }*@
                         </select>
                         @*<select asp-for="Skin_Color" class="uk-input" asp-items="Html.GetEnumSelectList<EnumField.SkinColor>()"></select>*@
                     </div>
                     <div class="uk-width-1-2@s">
                         <label class="uk-form-label" for="form-stacked-text">Height</label>
-                        <select name="Height" id="" class="uk-input">
+                        <select name="Height" class="uk-input" onselect="true">
                             <option value="">Select</option>
-                            <option value="3-4">3-4</option>
+                            <option value="3-4"> 3-4</option>
                             <option value="4-5">4-5</option>
                             <option value="5-6">5-6</option>
                             <option value="6-7">6-7</option>
                             <option value="7-8">7-8</option>
                         </select>
                     </div>
-                        <div class="uk-width-1-2@s">
+                    <div class="uk-width-1-2@s">
                         <label class="uk-form-label" for="form-stacked-text">Age</label>
-                        <select name="Age" id="" class="uk-input">
+                        <select name="Age" class="uk-input">
                             <option value="">Select</option>
                             <option value="0-2">Baby</option>
                             <option value="3-12">Children</option>
@@ -93,6 +93,7 @@
             </div>
         </div>
     </div>
+
 
     <p style="font-size:1.8rem; font-weight:Bold;color:black; margin: 3% 0px 1% 0; ">Our Talents</p>
 

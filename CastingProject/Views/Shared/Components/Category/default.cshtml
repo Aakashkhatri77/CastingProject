@@ -1,0 +1,18 @@
+﻿@model IEnumerable<CastingProject.Models.Category>
+@{
+    var ethnicities = ViewBag.Ethnicity as IEnumerable<Ethnicity>;
+    var categories = ViewBag.Category as IEnumerable<Category>;
+}
+
+
+<div class="uk-width-1-2@s">
+    <label class="uk-form-label" for="form-stacked-text">Category</label>
+    <select name="category" class="uk-input">
+        <option value="">Select</option>
+        @foreach (var item in Model)
+        {
+            <option value=@item.Name>@item.Name</option>
+        }
+    </select>
+</div>
+

@@ -30,11 +30,11 @@ function ClearFilter() {
 }
 
 
-/*Tags Input*/
-var skills = document.getElementById("skill")
-var skill = new Tagify(skills, { originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')})
-var hobbies = document.getElementById("hobby")
-var hobby = new Tagify(hobbies, { originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',') })
+//Tags Input
+//var skills = document.getElementById("skill")
+//var skill = new Tagify(skills, { originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')})
+//var hobbies = document.getElementById("hobby")
+//var hobby = new Tagify(hobbies, { originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',') })
 
 
 /*for tag input select option*/

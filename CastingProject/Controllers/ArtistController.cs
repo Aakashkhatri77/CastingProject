@@ -27,6 +27,7 @@ namespace CastingProject.Controllers
             ViewBag.Height = filter.Height;
             ViewBag.Ethnicity = context.Ethnicities.ToList();
             ViewBag.Category = context.Categories.ToList();
+            ViewBag.Filter = filter;
 
             var query = context.Artists.Include(x => x.Ethnicity).AsQueryable();
             if (!String.IsNullOrEmpty(filter.searchText))
