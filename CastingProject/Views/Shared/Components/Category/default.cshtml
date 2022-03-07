@@ -1,18 +1,31 @@
-﻿@model IEnumerable<CastingProject.Models.Category>
+﻿@*@model IEnumerable<CastingProject.Models.Cate>*@
+
+
 @{
-    var ethnicities = ViewBag.Ethnicity as IEnumerable<Ethnicity>;
-    var categories = ViewBag.Category as IEnumerable<Category>;
+    var categories = ViewBag.category as IEnumerable<Category>;
+    var selectedCategory = @ViewBag.SelectedCategory;
 }
 
 
-<div class="uk-width-1-2@s">
+<div class="uk-child-width-expand@s uk-grid-collapse" uk-grid>
+    <div class="labelname">
+        <label>Category</label>
+    </div>
+    <div class="selectlist">
+        <select name="category"  asp-items="@(new SelectList(categories,"Name", "Name", selectedCategory))">
+            <option value="">Select</option>
+        </select>
+    </div>
+</div>
+
+@*<div class="uk-width-1-2@s uk-margin-small-top">
     <label class="uk-form-label" for="form-stacked-text">Category</label>
     <select name="category" class="uk-input">
-        <option value="">Select</option>
-        @foreach (var item in Model)
-        {
-            <option value=@item.Name>@item.Name</option>
-        }
+    <option value="">Select</option>
+    @foreach (var item in categories)
+    {
+    <option value=@item.Name>@item.Name</option>
+    }
     </select>
-</div>
+    </div>*@
 

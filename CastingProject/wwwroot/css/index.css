@@ -1,0 +1,133 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+.wrapper,
+.wrapper .img-area,
+.buttons a,
+.buttons button {
+    background: #ecf0f3;
+    box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
+}
+
+.wrapper {
+    position: relative;
+    width: 250px;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 8px;
+}
+
+    .wrapper .img-area {
+        height: 170px;
+        width: 170px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+.img-area .inner-area {
+    height: calc(100% - 25px);
+    width: calc(100% - 25px);
+    border-radius: 50%;
+}
+
+.inner-area img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.wrapper .name {
+    font-size: 23px;
+    font-weight: 500;
+    color: #31344b;
+    margin: 10px 0 5px 0;
+}
+
+.wrapper .ethnicity {
+    color: #44476a;
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+
+.uk-input.searchfield {
+   height:31px;
+    border-radius: 3px;
+    border: 1px solid #c1b8b8;
+}
+
+.select-box {
+    padding: 0 0px 14px 0;
+}
+
+.labelname {
+    margin-left: 100px;
+}
+
+    .labelname.uk-first-column {
+        margin: 5% 0;
+    }
+
+    .labelname label {
+        font-size: 13px;
+    }
+/*.label-name{
+    padding: 20px 20px;
+}*/
+
+.selectlist select {
+    height: 30px;
+    border-radius: 3px;
+    width: 150px;
+    margin: 10% 0;
+    outline: none;
+}
+
+
+.buttons button:hover:before {
+    z-index: -1;
+    border-radius: 5px;
+}
+
+
+.wrapper .buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.buttons a {
+    position: relative;
+    width: 100%;
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 12px 0;
+    color: #31344b;
+    font-size: 17px;
+    font-weight: 400;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 4;
+    text-align: center;
+}
+
+    .buttons a:hover {
+        text-decoration: none;
+        color: #31344b;
+    }
+
+
+    .buttons a:first-child {
+        margin-right: 10px;
+    }
+
+    .buttons a:last-child {
+        margin-left: 10px;
+    }

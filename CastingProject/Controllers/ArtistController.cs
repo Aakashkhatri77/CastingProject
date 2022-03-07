@@ -72,7 +72,7 @@ namespace CastingProject.Controllers
                 query = query.Where(x => x.DOB.Date >= From && x.DOB.Date <= To);
             }
 
-            int pageSize = 8;
+            int pageSize = 9;
             return View(PaginatedList<Artist>.CreateAsync(query.AsNoTracking(), page ?? 1, pageSize));
 
             //ViewBag.Artist = query.ToList();
@@ -171,7 +171,11 @@ namespace CastingProject.Controllers
         //Details
         public IActionResult Details(int id)
         {
-            var artist = context.Artists.Include(x => x.ArtistGalleries).Include(x => x.Category).FirstOrDefault(x => x.Id == id);
+            var artist = context.Artists.Include(x => x.ArtistGalleries)
+                .Include(x => x.Category)
+                .Include(x=>x.ArtistSkills).ThenInclude(x=>x.Skill)
+                .Include(x=>x.ArtistHobbies).ThenInclude(x=>x.Hobby)
+                .Include(x=>x.ArtistRoles).ThenInclude(x=>x.Role).FirstOrDefault(x => x.Id == id);
             return View(artist);
         }
 
@@ -447,6 +451,21 @@ namespace CastingProject.Controllers
             return RedirectToAction(nameof(GalleryIndex), new { id = artistId });
         }
 
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [IgnoreAntiforgeryToken]
+        public IActionResult Contact(int id)
+        {
+            return View();
+        }
+
+
+
         //File Validation Function
         private bool FileValid(IFormFile file, string extension)
         {
@@ -490,7 +509,6 @@ namespace CastingProject.Controllers
 
             return image;
         }
-
      
     }
 }

@@ -1,0 +1,44 @@
+﻿@model CastingProject.Models.Artist
+
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<h1>Contact</h1>
+
+<hr />
+<div class="row">
+    <form class="uk-grid-small" uk-grid asp-action="Contact">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="uk-width-1-2@s">
+            <input class="uk-input" type="text" placeholder="Full name*" required>
+        </div>
+        <div class="uk-width-1-2@s">
+            <input class="uk-input" type="text" placeholder="Email*" required>
+        </div>
+        <div class="uk-width-1-2@s">
+            <input class="uk-input" type="text" placeholder="Subject*" required>
+        </div>
+        <div class="uk-width-1-2@s">
+            <input class="uk-input" type="number" placeholder="Mobile number*" required>
+        </div>
+        <div class="uk-width-1">
+            <textarea class="uk-textarea" rows="5" placeholder="Message*" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

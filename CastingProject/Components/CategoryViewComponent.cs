@@ -14,11 +14,11 @@ namespace CastingProject.Components
             this.context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(string selectedcategory)
         {
-            var category = await context.Categories.ToListAsync();
-            ViewBag.Ethnicity = await context.Ethnicities.ToListAsync();
-            return View(category);
+            ViewBag.category = await context.Categories.ToListAsync();
+            ViewBag.SelectedCategory = selectedcategory;
+            return View();
         }
     }
 }

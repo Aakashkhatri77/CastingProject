@@ -1,122 +1,129 @@
 ﻿@model PaginatedList<CastingProject.Models.Artist>
 
-@{
-    //as IEnumerable<Artist>;
+    @{
     ViewData["Title"] = "Index";
-    //var artist = ViewBag.Artist;
     var ethnicities = ViewBag.Ethnicity as IEnumerable<Ethnicity>;
-    var categories = ViewBag.Category as IEnumerable<Category>;
-
-
     var gender = from EnumField.Gender d in Enum.GetValues(typeof(EnumField.Gender))
                  select new { ID = (int)d, Name = d.ToString() };
-
     var skinColor = from EnumField.SkinColor d in Enum.GetValues(typeof(EnumField.SkinColor))
                     select new { ID = (int)d, Name = d.ToString() };
 
-    var filter = ViewBag.Filter as CastingProject.Filter.GeneralFilter;
-
-
-    //filter = filter == null ? new CastingProject.Filter.GeneralFilter() : filter;
-
+    var filter = ViewBag.filter as CastingProject.Filter.GeneralFilter;
 }
+
 <input type="hidden" id="details">
-<div class="talent">
-    <p style="font-size:1.8rem; font-weight:Bold;color:black; margin: 3% 0px 1% 0; ">Find Local Actors & Talent for Hire</p>
-    <div class="filter" uk-accordion style="padding: 20px; padding-bottom:20px;">
-        <div class="uk-open">
-            <a class="uk-accordion-title" href="#">Filter Results</a>
-            <div class="uk-accordion-content">
-                <form id="filterform" class="clear" asp-action="Index" class="uk-grid-small" uk-grid method="get">
-                    <div class="uk-width-1-1 " style="width:94%">
-                        <input class="uk-input " type="text" value="@ViewData["CurrentFilter"]" name="searchText" placeholder="Search by Name">
-                    </div>
-                    <button type="submit" class="uk-search-icon-flip" uk-search-icon> </button>
+<div class="uk-child-width-expand@s" uk-grid>
+    <div class="uk-width-1-5">
+        @*<p style="font-size:1.5rem; font-weight:Bold;color:black; margin: 6% 0px 6% 15%;">Find Local Artists</p>*@
 
+        <form id="filterform" class="clear" asp-action="Index" method="get">
+            <h5 style="margin: 42% -18px 2% 0%">Search By Name</h5>
+            <div style="width:236px; display:flex; justify-content:space-around;">
+                <input class="uk-input searchfield" type="text" value="@ViewData["CurrentFilter"]" name="searchText" placeholder="Artist Name">
+            </div>
+            @*<button type="submit" class="uk-search-icon-flip uk-margin-small-left" uk-search-icon> </button>*@
 
-                    @await Component.InvokeAsync("Category", filter.Category)
+            <h5 style="margin:30px 0 11px 0;">Filters</h5>
 
-                    @* <div class="uk-width-1-2@s">
-                        <label class="uk-form-label" for="form-stacked-text">Category</label>
-                        <select name="category" class="uk-input" asp-items="@(new SelectList(categories,"Name", "Name",filter.Category))">
+            @await Component.InvokeAsync("Category",filter.Category)
+
+            <div class="uk-child-width-expand@s uk-grid-collapse " uk-grid>
+                <div class="labelname">
+                    <label>Ethnicity</label>
+                </div>
+                <div class="selectlist">
+                    <select name="ethnicity" asp-items="@(new SelectList(ethnicities,"Name", "Name", filter.Ethnicity))">
                         <option value="">Select</option>
-                        </select>
-                        </div>*@
-                    <div class="uk-width-1-2@s">
-                        <label class="uk-form-label" for="form-stacked-text">Gender</label>
-                        <select name="Gender" class="uk-input" asp-items="@(new SelectList(gender, "Name", "Name",filter.Gender))">
-                            <option value="">Select</option>
-                        </select>
-                    </div>
+                    </select>
+                </div>
+            </div>
 
-                    <div class="uk-width-1-2@s">
-                        <label class="uk-form-label" for="form-stacked-text">Ethnicity</label>
-                        <select name="ethnicity" class="uk-input" asp-items="@(new SelectList(ethnicities,"Name", "Name", filter.Ethnicity))">
-                            <option value="">Select</option>
-                        </select>
+            <div class="uk-child-width-expand@s uk-grid-collapse" uk-grid>
+                <div class="labelname">
+                    <label>Gender</label>
+                </div>
+                <div class="selectlist">
+                    <select name="Gender" asp-items="@(new SelectList(gender, "Name", "Name",filter.Gender))">
+                        <option value="">Select</option>
+                    </select>
+                </div>
+            </div>
+            <div class="uk-child-width-expand@s uk-grid-collapse" uk-grid>
+                <div class="labelname">
+                    <label>Skin Color</label>
+                </div>
+                <div class="selectlist">
+                    <select name="SkinColor" asp-items="@(new SelectList(skinColor, "Name", "Name",filter.SkinColor))">
+                        <option value="">Select</option>
+                    </select>
+                </div>
+            </div>
+            <div class="uk-child-width-expand@s uk-grid-collapse" uk-grid>
+                <div class="labelname">
+                    <label>Height</label>
+                </div>
+                <div class="selectlist">
+                    <select name="Height" id="height">
+                        <option value="">Select</option>
+                        <option value="3-4"> 3-4</option>
+                        <option value="4-5">4-5</option>
+                        <option value="5-6">5-6</option>
+                        <option value="6-7">6-7</option>
+                        <option value="7-8">7-8</option>
+                    </select>
+                </div>
+            </div>
+            <div class="uk-child-width-expand@s uk-grid-collapse" uk-grid>
+                <div class="labelname">
+                    <label>Age</label>
+                </div>
+                <div class="selectlist">
+                    <select name="Age" id="age">
+                        <option value="">Select</option>
+                        <option value="0-2">Baby</option>
+                        <option value="3-12">Children</option>
+                        <option value="13-19">Teenage</option>
+                        <option value="20-30">Adults</option>
+                        <option value="31-45">MiddleAge</option>
+                        <option value="46-100">Senior</option>
+                    </select>
+                </div>
+            </div>
+            <div class="uk-width-1-1@s" style=" margin-top:20px;">
+                <button class=" uk-button uk-button-default uk-button-small" id="filter-btn">Filter</button>
+                <button onclick="ClearFilter()" class=" uk-button uk-button-default uk-button-small">Reset</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div>
+        <p style="font-size:1.5rem; font-weight:Bold;color:black; margin: 2% 0px 1% 5%; ">Our Talents</p>
+        <div class="uk-child-width-expand@s" uk-grid>
+            <div class="uk-flex uk-flex-wrap uk-flex-center">
+            @foreach (var item in Model)
+            {
+                @*<div class="uk-grid-small uk-width-1-3">*@
+                    <div class="wrapper">
+                        <div class="img-area">
+                            <div class="inner-area">
+                                <img src="~/@item.Dp" alt="Display Picture" />
+                            </div>
+                        </div>
+                        <div class="name">@item.Name</div>
+                        <div class="ethnicity">@item.Ethnicity.Name</div>
+                        <div class="buttons">
+                            <a asp-action="Details" asp-route-id="@item.Id">View</a>
+                            <a asp-action="send" asp-controller="Email" asp-route-id="@item.Id">Contact</a>
+                        </div>
                     </div>
-                    <div class="uk-width-1-2@s">
-                        <label class="uk-form-label" for="form-stacked-text">Skin Color</label>
-                        <select name="SkinColor" class="uk-input" asp-items="@(new SelectList(skinColor,"Name","Name", filter.SkinColor))">
-                            <option value="">Select</option>
-                        </select>
-                        @*<select asp-for="Skin_Color" class="uk-input" asp-items="Html.GetEnumSelectList<EnumField.SkinColor>()"></select>*@
-                    </div>
-                    <div class="uk-width-1-2@s">
-                        <label class="uk-form-label" for="form-stacked-text">Height</label>
-                        <select name="Height" class="uk-input" onselect="true">
-                            <option value="">Select</option>
-                            <option value="3-4"> 3-4</option>
-                            <option value="4-5">4-5</option>
-                            <option value="5-6">5-6</option>
-                            <option value="6-7">6-7</option>
-                            <option value="7-8">7-8</option>
-                        </select>
-                    </div>
-                    <div class="uk-width-1-2@s">
-                        <label class="uk-form-label" for="form-stacked-text">Age</label>
-                        <select name="Age" class="uk-input">
-                            <option value="">Select</option>
-                            <option value="0-2">Baby</option>
-                            <option value="3-12">Children</option>
-                            <option value="13-19">Teenage</option>
-                            <option value="20-30">Adults</option>
-                            <option value="31-45">MiddleAge</option>
-                            <option value="46-100">Senior</option>
-                        </select>
-                    </div>
-                    <div class="uk-width-1-1@s" style=" margin-top:20px;">
-                        <button class=" uk-button uk-button-default uk-button-small" id="filter-btn">Filter</button>
-                        <button onclick="ClearFilter()" class=" uk-button uk-button-default uk-button-small">Reset</button>
-                    </div>
-                </form>
+                @*</div>*@
+            }
             </div>
         </div>
     </div>
-
-
-    <p style="font-size:1.8rem; font-weight:Bold;color:black; margin: 3% 0px 1% 0; ">Our Talents</p>
-
-    <div class="uk-grid-column-small uk-grid-row-small uk-child-width-1-4 uk-text-center" uk-grid>
-        @foreach (var item in Model)
-        {
-            <div class="uk-text-center">
-                <div class="for-img uk-inline-clip uk-transition-toggle talent-image" tabindex="0">
-                    <img src="~/@item.Dp" class="uk-transition-scale-up uk-transition-opaque" alt="">
-
-                    <div class="link-tag uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary">
-                        <div class="uk-overlay uk-position-bottom uk-light">
-                            <a onclick="addPage(@item.Id)" id="showdetails" asp-action="Details" asp-route-id="@item.Id" class="uk-h4 uk-margin-remove">@item.Name</a>
-                        </div>
-                    </div>
-                </div>
-                <a onclick="Confirm()" asp-action="Delete" asp-controller="Artist" asp-route-id="@item.Id">
-                    <i id="close" uk-icon="icon: close"></i>
-                </a>
-            </div>
-        }
-    </div>
 </div>
+
 
 <div class="float-btn">
     <a asp-action="Create" asp-controller="Artist" class="Create-btn">
@@ -124,9 +131,7 @@
     </a>
 </div>
 
-
 @*Previous and Next Button*@
-
 @{
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
@@ -149,10 +154,21 @@
     <button class="uk-button uk-button-default" @nextDisabled>Next</button>
 </a>
 
+
+
+@section Scripts
+{
+
 <script>
     function Confirm() {
         confirm("Are you sure you want to delete this?");
     }
+
+    $(document).ready(function(){
+        $('#height option[value="@filter.Height"]').prop('selected', true);
+        $('#age option[value="@filter.Age"]').prop('selected',true);
+    });
 </script>
 
+}
 
