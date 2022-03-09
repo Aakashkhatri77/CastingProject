@@ -9,10 +9,11 @@
     var categories = ViewBag.Category as IEnumerable<Category>;
 }
 
-<div style="margin-top:50px">
-    <h4 style="background-color:#ffcc33;"> Personal Information</h4>
-</div>
-<form class="uk-grid-small" uk-grid style="margin-bottom:100px" asp-action="Create" enctype="multipart/form-data">
+
+    <div style="margin-top:50px;">
+        <h4 class="uk-margin-medium-left uk-margin-medium-right" style="background-color:#ffcc33;  padding: 6px 8px;"> Personal Information</h4>
+    </div>
+<form class="uk-grid-small uk-margin-medium-left uk-margin-medium-right" uk-grid style="margin-bottom:100px" asp-action="Create" enctype="multipart/form-data">
     <div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Name</label>
         <input asp-for="Name" class="uk-input" placeholder="Name">
@@ -39,7 +40,7 @@
         <label class="uk-form-label" for="form-stacked-text">Hobbies</label>
         <select multiple class="uk-input s2" name="SelectedHobbyId" asp-items="@(new SelectList (hobbies,"Id", "Name"))"></select>
     </div>
-      <div class="uk-width-1-2@s">
+    <div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Skills</label>
         <select multiple class="uk-input s2" name="SelectedSkillID" asp-items="@(new SelectList (skills,"Id", "Name"))"></select>
     </div>
@@ -50,7 +51,7 @@
 
     </div>
     <div class="uk-width-1.1" style="margin-top:40px">
-        <h4 style="background-color:#ffcc33;">Attributes</h4>
+        <h4 style="background-color:#ffcc33;  padding: 6px 8px;">Attributes</h4>
     </div>
     <div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Hair Length</label>
@@ -89,10 +90,10 @@
     </div>
     <div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Weight</label>
-        <input asp-for="Weight" class="uk-input" type="number"  placeholder="Weight in kg.">
+        <input asp-for="Weight" class="uk-input" type="number" placeholder="Weight in kg.">
         @*<span asp-validation-for="Weight" class="text-danger"></span>*@
     </div>
- 
+
     <div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Profile</label>
         <div class="uk-width" uk-form-custom="target: true">

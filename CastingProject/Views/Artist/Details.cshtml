@@ -5,97 +5,273 @@
     var Age = int.Parse(DateTime.Now.ToString("yyyy")) - int.Parse(@Model.DOB.ToString("yyyy"));
 }
 
-<div style="min-height:100vh;">
+<div class="float-btn">
+    <a asp-action="Edit" asp-controller="Artist" asp-route-id="@Model.Id" class="Create-btn">
+        <i id="my-float" uk-icon="icon: file-edit"></i>
+    </a>
+</div>
 
-    <div class="float-btn">
-        <a asp-action="Edit" asp-controller="Artist" asp-route-id="@Model.Id" class="Create-btn">
-            <i id="my-float" uk-icon="icon: file-edit"></i>
-        </a>
+@*<div class="uk-child-width-expand@s uk-margin-medium-left uk-margin-large-right uk-margin-top " uk-grid style="height:430px;">
+    <div class="uk-width-1-2">
+    <div class="artistDp">
+    <img src="~/@Model.Dp" alt="dp" />
+    </div>
+    </div>
+    <div class="uk-width-1-2">
+    <div class="artist-box">
+    <h2 class="uk-margin-remove-bottom">@Model.Name</h2>
+    <p class="uk-margin-remove-top">@Model.DOB</p>
+
+    <span class="university-text">Roles</span>
+    <div>
+    @foreach (var item in Model.ArtistRoles)
+    {
+    <div class='university-info' style="display:inline-block; text-align:center;">
+    <span>@item.Role.Name </span>
+    </div>
+    }
     </div>
 
-    <div class="uk-child-width-expand@s uk-margin-large-left uk-margin-large-right uk-margin-top" uk-grid>
-        <div class="uk-width-auto">
-            <img id="main-cover" src="~/@Model.Dp" />
-        </div>
-        <div class="uk-width-expand">
-            <h3 class="uk-card-title uk-margin-remove-bottom">@Model.Name</h3>
-            <p class="uk-text-meta uk-margin-remove-top"> @Model.DOB.ToString("MMMMM yyyy")</p>
-        </div>
+    <span class="university-text">Skills</span>
+    <div>
+    @foreach (var item in Model.ArtistSkills)
+    {
+    <div class='university-info' style="display:inline-block; text-align:center;">
+    <span>@item.Skill.Name</span>
+    </div>
+    }
     </div>
 
-    <div class="uk-child-width-expand@s uk-margin-large-left uk-margin-large-right" uk-grid>
-        <div class="uk-width-1-2">
-                <h4>Photos</h4>
-                <img src="~/@Model.Dp" alt="dp" />
+    <span class="university-text">Hobbies</span>
+    <div>
+    @foreach (var item in Model.ArtistHobbies)
+    {
+    <div class='university-info' style="display:inline-block; text-align:center;">
+    <span>@item.Hobby.Name </span>
+    </div>
+    }
+    </div>
+    <p>Hire Me</p>
+    </div>
 
-            <div class="uk-grid-small uk-child-width-1-3 uk-margin-small-top uk-text-center" uk-grid>
+    </div>
+    </div>*@
+
+<div style="height: 500px;" class="uk-child-width-expand@s uk-margin-large-left uk-margin-large-right uk-margin-top uk-grid-collapse uk-card uk-card-default" uk-grid>
+    <div class="main-dp">
+        <img src="~/@Model.Dp" style="height: 500px;" />
+    </div>
+    <div class="talent-details uk-width-1-3@s">
+        <div class="talent-name">
+            <h1 class="uk-card-title uk-margin-remove-bottom">@Model.Name</h1>
+            <p class="uk-text-meta uk-margin-remove-top">@Model.DOB.ToString("dd MMMMM yyyy"), @Model.Gender</p>
+        </div>
+        <div class="talent-interest">
+            <dl>
+                <dt>
+                    <h3>Skills</h3>
+                </dt>
+                <dd style="display: flex;">
+                    @foreach (var item in Model.ArtistSkills)
+                    {
+                        <div class='university-info' style="display:inline-block; text-align:center;">
+                            <span>@item.Skill.Name</span>
+                        </div>
+                    }
+                </dd>
+                <dt>
+                    <h3>Roles</h3>
+                </dt>
+                <dd style="display: flex;">
+                    @foreach (var item in Model.ArtistRoles)
+                    {
+                        <div class='university-info' style="display:inline-block; text-align:center;">
+                            <span>@item.Role.Name</span>
+                        </div>
+                    }
+                </dd>
+                <dt>
+                    <h3>Hobbies</h3>
+                </dt>
+                <dd style="display: flex;">
+                    @foreach (var item in Model.ArtistHobbies)
+                    {
+                        <div class='university-info' style="display:inline-block; text-align:center;">
+                            <span>@item.Hobby.Name </span>
+                        </div>
+                    }
+                </dd>
+            </dl>
+        </div>
+        <div class="talent-hire">
+            <strong>If you want to hire me?</strong><a asp-action="ContactUs" asp-controller="Contact">Click Here</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="uk-margin"  style="margin-top:70px;">
+    <h3 class="uk-margin-large-left uk-margin-large-right uk-margin-top" >Attributes</h3>
+</div>
+
+<div class="uk-margin-large-right uk-margin-large-left artist-attribute">
+    <div class="attribute">
+        <div>
+            <span>Ethnicity</span>
+        </div>
+        <div class="">@Model.Ethnicity.Name</div>
+    </div>
+    <div class="attribute">
+        <div>
+            <span>Height</span>
+        </div>
+        <div class="">@Model.Height</div>
+    </div>
+    <div class="attribute">
+        <div>
+
+            <span>Weight</span>
+        </div>
+        <div class="">@Model.Weight</div>
+    </div>
+    <div class="attribute">
+        <div>
+
+            <span>Skin Type</span>
+        </div>
+        <div class="">@Model.Skin_Type</div>
+    </div>
+    <div class="attribute">
+        <div>
+
+            <span>Skin Color</span>
+        </div>
+        <div class="">@Model.Skin_Color</div>
+    </div>
+    <div class="attribute">
+        <div>
+
+            <span>Hair Color</span>
+        </div>
+        <div class="">@Model.Hair_Color</div>
+    </div>
+    <div class="attribute">
+        <div>
+
+            <span>Hair Type</span>
+        </div>
+        <div class="">@Model.Hair_Type</div>
+    </div>
+    <div class="attribute">
+        <div>
+
+            <span>Hair Length</span>
+        </div>
+        <div class="">@Model.Hair_Length</div>
+    </div>
+    <div class="attribute">
+        <div>
+
+            <span>Eye Color</span>
+        </div>
+        <div class="">@Model.Eye_Color</div>
+    </div>
+    <div class="attribute">
+        <div>
+
+            <span>Hair-Type</span>
+        </div>
+        <div class="">@Model.Hair_Type</div>
+    </div>
+    <div class="attribute">
+        <div>
+
+            <span>Hair-Type</span>
+        </div>
+        <div class="">@Model.Hair_Type</div>
+    </div>
+    <div class="attribute">
+        <div>
+
+            <span>Hair-Type</span>
+        </div>
+        <div class="">@Model.Hair_Type</div>
+    </div>
+    <div class="attribute">
+        <div>
+
+            <span>Hair-Type</span>
+        </div>
+        <div class="">@Model.Hair_Type</div>
+    </div>
+    <div class="attribute">
+        <div>
+
+            <span>Hair-Type</span>
+        </div>
+        <div class="">@Model.Hair_Type</div>
+    </div>
+</div>
+
+
+
+<div class="uk-child-width-expand@s uk-grid-collapse uk-margin-large-left uk-margin-large-right uk-card aboutme-card" uk-grid style="margin-top:70px;" >
+    <div>
+        <div class="uk-card-body aboutme-title">
+            <h3 class="uk-card-title">About Me</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur a
+                Lorem ipsum dolor sit amet, consectetur a
+                Lorem ipsum dolor sit amet, consectetur a
+                Lorem ipsum dolor sit amet, consectetur a
+                Lorem ipsum dolor sit amet, consectetur a
+                Lorem ipsum dolor sit amet, consectetur a
+                Lorem ipsum dolor sit amet, consectetur a
+                Lorem ipsum dolor sit amet, consectetur a
+                Lorem ipsum dolor sit amet, consectetur a
+                Lorem ipsum dolor sit amet, consectetur a
+                Lorem ipsum dolor sit amet, consectetur a
+                Lorem ipsum dolor sit amet, consectetur a
+                dipiscing elit, sed do eiusmod tempor incididunt.
+            </p>
+        </div>
+    </div>
+    <div class="uk-width-1-3@s">
+        <div class="about-me">
+            <img src="~/@Model.Dp" alt="">
+
+        </div>
+    </div>
+</div>
+
+
+<div class="uk-margin-large-right uk-margin-large-left">
+    <h3 style="margin-top:70px;">Introduction Video</h3>
+    <iframe src="https://www.youtube-nocookie.com/embed/c2pz2mlSfXA?autoplay=0&amp;showinfo=0&amp;rel=0&amp;modestbranding=1&amp;playsinline=1" width="1920" height="1080" allowfullscreen uk-responsive uk-video="automute: true"></iframe>
+</div>
+
+
+
+
+<div class="uk-margin-large-left uk-margin-large-right uk-margin-top">
+    <h3  style="margin-top:70px;">Photos</h3>
+    <div class="uk-grid-small uk-child-width-1-3@s uk-text-center" uk-grid>
         @foreach (var item in Model.ArtistGalleries)
         {
-            <div class="uk-margin-remove">
-                <div class="for-img uk-inline-clip uk-transition-toggle talent-image" tabindex="0">
-                    <div class="content uk-margin-remove" uk-lightbox="animation: scale">
+            <div class="artist-image">
+                <div class="for-img uk-inline-clip uk-transition-toggle artist-image" tabindex="0">
+                    <div class="artist-content uk-margin-remove" uk-lightbox="animation: scale">
                         <a class="uk-inline" href="~/@item.Gallery" target="_blank">
                             <img src="~/@item.Gallery" class="uk-transition-scale-up uk-transition-opaque" alt="">
                         </a>
                     </div>
-                    <a onclick="Confirm()" asp-action="DeleteGallery" asp-controller="Artist" asp-route-id="@item.Id">
-                        <i id="close" uk-icon="icon: close"></i>
-                    </a>
                 </div>
             </div>
         }
     </div>
-        </div>
-
-        <div>
-            <div>
-                <dl class="uk-description-list uk-description-list-divider">
-                    <dt><strong>Age</strong></dt>
-                    <dd>@Age</dd>
-
-                    <dt><strong>Category</strong></dt>
-                    <dd>@Model.Category.Name</dd>
-
-                    <dt><strong>Attributes</strong></dt>
-                    <dd>Height: @Model.Height</dd>
-                    <dd>Weight: @Model.Weight </dd>
-                    <dd>Skin Color: @Model.Skin_Color</dd>
-                    <dd>Eye Color: @Model.Eye_Color</dd>
-                    <dd>Hair Color: @Model.Hair_Color</dd>
-                    <dd>Skin Type: @Model.Skin_Type</dd>
-                    <dd>Hair Length: @Model.Hair_Length</dd>
-                    <dd>Hair Type: @Model.Hair_Type</dd>
-
-                    <dt><strong>Skills</strong></dt>
-                    <div class="tagStyle">
-                        <span>
-                            @string.Join('/',Model.ArtistSkills.Select(x=>x.Skill.Name))
-                        </span>
-                    </div>
-
-                    <dt><strong>Roles</strong></dt>
-                    <div class="tagStyle">
-                        <span>
-                            @string.Join('/',Model.ArtistRoles.Select(x=>x.Role.Name))
-                        </span>
-                    </div>
-
-                    <dt><strong>Hobbies</strong></dt>
-                    <div class="tagStyle">
-                        <span>
-                            @string.Join('/',Model.ArtistHobbies.Select(x=>x.Hobby.Name))
-                        </span>
-                    </div>
-                    <dt><strong>View Gallery</strong></dt>
-                    <dd class="image-btn"><a class="btn uk-botton uk-button-primary" asp-action="GalleryIndex" asp-controller="Artist" asp-route-id="@Model.Id">View</a></dd>
-                    <dd class="image-btn"><a class="btn uk-botton uk-button-primary" asp-action="send" asp-controller="Email" asp-route-id="@Model.Id">Contact</a></dd>
-                </dl>
-            </div>
-        </div>
-
-    </div>
-
-
-
-
 </div>
+
+<dd class="image-btn"><a class="btn uk-botton uk-button-primary" asp-action="GalleryIndex" asp-controller="Artist" asp-route-id="@Model.Id">View</a></dd>
+
+
+

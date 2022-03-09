@@ -43,6 +43,15 @@ $(document).ready(function () {
 });
 
 
+/*For Load More button*/
+$(".artist-image").slice(0, 3).show()
+$(".load-btn").on("click", function () {
+    $(".artist-image:hidden").slice(0, 3).slideDown()
+    if ($(".artist-image:hidden").length == 0) {
+        $(".load-btn").fadeOut('slow')
+    }
+})
+
 
 
 

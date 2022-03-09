@@ -1,0 +1,153 @@
+﻿.talent-name {
+    position: absolute;
+    top: 8%;
+    left: 71%;
+}
+
+.talent-interest {
+    position: absolute;
+    top: 26%;
+    left: 71%;
+}
+
+.talent-hire {
+    position: absolute;
+    top: 82%;
+    left: 71%;
+}
+
+.talent-interest h3 {
+    margin-bottom: 0px;
+}
+
+.talent-name h1 {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.main-dp {
+    text-align: center;
+    background-color: #72726e;
+}
+
+.talent-details {
+    background-color: #ffcc33;
+}
+
+
+/*.artistDp img{
+    width: 100%;
+}*/
+
+.about-me {
+    position: absolute;
+    top: 13%;
+    left: 75%;
+}
+
+    .about-me img {
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+.aboutme-title h3 {
+    color: #ffcc33;
+    font-weight: 400;
+    font-size: 29px;
+}
+
+.aboutme-title p {
+    color: #cfcfcf;
+    font-size: 15px;
+}
+
+.aboutme-card {
+    background-color: #181717;
+    border-radius: 7px;
+}
+
+.aboutArtist {
+    padding: 33px 5px;
+}
+
+.artist-content a img {
+    height: 341px;
+    width: 400px;
+    object-fit: cover;
+}
+
+
+
+/*Artist Skills*/
+
+/*.artist-box {
+    width: 100%;
+    height: 370px;
+    border-radius: 7px;
+}*/
+
+.university-info h3 {
+    margin: 8px 16px;
+    padding: 0 8px;
+    font-size: 20px;
+}
+
+.university-info {
+    background-color: rgb(229, 233, 233);
+    border-radius: 6px;
+    padding: 4px 10px;
+    margin: 0 5px 25px 0;
+}
+
+.university-text {
+    margin: 7px 0;
+    font-size: 13px;
+    color: rgb(121, 117, 114);
+}
+
+.university-info span {
+    font-size: 13px;
+    color: #4a4a4a;
+}
+
+.university-info h3 {
+    font-size: 15px;
+    margin-left: -7px;
+}
+
+/*Artist Attributes*/
+.artist-attribute {
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #ebebeb;
+    padding: 45px 0;
+}
+
+.attribute {
+    margin: 0px 27px;
+    margin-bottom: 20px;
+    width: 9%;
+    transition: width 1s, height 1s, background-color 1s, transform 1s;
+}
+
+    .attribute:hover {
+        background: #ffcc33;
+        border-radius: 5px;
+        transform: rotate(15deg);
+    }
+
+    .attribute span {
+        font-size: 14px;
+        font-weight: 600;
+        width: 20px;
+    }
+
+    .attribute div {
+        font-size: 14px;
+        text-align: center;
+        margin: 11px;
+        color: #5e5e5e;
+    }

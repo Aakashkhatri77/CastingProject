@@ -172,6 +172,7 @@ namespace CastingProject.Controllers
         public IActionResult Details(int id)
         {
             var artist = context.Artists.Include(x => x.ArtistGalleries)
+                .Include(x=>x.Ethnicity)
                 .Include(x => x.Category)
                 .Include(x=>x.ArtistSkills).ThenInclude(x=>x.Skill)
                 .Include(x=>x.ArtistHobbies).ThenInclude(x=>x.Hobby)
