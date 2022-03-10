@@ -8,6 +8,14 @@
     box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
 }
 
+
+
+#filterform {
+    position: sticky;
+    top: 6rem;
+}
+
+
 .wrapper {
     position: relative;
     width: 310px;
@@ -57,7 +65,7 @@
 }
 
 .uk-input.searchfield {
-   height:31px;
+    height: 31px;
     border-radius: 3px;
     border: 1px solid #c1b8b8;
 }
@@ -131,3 +139,66 @@
     .buttons a:last-child {
         margin-left: 10px;
     }
+
+
+/*Artist Card*/
+
+.artist-card {
+    position: relative;
+    width: 310px;
+    display: flex;
+    justify-content: center;
+    height: 400px;
+}
+
+    .artist-card:hover {
+        opacity:0.9;
+    }
+
+
+    .artist-name{
+        display:flex;
+        justify-content:center;
+    }
+
+    .artist-name a{
+        display:flex;
+        justify-content:center;
+    }
+
+        .artist-name a h3 {
+            font-size: 25px;
+            color: #ffffff;
+            font-family: fangsong;
+            position: absolute;
+            top: 85%;
+            transition: width 1s, height 1s, transform 1s;
+        }
+
+.artist-name a h3:hover{
+    color: #ffcc33;
+    font: 30px;
+}
+
+.img-area {
+    height: 100%;
+    width: 100%;
+}
+
+    .img-area img {
+        height: 396px;
+        width: 310px;
+        object-fit: cover;
+    }
+
+.artist-card .name {
+    font-size: 23px;
+    font-weight: 500;
+    color: #31344b;
+    margin: 10px 0 5px 0;
+}
+
+
+.artist-index{
+    scroll-behavior:smooth;
+}

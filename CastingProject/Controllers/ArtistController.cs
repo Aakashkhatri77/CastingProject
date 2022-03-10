@@ -72,7 +72,7 @@ namespace CastingProject.Controllers
                 query = query.Where(x => x.DOB.Date >= From && x.DOB.Date <= To);
             }
 
-            int pageSize = 9;
+            int pageSize = 50;
             return View(PaginatedList<Artist>.CreateAsync(query.AsNoTracking(), page ?? 1, pageSize));
 
             //ViewBag.Artist = query.ToList();

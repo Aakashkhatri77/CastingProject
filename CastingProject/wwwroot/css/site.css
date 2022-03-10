@@ -155,6 +155,7 @@ body {
 
 #my-float {
     margin-top: 22px;
+    z-index: 100;
 }
 
 #my-floatback {

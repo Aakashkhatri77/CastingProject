@@ -1,4 +1,13 @@
-﻿.talent-name {
+﻿
+/*.detail-name {
+    top: 25rem;
+    font-size: 3rem;
+    color: #fff;
+    background: linear-gradient(90deg, #111, transparent);
+    position: absolute;
+}*/
+
+talent-name {
     position: absolute;
     top: 8%;
     left: 71%;
@@ -35,13 +44,9 @@
 }
 
 
-/*.artistDp img{
-    width: 100%;
-}*/
-
 .about-me {
     position: absolute;
-    top: 13%;
+    top: 24%;
     left: 75%;
 }
 
@@ -50,6 +55,10 @@
         width: 200px;
         border-radius: 50%;
         object-fit: cover;
+    }
+
+    .aboutme-title{
+        margin-top: 40px;
     }
 
 .aboutme-title h3 {
@@ -65,16 +74,17 @@
 
 .aboutme-card {
     background-color: #181717;
-    border-radius: 7px;
+    /*border-radius: 7px;*/
 }
+
 
 .aboutArtist {
     padding: 33px 5px;
 }
 
 .artist-content a img {
-    height: 341px;
-    width: 400px;
+    height: 410px;
+    width: 420px;
     object-fit: cover;
 }
 
@@ -127,16 +137,22 @@
 }
 
 .attribute {
-    margin: 0px 27px;
+    /*  margin: 0px 27px;
     margin-bottom: 20px;
     width: 9%;
+    transition: width 1s, height 1s, background-color 1s, transform 1s;*/
+
+    margin: 0px 28px;
+    margin-bottom: 24px;
+    width: 15%;
     transition: width 1s, height 1s, background-color 1s, transform 1s;
+    height:95px;
 }
 
     .attribute:hover {
         background: #ffcc33;
         border-radius: 5px;
-        transform: rotate(15deg);
+        transform: rotate(10deg);
     }
 
     .attribute span {
@@ -150,4 +166,54 @@
         text-align: center;
         margin: 11px;
         color: #5e5e5e;
+    }
+
+
+.float-btn{
+    z-index:10;
+}
+
+    .float-btn a {
+        margin-top: 60px;
+        z-index: 10;
+    }
+
+.artist-details{
+    scroll-behavior:smooth;
+}
+
+.artist-talents {
+    background-color: rgb(229, 233, 233);
+    width: 43%;
+    border-radius: 6px;
+    padding: 26px 0px;
+    margin: 0px 11px 24px 9px;
+}
+
+/*
+.artistInterest-card {
+    background-color:black;
+    color:#ffcc33;
+}
+
+.artistInterest-card h3{
+    color:#ffcc33;
+}
+
+.artist-talents {
+    background-color: #ffcc33;
+    width: 43%;
+    border-radius: 6px;
+    padding: 26px 0px;
+    margin: 0px 11px 24px 9px;
+}
+
+.artistInterest-card span{
+    color:black;
+}
+*/
+    .artistInterest-card:hover {
+        transition: width 1s, height 1s, background-color 1s, transform 1s;
+        background-color: #ffcc33;
+        color:black;
     }

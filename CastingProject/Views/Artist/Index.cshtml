@@ -12,8 +12,8 @@
 }
 
 <input type="hidden" id="details">
-<div class="uk-child-width-expand@s" uk-grid>
-    <div class="uk-width-1-5">
+<div class="uk-child-width-expand@s uk-margin-bottom artist-index" uk-grid>
+    <div class="uk-width-1-4 sidebar">
         @*<p style="font-size:1.5rem; font-weight:Bold;color:black; margin: 6% 0px 6% 15%;">Find Local Artists</p>*@
 
         <form id="filterform" class="clear" asp-action="Index" method="get">
@@ -98,27 +98,76 @@
 
 
     <div>
-        <p style="font-size:1.5rem; font-weight:Bold;color:black; margin: 2% 0px 1% 5%; ">Our Talents</p>
-        <div class="uk-child-width-expand@s" uk-grid>
+        <p style="font-size:1.5rem; font-weight:Bold;color:black; margin: 2% 0px 1% 5%;">Find Local Actors & Models for Hire</p>
+        @*<div class="uk-child-width-expand@s" uk-grid>
             <div class="uk-flex uk-flex-wrap uk-flex-center">
             @foreach (var item in Model)
             {
-                @*<div class="uk-grid-small uk-width-1-3">*@
-                    <div class="wrapper">
-                        <div class="img-area">
-                            <div class="inner-area">
-                                <img src="~/@item.Dp" alt="Display Picture" />
+            <div class="wrapper">
+            <div class="img-area">
+            <div class="inner-area">
+            <img src="~/@item.Dp" alt="Display Picture" />
+            </div>
+            </div>
+            <div class="name">@item.Name</div>
+            <div class="ethnicity">@item.Ethnicity.Name</div>
+            <div class="buttons">
+            <a asp-action="Details" asp-route-id="@item.Id">View</a>
+            <a asp-action="send" asp-controller="Email" asp-route-id="@item.Id">Contact</a>
+            </div>
+            </div>
+            }
+            </div>
+            </div>*@
+
+
+
+        <div class="uk-child-width-expands@s" uk-grid>
+            <div class="uk-flex uk-flex-wrap">
+                @foreach (var item in Model)
+                {
+                    <div style="">
+                        <div class="artist-card uk-margin-small-bottom uk-margin-small-right">
+                            <div class="img-area uk-inline-clip uk-transition-toggle ">
+                                <a asp-action="Details" asp-route-id="@item.Id">
+                                    <img src="~/@item.Dp" class="uk-transition-scale-up uk-transition-opaque" alt="Display Picture" />
+                                </a>
+
+                                <div class="artist-name">
+                                    <a asp-action="Details" asp-route-id="@item.Id">
+                                        <h3>@item.Name</h3>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <div class="name">@item.Name</div>
-                        <div class="ethnicity">@item.Ethnicity.Name</div>
-                        <div class="buttons">
-                            <a asp-action="Details" asp-route-id="@item.Id">View</a>
-                            <a asp-action="send" asp-controller="Email" asp-route-id="@item.Id">Contact</a>
-                        </div>
+                        @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
                     </div>
-                @*</div>*@
+                }
+            </div>
+
+
+            @*Previous and Next Button*@
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
             }
+            <div>
+                <a asp-action="Index"
+                   asp-route-page="@(Model.PageIndex - 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   asp-route-Height="@ViewBag.Height"
+                   asp-route-Gender="@ViewBag.Gender"
+                   asp-route-SkinColor="@ViewBag.SkinColor">
+                    <button class="uk-button uk-button-default" @prevDisabled>Previous</button>
+                </a>
+                <a asp-action="Index"
+                   asp-route-page="@(Model.PageIndex + 1)"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   asp-route-Height="@ViewBag.Height"
+                   asp-route-Gender="@ViewBag.Gender"
+                   asp-route-SkinColor="@ViewBag.SkinColor">
+                    <button class="uk-button uk-button-default" @nextDisabled>Next</button>
+                </a>
             </div>
         </div>
     </div>
@@ -130,29 +179,6 @@
         <i id="my-float" uk-icon="icon: plus"></i>
     </a>
 </div>
-
-@*Previous and Next Button*@
-@{
-    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-}
-
-<a asp-action="Index"
-   asp-route-page="@(Model.PageIndex - 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   asp-route-Height="@ViewBag.Height"
-   asp-route-Gender="@ViewBag.Gender"
-   asp-route-SkinColor="@ViewBag.SkinColor">
-    <button class="uk-button uk-button-default" @prevDisabled>Previous</button>
-</a>
-<a asp-action="Index"
-   asp-route-page="@(Model.PageIndex + 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   asp-route-Height="@ViewBag.Height"
-   asp-route-Gender="@ViewBag.Gender"
-   asp-route-SkinColor="@ViewBag.SkinColor">
-    <button class="uk-button uk-button-default" @nextDisabled>Next</button>
-</a>
 
 
 
