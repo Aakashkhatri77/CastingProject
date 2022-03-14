@@ -12,22 +12,22 @@
 }
 
 <input type="hidden" id="details">
-<div class="uk-child-width-expand@s uk-margin-bottom artist-index" uk-grid>
+<div class="uk-child-width-expand@s uk-margin-bottom artist-index uk-grid" uk-grid>
     <div class="uk-width-1-4 sidebar">
-        @*<p style="font-size:1.5rem; font-weight:Bold;color:black; margin: 6% 0px 6% 15%;">Find Local Artists</p>*@
 
         <form id="filterform" class="clear" asp-action="Index" method="get">
-            <h5 style="margin: 42% -18px 2% 0%">Search By Name</h5>
-            <div style="width:236px; display:flex; justify-content:space-around;">
+            <h5 style="margin:20% -18px 6% 0%; font-size:24px; font-weight:500; color:black;">Search By Name</h5>
+            <div style="width:256px; display:flex; justify-content:space-around;">
                 <input class="uk-input searchfield" type="text" value="@ViewData["CurrentFilter"]" name="searchText" placeholder="Artist Name">
             </div>
-            @*<button type="submit" class="uk-search-icon-flip uk-margin-small-left" uk-search-icon> </button>*@
 
-            <h5 style="margin:30px 0 11px 0;">Filters</h5>
 
-            @await Component.InvokeAsync("Category",filter.Category)
 
-            <div class="uk-child-width-expand@s uk-grid-collapse " uk-grid>
+            <div>
+
+                <h5 style="margin:24px 0px 17px 0px; font-size:24px; font-weight:500; color:black;">Filters</h5>
+            </div>
+            <div class="uk-child-width-expand@s uk-grid-collapse uk-grid" uk-grid>
                 <div class="labelname">
                     <label>Ethnicity</label>
                 </div>
@@ -38,7 +38,9 @@
                 </div>
             </div>
 
-            <div class="uk-child-width-expand@s uk-grid-collapse" uk-grid>
+            @await Component.InvokeAsync("Category",filter.Category)
+
+            <div class="uk-child-width-expand@s uk-grid-collapse uk-grid" uk-grid>
                 <div class="labelname">
                     <label>Gender</label>
                 </div>
@@ -48,7 +50,7 @@
                     </select>
                 </div>
             </div>
-            <div class="uk-child-width-expand@s uk-grid-collapse" uk-grid>
+            <div class="uk-child-width-expand@s uk-grid-collapse uk-grid" uk-grid>
                 <div class="labelname">
                     <label>Skin Color</label>
                 </div>
@@ -58,7 +60,7 @@
                     </select>
                 </div>
             </div>
-            <div class="uk-child-width-expand@s uk-grid-collapse" uk-grid>
+            <div class="uk-child-width-expand@s uk-grid-collapse uk-grid" uk-grid>
                 <div class="labelname">
                     <label>Height</label>
                 </div>
@@ -73,7 +75,7 @@
                     </select>
                 </div>
             </div>
-            <div class="uk-child-width-expand@s uk-grid-collapse" uk-grid>
+            <div class="uk-child-width-expand@s uk-grid-collapse uk-grid" uk-grid>
                 <div class="labelname">
                     <label>Age</label>
                 </div>
@@ -89,7 +91,7 @@
                     </select>
                 </div>
             </div>
-            <div class="uk-width-1-1@s" style=" margin-top:20px;">
+            <div class="uk-width-1-1@s" style=" margin-top:30px;">
                 <button class=" uk-button uk-button-default uk-button-small" id="filter-btn">Filter</button>
                 <button onclick="ClearFilter()" class=" uk-button uk-button-default uk-button-small">Reset</button>
             </div>
@@ -98,7 +100,7 @@
 
 
     <div>
-        <p style="font-size:1.5rem; font-weight:Bold;color:black; margin: 2% 0px 1% 5%;">Find Local Actors & Models for Hire</p>
+        <p style="font-size:2rem; font-weight:Bold;color:black; margin: 2% 0px 1% 0;">Find Local Actors & Models for Hire</p>
         @*<div class="uk-child-width-expand@s" uk-grid>
             <div class="uk-flex uk-flex-wrap uk-flex-center">
             @foreach (var item in Model)
@@ -122,7 +124,7 @@
 
 
 
-        <div class="uk-child-width-expands@s" uk-grid>
+        <div class="uk-child-width-expands@s uk-grid" uk-grid>
             <div class="uk-flex uk-flex-wrap">
                 @foreach (var item in Model)
                 {
@@ -130,7 +132,7 @@
                         <div class="artist-card uk-margin-small-bottom uk-margin-small-right">
                             <div class="img-area uk-inline-clip uk-transition-toggle ">
                                 <a asp-action="Details" asp-route-id="@item.Id">
-                                    <img src="~/@item.Dp" class="uk-transition-scale-up uk-transition-opaque" alt="Display Picture" />
+                                    <img src="@item.Dp" class="uk-transition-scale-up uk-transition-opaque" alt="Display Picture" />
                                 </a>
 
                                 <div class="artist-name">

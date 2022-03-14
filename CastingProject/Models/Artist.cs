@@ -21,9 +21,9 @@ namespace CastingProject.Models
         public string Experience { get; set; }
         public string Wages { get; set; }
         public DateTime DOB { get; set; }
-        public string Dp { get; set; }
         public int CategoryId { get; set; } 
         public Category Category { get; set; } 
+        public string Dp { get; set; }
 
         [NotMapped]
         public IFormFile ImageFile { get; set; }

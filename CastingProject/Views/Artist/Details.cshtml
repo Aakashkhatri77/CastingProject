@@ -63,11 +63,14 @@
     </div>
     </div>
     </div>*@
-<div class="artist-details">
-    <div>
+<div class="uk-position-top artist-details ">
+    <div >
+        <div style=" background:url(@(CastingProject.Helper.ImageSize.Get(Model.Dp, "fullscreen"))); object-fit:cover; height:800px; background-repeat:no-repeat">
+            @*<img src="@Model.Dp" alt="" style="height:100vh; width:100%; object-fit:cover; ">*@
+        </div>
+
         <div class="detail-name">
             <p>@Model.Name</p>
-            <img src="~/@Model.Dp" alt="" style="height:100vh; width:100%; object-fit:cover; opacity:0.9;">
         </div>
     </div>
 
@@ -145,33 +148,35 @@
             </div>
             <div class="">@Model.Hair_Type</div>
         </div>
-        <div class="attribute">
-            <div>
+    </div>
 
-                <span>Hair-Type</span>
+
+        <div class="uk-child-width-expand@s uk-grid-collapse uk-card aboutme-card" uk-grid style="margin-top:70px; height:500px;">
+        <div>
+            <div class="uk-card-body aboutme-title">
+                <h3 class="uk-card-title">About Me</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur a
+                    Lorem ipsum dolor sit amet, consectetur a
+                    Lorem ipsum dolor sit amet, consectetur a
+                    Lorem ipsum dolor sit amet, consectetur a
+                    Lorem ipsum dolor sit amet, consectetur a
+                    Lorem ipsum dolor sit amet, consectetur a
+                    Lorem ipsum dolor sit amet, consectetur a
+                    Lorem ipsum dolor sit amet, consectetur a
+                    Lorem ipsum dolor sit amet, consectetur a
+                    Lorem ipsum dolor sit amet, consectetur a
+                    Lorem ipsum dolor sit amet, consectetur a
+                    Lorem ipsum dolor sit amet, consectetur a
+                    dipiscing elit, sed do eiusmod tempor incididunt.
+                </p>
             </div>
-            <div class="">@Model.Hair_Type</div>
         </div>
-        <div class="attribute">
-            <div>
+        <div class="uk-width-1-3@s">
+            <div class="about-me">
+                <img src="@(CastingProject.Helper.ImageSize.Get(Model.Dp ,"fullscreen"))" alt="">
 
-                <span>Hair-Type</span>
             </div>
-            <div class="">@Model.Hair_Type</div>
-        </div>
-        <div class="attribute">
-            <div>
-
-                <span>Hair-Type</span>
-            </div>
-            <div class="">@Model.Hair_Type</div>
-        </div>
-        <div class="attribute">
-            <div>
-
-                <span>Hair-Type</span>
-            </div>
-            <div class="">@Model.Hair_Type</div>
         </div>
     </div>
 
@@ -179,7 +184,7 @@
     <h3 class="uk-margin-medium-right uk-margin-medium-left" style="margin-top:70px;">Talents And Interests </h3>
     <div class="uk-child-width-expand@s uk-text-center uk-margin-medium-right uk-margin-medium-left uk-margin-large-bottom skills" uk-grid style="height:300px;">
 
-        <div class="uk-card uk-margin-right uk-card-body artistInterest-card">
+        <div class="uk-card uk-card-default uk-margin-right uk-card-body artistInterest-card">
             <h3 style="margin:0 0 28px 0 ;"> Roles</h3>
             @foreach (var item in Model.ArtistRoles)
             {
@@ -209,34 +214,7 @@
     </div>
 
 
-    <div class="uk-child-width-expand@s uk-grid-collapse uk-card aboutme-card" uk-grid style="margin-top:70px; height:350px;">
-        <div>
-            <div class="uk-card-body aboutme-title">
-                <h3 class="uk-card-title">About Me</h3>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    dipiscing elit, sed do eiusmod tempor incididunt.
-                </p>
-            </div>
-        </div>
-        <div class="uk-width-1-3@s">
-            <div class="about-me">
-                <img src="~/@Model.Dp" alt="">
 
-            </div>
-        </div>
-    </div>
 
 
     <div class="uk-margin-medium-right uk-margin-medium-left">
@@ -255,8 +233,8 @@
                 <div class="artist-image">
                     <div class="for-img uk-inline-clip uk-transition-toggle artist-image" tabindex="0">
                         <div class="artist-content uk-margin-remove" uk-lightbox="animation: scale">
-                            <a class="uk-inline" href="~/@item.Gallery" target="_blank">
-                                <img src="~/@item.Gallery" class="uk-transition-scale-up uk-transition-opaque" alt="">
+                            <a class="uk-inline" href="@(CastingProject.Helper.ImageSize.Get(item.Gallery, "fullscreen"))" target="_blank">
+                                <img src="@(CastingProject.Helper.ImageSize.Get(item.Gallery, "medium"))" class="uk-transition-scale-up uk-transition-opaque" alt="">
                             </a>
                         </div>
                     </div>

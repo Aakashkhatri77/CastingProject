@@ -5,6 +5,9 @@ using CastingProject.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp.Processing;
 
 namespace CastingProject.Controllers
 {
@@ -14,6 +17,10 @@ namespace CastingProject.Controllers
         private readonly IWebHostEnvironment hostEnvironment;
         private readonly string[] permittedExtensions = { ".jpg", ".jpeg", ".png" };
         Random random = new Random();
+        private string image;
+        private const int ThumbnailWidth = 150;
+        private const int MediumWidth = 400;
+        private const int FullScreenWidth = 1400;
         public ArtistController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment)
         {
             this.hostEnvironment = hostEnvironment;
@@ -91,7 +98,8 @@ namespace CastingProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Artist artist, int[] SelectedRoleId, int[] SelectedHobbyId, int[] SelectedSkillID)
+        [RequestSizeLimit(230 * 1024 * 1024)]
+        public async Task<IActionResult> Create(Artist artist, int[] SelectedRoleId, int[] SelectedHobbyId, int[] SelectedSkillID)
         {
             try
             {
@@ -107,7 +115,7 @@ namespace CastingProject.Controllers
                         string extension = Path.GetExtension(postedFile.FileName);
                         if (FileValid(postedFile, extension))
                         {
-                            var imagePath = UploadFile(artistName, postedFile);
+                            string  imagePath = await UploadFile(artistName, postedFile);
                             artist.Dp = imagePath;
                         }
                         else
@@ -124,7 +132,7 @@ namespace CastingProject.Controllers
                             string extension = Path.GetExtension(postedFile.FileName);
                             if (FileValid(postedFile, extension))
                             {
-                                var imagePath = UploadFile(artistName, postedFile);
+                                string imagePath = await UploadFile(artistName, postedFile);
                                 artist.ArtistGalleries.Add(new ArtistGallery { Gallery = imagePath });
                             }
                             else
@@ -194,7 +202,7 @@ namespace CastingProject.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Artist artist, int[] SelectedRoleId, int[] SelectedHobbyId, int[] SelectedSkillId)
+        public async Task<IActionResult> Edit(int id, Artist artist, int[] SelectedRoleId, int[] SelectedHobbyId, int[] SelectedSkillId)
         {
             try
             {
@@ -211,7 +219,7 @@ namespace CastingProject.Controllers
                             string extension = Path.GetExtension(postedFile.FileName);
                             if (FileValid(postedFile, extension))
                             {
-                                var imagePath = UploadFile(artistName, postedFile);
+                                string imagePath = await UploadFile(artistName, postedFile);
                                 artist.Dp = imagePath;
                             }
                             else
@@ -402,7 +410,8 @@ namespace CastingProject.Controllers
 
         [HttpPost]
         [IgnoreAntiforgeryToken]
-        public IActionResult GalleryUpdate(int id, Artist artist)
+        [RequestSizeLimit(230 * 1024 * 1024)]
+        public async Task<IActionResult> GalleryUpdate(int id, Artist artist)
         {
             // if (ModelState.IsValid)
             // {
@@ -417,7 +426,7 @@ namespace CastingProject.Controllers
                     string extension = Path.GetExtension(postedFile.FileName);
                     if (FileValid(postedFile, extension))
                     {
-                        var imagePath = UploadFile(artistName, postedFile);
+                        string imagePath = await UploadFile(artistName, postedFile);
                         context.ArtistGalleries.Add(new ArtistGallery { ArtistId = id, Gallery = imagePath });
                     }
                     else
@@ -485,7 +494,7 @@ namespace CastingProject.Controllers
         }
 
         //File Upload Function
-        private string UploadFile(string artistName, IFormFile file)
+       /* private string UploadFile(string artistName, IFormFile file)
         {
             string imgPath = "images/" + DateTime.Now.ToString("yyyy") + "/" + DateTime.Now.ToString("MM") + "/";
             string directory = hostEnvironment.WebRootPath + "/" + imgPath;
@@ -510,6 +519,72 @@ namespace CastingProject.Controllers
 
             return image;
         }
-     
+*/
+
+        private async Task<string> UploadFile(string artistName, IFormFile file)
+        {
+            try
+            {
+                IFormFile postedFile = file;
+                var tasks = new List<Task>();
+                tasks.Add(Task.Run(async () =>
+                {
+                    string imgPath = "/images/" + DateTime.Now.ToString("yyyy") + "/" + DateTime.Now.ToString("MM") + "/";
+
+                    string directory = hostEnvironment.WebRootPath + imgPath;
+                    if (!Directory.Exists(directory))
+                    {
+                        Directory.CreateDirectory(directory);
+                    }
+                    string filename = artistName;
+                    var extension = Path.GetExtension(file.FileName);
+                    filename = filename + " " + Guid.NewGuid();
+                    filename = SlugHelper.GenerateSlug(filename);
+                    var imgfullpath = filename + extension;
+
+                    //Saving Original File with fileStream for better performance becasue original size is very high
+                    string path = Path.Combine(directory, imgfullpath);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        postedFile.CopyTo(fileStream);
+                    }
+                    filename = imgPath + filename;
+                    image = filename + extension;
+                    using var imageResult = await Image.LoadAsync(file.OpenReadStream());
+                    await SaveImage(imageResult, $"{filename}" + "-fullscreen" + $"{ extension}", FullScreenWidth);
+                    await SaveImage(imageResult, $"{filename}" + "-medium" + $"{ extension}", MediumWidth);
+                    await SaveImage(imageResult, $"{filename}" + "-thumb" + $"{ extension}", ThumbnailWidth);
+                }));
+                await Task.WhenAll(tasks);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return image;
+
+        }
+
+        private async Task SaveImage(Image image, string name, int resizeWidth)
+        {
+            var rootPath = hostEnvironment.WebRootPath;
+            var width = image.Width;
+            var height = image.Height;
+            if (width > resizeWidth)
+            {
+                height = (int)((double)resizeWidth / width * height);
+                width = resizeWidth;
+            }
+
+            image.Mutate(x => x
+            .Resize(new Size(width, height)));
+            await image.SaveAsJpegAsync(rootPath + name, new JpegEncoder
+            {
+                Quality = 100
+            });
+
+        }
+
     }
 }

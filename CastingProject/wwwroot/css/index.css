@@ -83,7 +83,8 @@
     }
 
     .labelname label {
-        font-size: 13px;
+        font-size: 18px;
+        color:black;
     }
 /*.label-name{
     padding: 20px 20px;
@@ -178,6 +179,7 @@
 .artist-name a h3:hover{
     color: #ffcc33;
     font: 30px;
+    background-color: black;
 }
 
 .img-area {

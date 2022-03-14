@@ -20,11 +20,15 @@ body {
 
 
 /*Navigation Bar*/
-#main-navbar {
-    background-color: #111111;
-    /*display: flex;*/
-    /*height: 60px;*/
+
+.uk-sticky-below{
+    background-color : #111;
 }
+
+.uk-sticky.uk-sticky-below.uk-sticky-fixed ul li a {
+    color: white;
+}
+
 .logo{
     padding-right: 5%;
 }
@@ -36,16 +40,13 @@ body {
 }
 
 .nav-header ul li a {
-    /*font-family: jost,sans-serif;*/
     font-family: 'Ubuntu', sans-serif;
     font-weight: 700;
     text-transform: capitalize;
     font-size: 0.9rem;
-    color: #ffffff;
-    /*text-transform: uppercase;*/
+    color: #111;
     transition: .1s ease-in-out;
     transition-property: color,background-color;
-    /*font-size: 0.8rem;*/
 }
 
     .nav-header ul li a:hover {

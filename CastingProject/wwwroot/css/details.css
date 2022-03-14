@@ -7,6 +7,19 @@
     position: absolute;
 }*/
 
+.detail-name{
+    color:#ffffff;
+}
+
+    .detail-name p {
+        position: absolute;
+        color: #ffffff;
+        top: 9%;
+        font-size: 45px;
+        font-weight: 600;
+        background: linear-gradient(113deg, #000000, #24222200);
+    }
+
 talent-name {
     position: absolute;
     top: 8%;
@@ -44,21 +57,20 @@ talent-name {
 }
 
 
-.about-me {
+/*.about-me {
     position: absolute;
     top: 24%;
     left: 75%;
-}
+}*/
 
     .about-me img {
-        height: 200px;
-        width: 200px;
-        border-radius: 50%;
+        height: 500px;
+        width: 450px;
         object-fit: cover;
     }
 
     .aboutme-title{
-        margin-top: 40px;
+        margin-top: 60px;
     }
 
 .aboutme-title h3 {
@@ -152,17 +164,17 @@ talent-name {
     .attribute:hover {
         background: #ffcc33;
         border-radius: 5px;
-        transform: rotate(10deg);
+        /*transform: rotate(10deg);*/
     }
 
     .attribute span {
-        font-size: 14px;
+        font-size: 17px;
         font-weight: 600;
         width: 20px;
     }
 
     .attribute div {
-        font-size: 14px;
+        font-size: 17px;
         text-align: center;
         margin: 11px;
         color: #5e5e5e;
@@ -190,28 +202,7 @@ talent-name {
     margin: 0px 11px 24px 9px;
 }
 
-/*
-.artistInterest-card {
-    background-color:black;
-    color:#ffcc33;
-}
 
-.artistInterest-card h3{
-    color:#ffcc33;
-}
-
-.artist-talents {
-    background-color: #ffcc33;
-    width: 43%;
-    border-radius: 6px;
-    padding: 26px 0px;
-    margin: 0px 11px 24px 9px;
-}
-
-.artistInterest-card span{
-    color:black;
-}
-*/
     .artistInterest-card:hover {
         transition: width 1s, height 1s, background-color 1s, transform 1s;
         background-color: #ffcc33;
