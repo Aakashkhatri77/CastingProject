@@ -3,13 +3,10 @@
 @{
     ViewData["Title"] = "Details";
     var Age = int.Parse(DateTime.Now.ToString("yyyy")) - int.Parse(@Model.DOB.ToString("yyyy"));
+    var Artist = ViewBag.Artist as IEnumerable<Artist>;
 }
 
-<div class="float-btn">
-    <a asp-action="Edit" asp-controller="Artist" asp-route-id="@Model.Id" class="Create-btn">
-        <i id="my-float" uk-icon="icon: file-edit"></i>
-    </a>
-</div>
+
 
 
 @*<div style="height: 500px;" class="uk-child-width-expand@s uk-margin-large-left uk-margin-large-right uk-margin-top uk-grid-collapse uk-card uk-card-default" uk-grid>
@@ -63,188 +60,199 @@
     </div>
     </div>
     </div>*@
-<div class="uk-position-top artist-details ">
-    <div >
-        <div style=" background:url(@(CastingProject.Helper.ImageSize.Get(Model.Dp, "fullscreen"))); object-fit:cover; height:800px; background-repeat:no-repeat">
-            @*<img src="@Model.Dp" alt="" style="height:100vh; width:100%; object-fit:cover; ">*@
-        </div>
 
-        <div class="detail-name">
-            <p>@Model.Name</p>
-        </div>
-    </div>
+<div class="float-btn">
+    <a asp-action="Edit" asp-controller="Artist" asp-route-id="@Model.Id" class="Create-btn">
+        <i id="my-float" uk-icon="icon: file-edit"></i>
+    </a>
+</div>
 
 
-    <div class="uk-margin" style="margin-top:70px;">
-        <h3 class="uk-margin-large-left uk-margin-large-right uk-margin-top">Attributes</h3>
-    </div>
-
-    <div class="uk-margin-medium-right uk-margin-medium-left artist-attribute">
-        <div class="attribute">
-            <div>
-                <span>Ethnicity</span>
+<div>
+    <div class="uk-position-top artist-details ">
+        <div class="fullscreen-img">
+            <div style=" background:url(@(CastingProject.Helper.ImageSize.Get(Model.Dp, "fullscreen"))); object-fit:cover; height:800px; background-repeat:no-repeat ">
             </div>
-            <div class="">@Model.Ethnicity.Name</div>
-        </div>
-        <div class="attribute">
-            <div>
-                <span>Height</span>
-            </div>
-            <div class="">@Model.Height</div>
-        </div>
-        <div class="attribute">
-            <div>
 
-                <span>Weight</span>
+            <div class="detail-name">
+                <p>@Model.Name</p>
             </div>
-            <div class="">@Model.Weight</div>
         </div>
-        <div class="attribute">
-            <div>
 
-                <span>Skin Type</span>
-            </div>
-            <div class="">@Model.Skin_Type</div>
-        </div>
-        <div class="attribute">
-            <div>
 
-                <span>Skin Color</span>
-            </div>
-            <div class="">@Model.Skin_Color</div>
+        <div class="uk-margin" style="margin-top:70px;">
+            <h3 class="uk-margin-large-left uk-margin-large-right uk-margin-top">Attributes</h3>
         </div>
-        <div class="attribute">
-            <div>
 
-                <span>Hair Color</span>
+        <div class="uk-margin-medium-right uk-margin-medium-left artist-attribute">
+            <div class="attribute">
+                <div>
+                    <span>Ethnicity</span>
+                </div>
+                <div class="">@Model.Ethnicity.Name</div>
             </div>
-            <div class="">@Model.Hair_Color</div>
-        </div>
-        <div class="attribute">
-            <div>
+            <div class="attribute">
+                <div>
+                    <span>Height</span>
+                </div>
+                <div class="">@Model.Height</div>
+            </div>
+            <div class="attribute">
+                <div>
 
-                <span>Hair Type</span>
+                    <span>Weight</span>
+                </div>
+                <div class="">@Model.Weight</div>
             </div>
-            <div class="">@Model.Hair_Type</div>
-        </div>
-        <div class="attribute">
-            <div>
+            <div class="attribute">
+                <div>
 
-                <span>Hair Length</span>
+                    <span>Skin Type</span>
+                </div>
+                <div class="">@Model.Skin_Type</div>
             </div>
-            <div class="">@Model.Hair_Length</div>
-        </div>
-        <div class="attribute">
-            <div>
+            <div class="attribute">
+                <div>
 
-                <span>Eye Color</span>
+                    <span>Skin Color</span>
+                </div>
+                <div class="">@Model.Skin_Color</div>
             </div>
-            <div class="">@Model.Eye_Color</div>
-        </div>
-        <div class="attribute">
-            <div>
+            <div class="attribute">
+                <div>
 
-                <span>Hair-Type</span>
+                    <span>Hair Color</span>
+                </div>
+                <div class="">@Model.Hair_Color</div>
             </div>
-            <div class="">@Model.Hair_Type</div>
+            <div class="attribute">
+                <div>
+
+                    <span>Hair Type</span>
+                </div>
+                <div class="">@Model.Hair_Type</div>
+            </div>
+            <div class="attribute">
+                <div>
+
+                    <span>Hair Length</span>
+                </div>
+                <div class="">@Model.Hair_Length</div>
+            </div>
+            <div class="attribute">
+                <div>
+
+                    <span>Eye Color</span>
+                </div>
+                <div class="">@Model.Eye_Color</div>
+            </div>
+            <div class="attribute">
+                <div>
+
+                    <span>Hair-Type</span>
+                </div>
+                <div class="">@Model.Hair_Type</div>
+            </div>
         </div>
-    </div>
 
 
         <div class="uk-child-width-expand@s uk-grid-collapse uk-card aboutme-card" uk-grid style="margin-top:70px; height:500px;">
-        <div>
-            <div class="uk-card-body aboutme-title">
-                <h3 class="uk-card-title">About Me</h3>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    Lorem ipsum dolor sit amet, consectetur a
-                    dipiscing elit, sed do eiusmod tempor incididunt.
-                </p>
+            <div>
+                <div class="uk-card-body aboutme-title">
+                    <h3 class="uk-card-title">About Me</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur a
+                        Lorem ipsum dolor sit amet, consectetur a
+                        Lorem ipsum dolor sit amet, consectetur a
+                        Lorem ipsum dolor sit amet, consectetur a
+                        Lorem ipsum dolor sit amet, consectetur a
+                        Lorem ipsum dolor sit amet, consectetur a
+                        Lorem ipsum dolor sit amet, consectetur a
+                        Lorem ipsum dolor sit amet, consectetur a
+                        Lorem ipsum dolor sit amet, consectetur a
+                        Lorem ipsum dolor sit amet, consectetur a
+                        Lorem ipsum dolor sit amet, consectetur a
+                        Lorem ipsum dolor sit amet, consectetur a
+                        dipiscing elit, sed do eiusmod tempor incididunt.
+                    </p>
+                </div>
+            </div>
+            <div class="uk-width-1-3@s">
+                <div class="about-me">
+                    <img src="@(CastingProject.Helper.ImageSize.Get(Model.Dp ,"fullscreen"))" alt="">
+
+                </div>
             </div>
         </div>
-        <div class="uk-width-1-3@s">
-            <div class="about-me">
-                <img src="@(CastingProject.Helper.ImageSize.Get(Model.Dp ,"fullscreen"))" alt="">
 
+
+        <h3 class="uk-margin-medium-right uk-margin-medium-left" style="margin-top:70px;">Talents And Interests </h3>
+        <div class="uk-child-width-expand@s uk-text-center uk-margin-medium-right uk-margin-medium-left uk-margin-large-bottom skills" uk-grid style="height:300px;">
+
+            <div class="uk-card uk-card-default uk-margin-right uk-card-body artistInterest-card">
+                <h3 style="margin:0 0 28px 0 ;"> Roles</h3>
+                @foreach (var item in Model.ArtistRoles)
+                {
+                    <div class='artist-talents' style="display:inline-block; text-align:center;">
+                        <span> @item.Role.Name</span>
+                    </div>
+                }
+            </div>
+            <div class="uk-card uk-card-default  uk-margin-right uk-card-body artistInterest-card">
+                <h3 style="margin:0 0 28px 0;"> Skills</h3>
+                @foreach (var item in Model.ArtistSkills)
+                {
+                    <div class='artist-talents' style="display:inline-block; text-align:center;">
+                        <span> @item.Skill.Name</span>
+                    </div>
+                }
+            </div>
+            <div class="uk-card uk-card-default uk-card-body artistInterest-card">
+                <h3 style="margin:0 0 28px 0;"> Hobbies</h3>
+                @foreach (var item in Model.ArtistHobbies)
+                {
+                    <div class='artist-talents' style="display:inline-block; text-align:center;">
+                        <span> @item.Hobby.Name</span>
+                    </div>
+                }
             </div>
         </div>
-    </div>
 
 
-    <h3 class="uk-margin-medium-right uk-margin-medium-left" style="margin-top:70px;">Talents And Interests </h3>
-    <div class="uk-child-width-expand@s uk-text-center uk-margin-medium-right uk-margin-medium-left uk-margin-large-bottom skills" uk-grid style="height:300px;">
 
-        <div class="uk-card uk-card-default uk-margin-right uk-card-body artistInterest-card">
-            <h3 style="margin:0 0 28px 0 ;"> Roles</h3>
-            @foreach (var item in Model.ArtistRoles)
-            {
-                <div class='artist-talents' style="display:inline-block; text-align:center;">
-                    <span> @item.Role.Name</span>
-                </div>
-            }
+
+
+        <div class="uk-margin-medium-right uk-margin-medium-left">
+            <h3 style="margin-top:70px;">Introduction Video</h3>
+            <iframe src="https://www.youtube-nocookie.com/embed/c2pz2mlSfXA?autoplay=0&amp;showinfo=0&amp;rel=0&amp;modestbranding=1&amp;playsinline=1" width="1920" height="1080" allowfullscreen uk-responsive uk-video="automute: true"></iframe>
         </div>
-        <div class="uk-card uk-card-default  uk-margin-right uk-card-body artistInterest-card">
-            <h3 style="margin:0 0 28px 0;"> Skills</h3>
-            @foreach (var item in Model.ArtistSkills)
-            {
-                <div class='artist-talents' style="display:inline-block; text-align:center;">
-                    <span> @item.Skill.Name</span>
-                </div>
-            }
-        </div>
-        <div class="uk-card uk-card-default uk-card-body artistInterest-card">
-            <h3 style="margin:0 0 28px 0;"> Hobbies</h3>
-            @foreach (var item in Model.ArtistHobbies)
-            {
-                <div class='artist-talents' style="display:inline-block; text-align:center;">
-                    <span> @item.Hobby.Name</span>
-                </div>
-            }
-        </div>
-    </div>
 
-
-
-
-
-    <div class="uk-margin-medium-right uk-margin-medium-left">
-        <h3 style="margin-top:70px;">Introduction Video</h3>
-        <iframe src="https://www.youtube-nocookie.com/embed/c2pz2mlSfXA?autoplay=0&amp;showinfo=0&amp;rel=0&amp;modestbranding=1&amp;playsinline=1" width="1920" height="1080" allowfullscreen uk-responsive uk-video="automute: true"></iframe>
-    </div>
-
-
-
-
-    <div class="uk-margin-medium-left uk-margin-medium-right uk-margin-top">
-        <h3 style="margin-top:70px;">Photos</h3>
-        <div class="uk-grid-small uk-child-width-1-3@s uk-text-center" uk-grid>
-            @foreach (var item in Model.ArtistGalleries)
-            {
-                <div class="artist-image">
-                    <div class="for-img uk-inline-clip uk-transition-toggle artist-image" tabindex="0">
-                        <div class="artist-content uk-margin-remove" uk-lightbox="animation: scale">
-                            <a class="uk-inline" href="@(CastingProject.Helper.ImageSize.Get(item.Gallery, "fullscreen"))" target="_blank">
-                                <img src="@(CastingProject.Helper.ImageSize.Get(item.Gallery, "medium"))" class="uk-transition-scale-up uk-transition-opaque" alt="">
-                            </a>
+        <div class="uk-margin-medium-left uk-margin-medium-right uk-margin-top uk-margin-bottom" uk-margin>
+            <h3 style="margin-top:70px;">Photos</h3>
+            <div class="uk-grid-small uk-child-width-1-3@s uk-text-center" uk-grid uk-lightbox="animation: slide">
+                @foreach (var item in Model.ArtistGalleries)
+                {
+                    <div class="artist-image">
+                        <div class="for-img uk-inline-clip uk-transition-toggle artist-image" tabindex="0">
+                            <div class="artist-content uk-margin-remove">
+                                <a class="uk-inline" href="@(CastingProject.Helper.ImageSize.Get(item.Gallery, "fullscreen"))" target="_blank">
+                                    <img src="@(CastingProject.Helper.ImageSize.Get(item.Gallery, "medium"))" class="uk-transition-scale-up uk-transition-opaque" alt="">
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
+
+        <dd class="image-btn"><a class="btn uk-botton uk-button-primary" asp-action="GalleryIndex" asp-controller="Artist" asp-route-id="@Model.Id">View</a></dd>
+
+               @await Component.InvokeAsync("Artist");
+
     </div>
-
-    <dd class="image-btn"><a class="btn uk-botton uk-button-primary" asp-action="GalleryIndex" asp-controller="Artist" asp-route-id="@Model.Id">View</a></dd>
-
 </div>
+
+
+
 
 

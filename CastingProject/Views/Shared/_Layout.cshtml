@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/sidebar.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/details.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/footer.css" asp-append-version="true" />
+
 
     <!-- UIkit CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
@@ -25,36 +27,14 @@
 
 </head>
 <body>
-    <header>
-            <div uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky;" >
-                <nav id="main-navbar" class="uk-navbar-container uk-navbar-transparent uk-navbar" uk-navbar>
-                    <div class="uk-navbar-left logo">
-                        <ul class="uk-navbar-nav uk-margin-left">
-                            <li><a asp-action="Index" asp-controller="Home">Casting</a></li>
-                        </ul>
-                    </div>
-                    <div class="uk-navbar-left uk-margin-remove nav-header uk-navbar">
-                        <ul class="uk-navbar-nav">
-                            <li><a asp-action="Index" asp-controller="Artist">Artist</a></li>
-                            <li><a asp-action="Index" asp-controller="Ethnicity">Ethnicity</a></li>
-                            <li><a asp-action="Index" asp-controller="Category">Category</a></li>
-                            <li><a asp-action="Index" asp-controller="Roles">Role</a></li>
-                            <li><a asp-action="Index" asp-controller="Hobby">Hobbies</a></li>
-                            <li><a asp-action="Index" asp-controller="Skill">Skills</a></li>
-                        </ul>
-                    </div>
-                    <div class="uk-navbar-right uk-grid account">
-                        <partial name="_LoginPartial" />
-                    </div>
-                </nav>
-            </div>
-    </header>
+    <partial name="_Header" />
 
     <main role="main" class="pb-3">
         @RenderBody()
     </main>
-
-    @*<partial name="_Footer" />*@
+    <footer>
+        @*<partial name="_Footer" />*@
+    </footer>
 
     <!-- UIkit JS -->
 

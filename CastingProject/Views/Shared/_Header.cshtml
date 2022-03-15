@@ -1,0 +1,24 @@
+﻿  <header>
+            <div uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky;" >
+                <nav id="main-navbar" class="uk-navbar-container uk-navbar-transparent uk-navbar" uk-navbar>
+                    <div class="uk-navbar-left logo">
+                        <ul class="uk-navbar-nav uk-margin-left">
+                            <li><a asp-action="Index" asp-controller="Home">Casting</a></li>
+                        </ul>
+                    </div>
+                    <div class="uk-navbar-left uk-margin-remove nav-header uk-navbar">
+                        <ul class="uk-navbar-nav">
+                            <li><a asp-action="Index" asp-controller="Artist">Artist</a></li>
+                            <li><a asp-action="Index" asp-controller="Ethnicity">Ethnicity</a></li>
+                            <li><a asp-action="Index" asp-controller="Category">Category</a></li>
+                            <li><a asp-action="Index" asp-controller="Roles">Role</a></li>
+                            <li><a asp-action="Index" asp-controller="Hobby">Hobbies</a></li>
+                            <li><a asp-action="Index" asp-controller="Skill">Skills</a></li>
+                        </ul>
+                    </div>
+                    <div class="uk-navbar-right uk-grid account">
+                        <partial name="_LoginPartial" />
+                    </div>
+                </nav>
+            </div>
+    </header>

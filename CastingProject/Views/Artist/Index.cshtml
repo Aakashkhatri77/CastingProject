@@ -132,7 +132,7 @@
                         <div class="artist-card uk-margin-small-bottom uk-margin-small-right">
                             <div class="img-area uk-inline-clip uk-transition-toggle ">
                                 <a asp-action="Details" asp-route-id="@item.Id">
-                                    <img src="@item.Dp" class="uk-transition-scale-up uk-transition-opaque" alt="Display Picture" />
+                                    <img src="@(CastingProject.Helper.ImageSize.Get(item.Dp, "fullscreen"))" class="uk-transition-scale-up uk-transition-opaque" alt="Display Picture" />
                                 </a>
 
                                 <div class="artist-name">
@@ -142,7 +142,7 @@
                                 </div>
                             </div>
                         </div>
-                        @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     </div>
                 }
             </div>

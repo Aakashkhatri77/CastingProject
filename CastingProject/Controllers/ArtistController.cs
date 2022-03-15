@@ -115,7 +115,7 @@ namespace CastingProject.Controllers
                         string extension = Path.GetExtension(postedFile.FileName);
                         if (FileValid(postedFile, extension))
                         {
-                            string  imagePath = await UploadFile(artistName, postedFile);
+                            string imagePath = await UploadFile(artistName, postedFile);
                             artist.Dp = imagePath;
                         }
                         else
@@ -180,18 +180,20 @@ namespace CastingProject.Controllers
         public IActionResult Details(int id)
         {
             var artist = context.Artists.Include(x => x.ArtistGalleries)
-                .Include(x=>x.Ethnicity)
+                .Include(x => x.Ethnicity)
                 .Include(x => x.Category)
-                .Include(x=>x.ArtistSkills).ThenInclude(x=>x.Skill)
-                .Include(x=>x.ArtistHobbies).ThenInclude(x=>x.Hobby)
-                .Include(x=>x.ArtistRoles).ThenInclude(x=>x.Role).FirstOrDefault(x => x.Id == id);
+                .Include(x => x.ArtistSkills).ThenInclude(x => x.Skill)
+                .Include(x => x.ArtistHobbies).ThenInclude(x => x.Hobby)
+                .Include(x => x.ArtistRoles).ThenInclude(x => x.Role).FirstOrDefault(x => x.Id == id);
+
+            ViewBag.Artist = context.Artists.ToList();
             return View(artist);
         }
 
         //Edit
         public IActionResult Edit(int id)
         {
-            var artist = context.Artists.Include(x=>x.ArtistRoles).Include(x=>x.ArtistHobbies).Include(x=>x.ArtistSkills).FirstOrDefault(x => x.Id == id);
+            var artist = context.Artists.Include(x => x.ArtistRoles).Include(x => x.ArtistHobbies).Include(x => x.ArtistSkills).FirstOrDefault(x => x.Id == id);
             ViewBag.Ethnicity = context.Ethnicities.ToList();
             ViewBag.Category = context.Categories.ToList();
             ViewBag.Role = context.Roles.ToList();
@@ -208,7 +210,7 @@ namespace CastingProject.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var oldArtist = context.Artists.Include(x=>x.ArtistRoles).Include(x=>x.ArtistHobbies).Include(x=>x.ArtistSkills).FirstOrDefault(x=>x.Id == id);
+                    var oldArtist = context.Artists.Include(x => x.ArtistRoles).Include(x => x.ArtistHobbies).Include(x => x.ArtistSkills).FirstOrDefault(x => x.Id == id);
                     IFormFile postedFile;
                     string artistName = artist.Name.ToString();
                     if (oldArtist != null)
@@ -229,11 +231,8 @@ namespace CastingProject.Controllers
                             }
                             if (oldArtist.Dp != null)
                             {
-                                string oldImagePath = Path.Combine(hostEnvironment.WebRootPath, oldArtist.Dp);
-                                if (System.IO.File.Exists(oldImagePath))
-                                {
-                                    System.IO.File.Delete(oldImagePath);
-                                }
+                                string oldImagePath = oldArtist.Dp;
+                                DeleteRespondingImage(oldImagePath);
                             }
                             oldArtist.Dp = artist.Dp;
                         }
@@ -258,7 +257,7 @@ namespace CastingProject.Controllers
                             //add newly selected Roles
                             foreach (var selectedRoleId in SelectedRoleId)
                             {
-                                if (!oldArtist.ArtistRoles.Any(x=>x.RoleId == selectedRoleId))
+                                if (!oldArtist.ArtistRoles.Any(x => x.RoleId == selectedRoleId))
                                 {
                                     context.ArtistRoles.Add(new ArtistRole { RoleId = selectedRoleId, ArtistId = artist.Id });
                                 }
@@ -354,6 +353,39 @@ namespace CastingProject.Controllers
                return View(artist);
            }
     */
+
+        private void DeleteImage(string imagePath)
+        {
+            string imgFullPath = Path.Combine(hostEnvironment.WebRootPath, imagePath);
+            if (System.IO.File.Exists(imgFullPath))
+            {
+                System.IO.File.Delete(imgFullPath);
+            }
+        }
+
+        private void DeleteRespondingImage(string imagePath)
+        {
+            imagePath = imagePath.Remove(0, 1);
+            //deleting original image
+            string originalImgPath = imagePath;
+            DeleteImage(imagePath);
+            //deleting responding images
+            string extension = Path.GetExtension(imagePath);
+            string imageName = imagePath.Split(".")[0];
+
+            //deleting thumbnail images
+            string thumbImage = imageName + "-thumb" + extension;
+            DeleteImage(thumbImage);
+
+            //deleting medium images
+            string mediumImage = imageName + "-medium" + extension;
+            DeleteImage(mediumImage);
+
+            //deleting thumbnail images
+            string fullscreenImage = imageName + "-fullscreen" + extension;
+            DeleteImage(fullscreenImage);
+        }
+
         [ActionName("Delete")]
         public IActionResult DeleteConfirm(int id)
         {
@@ -363,22 +395,16 @@ namespace CastingProject.Controllers
                 var gallery = artist.ArtistGalleries.Where(x => x.ArtistId == id);
                 if (artist.Dp != null)
                 {
-                    string imagePath = Path.Combine(hostEnvironment.WebRootPath, artist.Dp);
-                    if (System.IO.File.Exists(imagePath))
-                    {
-                        System.IO.File.Delete(imagePath);
-                    }
+                    string imagePath = artist.Dp;
+                    DeleteRespondingImage(imagePath);
 
                 }
                 foreach (var item in gallery)
                 {
                     if (item.Gallery != null)
                     {
-                        string imagePath = Path.Combine(hostEnvironment.WebRootPath, item.Gallery);
-                        if (System.IO.File.Exists(imagePath))
-                        {
-                            System.IO.File.Delete(imagePath);
-                        }
+                        string imagePath = item.Gallery;
+                        DeleteRespondingImage(imagePath);
                     }
 
                 }
@@ -434,7 +460,7 @@ namespace CastingProject.Controllers
                         TempData["message.filevalidation"] = "File not valid";
                         return View();
                     }
-                }   
+                }
             }
             newArtist = artist;
             context.SaveChanges();
@@ -450,11 +476,9 @@ namespace CastingProject.Controllers
             var artistId = artistGallery.ArtistId;
             if (artistGallery.Gallery != null)
             {
-                string imagePath = Path.Combine(hostEnvironment.WebRootPath, artistGallery.Gallery);
-                if (System.IO.File.Exists(imagePath))
-                {
-                    System.IO.File.Delete(imagePath);
-                }
+                string imagePath = artistGallery.Gallery;
+                DeleteRespondingImage(imagePath);
+              
             }
             context.ArtistGalleries.Remove(artistGallery);
             context.SaveChanges();
@@ -494,32 +518,32 @@ namespace CastingProject.Controllers
         }
 
         //File Upload Function
-       /* private string UploadFile(string artistName, IFormFile file)
-        {
-            string imgPath = "images/" + DateTime.Now.ToString("yyyy") + "/" + DateTime.Now.ToString("MM") + "/";
-            string directory = hostEnvironment.WebRootPath + "/" + imgPath;
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-            var image = "";
-            IFormFile postedFile = file;
-            string filename = artistName;
-            filename = filename + " " + random.Next(1000, 9999);
-            filename = SlugHelper.GenerateSlug(filename);
-            string extension = Path.GetExtension(postedFile.FileName);
-            filename = filename + extension;
-            image = imgPath + filename;
+        /* private string UploadFile(string artistName, IFormFile file)
+         {
+             string imgPath = "images/" + DateTime.Now.ToString("yyyy") + "/" + DateTime.Now.ToString("MM") + "/";
+             string directory = hostEnvironment.WebRootPath + "/" + imgPath;
+             if (!Directory.Exists(directory))
+             {
+                 Directory.CreateDirectory(directory);
+             }
+             var image = "";
+             IFormFile postedFile = file;
+             string filename = artistName;
+             filename = filename + " " + random.Next(1000, 9999);
+             filename = SlugHelper.GenerateSlug(filename);
+             string extension = Path.GetExtension(postedFile.FileName);
+             filename = filename + extension;
+             image = imgPath + filename;
 
-            string path = Path.Combine(directory, filename);
-            using (var fileStream = new FileStream(path, FileMode.Create))
-            {
-                postedFile.CopyTo(fileStream);
-            }
+             string path = Path.Combine(directory, filename);
+             using (var fileStream = new FileStream(path, FileMode.Create))
+             {
+                 postedFile.CopyTo(fileStream);
+             }
 
-            return image;
-        }
-*/
+             return image;
+         }
+ */
 
         private async Task<string> UploadFile(string artistName, IFormFile file)
         {
