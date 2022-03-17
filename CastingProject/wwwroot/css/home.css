@@ -1,0 +1,295 @@
+﻿@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
+/** {
+    padding: 0;
+    margin: 0;
+}*/
+
+/*body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}*/
+
+.hire-btn{
+    position:absolute;
+    left:17%;
+}
+
+.hire-btn button {
+    padding: 3px 150px;
+    outline: none;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 35px;
+    font-family: cursive;
+    font-weight: 500;
+    border: 2px solid #ffcc33;
+    background-color: transparent;
+}
+
+.hire-btn button:hover{
+    background:black;
+        
+}
+
+.heading-text h1 {
+    font-family: "Montserrat Medium";
+    max-width: 40ch;
+    text-align: center;
+    transform: scale(0.94);
+    animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
+}
+
+@keyframes scale {
+    100% {
+        transform: scale(1);
+    }
+}
+
+.heading-text span {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(4px);
+}
+
+    span:nth-child(1) {
+        animation: fade-in 0.8s 0.1s forwards cubic-bezier(0.11, 0, 0.5, 0);
+    }
+
+    span:nth-child(2) {
+        animation: fade-in 0.8s 0.2s forwards cubic-bezier(0.11, 0, 0.5, 0);
+    }
+
+    span:nth-child(3) {
+        animation: fade-in 0.8s 0.3s forwards cubic-bezier(0.11, 0, 0.5, 0);
+    }
+
+    span:nth-child(4) {
+        animation: fade-in 0.8s 0.4s forwards cubic-bezier(0.11, 0, 0.5, 0);
+    }
+
+@keyframes fade-in {
+    100% {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+
+/*main section*/
+
+#landing{
+    width:100%;
+    height: 100%;
+    position:absolute;
+    overflow:hidden;
+}
+
+#box1{
+    width: 350px;
+    height:625px;
+    background-color:black;
+    /*background-image:url(~/WallPaper/Wallpaper5.jpg);*/
+    position:absolute;
+    bottom: -100%;
+    left: 36%;
+    animation: anim 2s forwards, anim2 3s forwards 3s;
+}
+
+
+    #box1:after {
+        content: '';
+        position: absolute;
+        width: 530px;
+        height: 625px;
+        background-color: black;
+        /*background-image: url('~/WallPaper/Wallpaper4.jpg');*/
+        left: 0px;
+        z-index: -1;
+    }
+
+@keyframes anim{
+    from{
+        bottom: -100%;
+    }
+    to{
+        bottom: 0%;
+    }
+}
+
+@keyframes anim2{
+    from{
+        left:30%;
+        width: 530px;
+    }
+    to{
+        width: 0px;
+        left:50%;
+    }
+}
+
+#box2{
+    width:auto;
+    height:auto;
+    font-family: 'Bahnschrift Condensed';
+    color:white;
+    font-size:7rem;
+    font-weight:500;
+    line-height:130px;
+    position:absolute;
+    top:250px;
+    left: 100px;
+    overflow: hidden;
+}
+
+
+#text{
+    position:relative;
+    left:-100%;
+    animation: anim3 2s forwards 3s;
+}
+
+@keyframes anim3{
+    from{
+        left:-100%;
+    }
+    to{
+        left:0%;
+    }
+}
+
+/*About Us*/
+
+.about{
+    height:100vh;
+    widows:100%;
+    background:white;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.about .main img{
+    width: 580px;
+    max-width:100%;
+    height:auto;
+    padding: 0 10px;
+}
+
+.all-text{
+    width: 600px;
+    max-width: 100%;
+    padding: 0 10px;
+}
+
+.main{
+    width: 1290px;
+    max-width:95%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.all-text h4{
+    font-family: sans-serif;
+    font-size:18px;
+    color: #777777;
+    letter-spacing: 1px;
+    font-weight: 400;
+    margin-bottom:5px;
+}
+
+.all-text h1{
+    font-size: 65px;
+    color:#111111;
+    font-weight:700;
+    margin-bottom: 20px;
+}
+
+.all-text p{
+    font-family: sans-serif;
+    font-size: 16px;
+    color: #777777;
+    line-height: 30px;
+    margin-bottom: 35px;
+}
+
+.about-btn button{
+    background:white;
+    padding:20px 32px;
+    font-size: 16px;
+    font-weight:bold;
+    color:#111111;
+    border:none;
+    outline:none;
+    box-shadow:0px 16px 32px 0px rgb(0 0 0 / 6%);
+    margin-right:20px;
+}
+
+.about-btn button:hover{
+    background-color: #1d44f9;
+    color:white;
+    transition: .3s;
+    cursor:pointer;
+}
+
+.about-btn .about-btn2{
+    background-color: #111111;
+    color:white;
+}
+
+@media screen and (max-width: 1250px){
+    .about{
+        width: 100%;
+        height:auto;
+        padding:60px 0;
+    }
+
+    .all-text{
+        text-align:center;
+        margin-top: 40px;
+    }
+}
+
+@media screen and (max-width:650px){
+    .about .main img{
+        margin-bottom: 35px;
+    }
+
+    .all-text h1{
+        font-size:45px;
+        margin-bottom:20px;
+    }
+}
+/*FAQ*/
+.faq-card {
+    background-color: #f3f3f3;
+    padding: 40px 50px;
+}
+
+.faq-title {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.faq-list li {
+    background: #ffffff;
+    padding: 15px 20px;
+}
+
+    .faq-list li a {
+        color:#9f9f9f;
+        text-align:justify;
+    }
+
+.uk-accordion-content p {
+    text-align: justify;
+    color: #7e7e7e;
+    font-size: 15px;
+}
