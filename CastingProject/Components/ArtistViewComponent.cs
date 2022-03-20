@@ -1,5 +1,6 @@
 ﻿using CastingProject.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CastingProject.Components
 {
@@ -14,8 +15,8 @@ namespace CastingProject.Components
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var artists = context.Artists.ToList();
-            return View(artists);
+            var artists = await context.Artists.Take(4).OrderByDescending(x => x.Id).ToListAsync();
+                return View(artists);
         }
     }
 }

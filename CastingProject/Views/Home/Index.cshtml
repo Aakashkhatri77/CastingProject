@@ -1,56 +1,47 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
 }
-
-<div style="uk-margin-bottom">
-    <img src="~/WallPaper/Wallpaper5.jpg" alt="Wallpaper" width:100%; opacity:0.8;" />
-      <div id="box2">
-            <div id="text">
-                CAST<br> BEST MODEL
-            </div>
-        </div>
-   @* <div class="heading-text" style="position:absolute; top:16%; left:22%;">
-    <h1 style="font-size: 4rem; color: #ffffff;">
-    <span>Welcome</span>
-    <span>to</span>
-    <span>Casting</span>
-    <span>Nepal</span>
-    </h1>
-
-   
-    <div class=" uk-margin-bottom hire-btn">
-    <button>Hire Model</button>
-    </div>
-    </div>*@
-    </div>
-
-
-@*    <div style="min-height:100vh;">
-
-    <div id="landing" >
-        <div id="box1">
-        </div>
+<section id="home">
+    <div class="uk-position-top" style="uk-margin-bottom ">
+        <img src="~/WallPaper/image.jpg" alt="Wallpaper" style="height:100vh; width:100%; object-fit:cover;" />
         <div id="box2">
             <div id="text">
-                CAST<br> BEST MODEL
+                Welcome<br> To Casting Nepal<br>
+                <div class="uk-flex">
+                    <button class="btn modelhire-btn">Hire Model</button>
+                    <button class="btn join-btn">Join</button>
+                </div>
             </div>
         </div>
     </div>
+</section>
+
+
+@*Artists Page*@
+<div class="uk-margin-small-left uk-margin-small-right" style="margin-top:610px;">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2 style="font-size: 35px;font-weight: 600;margin-left: 25px;">Featured Models</h2>
+        <span><a asp-action="Index" asp-controller="Artist" uk-icon="chevron-right">See more</a></span>
+     
     </div>
-*@
+    @await Component.InvokeAsync("Artist");
+</div>
+
 
 @*AboutUs Section*@
-
-<div class="about">
-    <div class="main">
-        <img src="~/WallPaper/Wallpaper3.jpg" />
-        <div class="all-text">
-            <h4 class="uk-margin-bottom-remove">About Us</h4>
-            <h1>A Platform for hiring a models.</h1>
-            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-            <div class="about-btn">
-                <button type="button">Our Testimonials</button>
-                <button type="button" class="about-btn2">Learn More</button>
+<div id="aboutUs">
+    <div class="uk-margin-bottom about" style="margin-top:10px;">
+        <div class="main">
+            <img src="~/WallPaper/Wallpaper3.jpg" />
+            <div class="all-text">
+                <h4 class="uk-margin-bottom-remove ">About Us</h4>
+                <h1>A Platform for hiring a models.</h1>
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                <div class="about-btn">
+                    <button type="button" class="about-btn2">Our Testimonials</button>
+                    @*<button type="button" class="about-btn2">Learn More</button>*@
+                </div>
             </div>
         </div>
     </div>
@@ -58,9 +49,52 @@
 
 
 
+@*Blogs section*@
+
+<h2 class="uk-margin-medium-left" style="margin-bottom:-40px; margin-top:20px;">Blogs</h2>
+<div class="uk-grid-small uk-child-width-expand@s uk-margin-top uk-padding" uk-grid>
+
+    <div>
+        <div class="uk-card uk-card-default" style="border-radius:6px; ">
+            <div class="uk-card-media-top card-img">
+                <img src="~/WallPaper/Wallpaper4.jpg" alt="" style="border-radius: 6px 6px 0px 0px;">
+            </div>
+            <div class="uk-card-body">
+                <h3 class="uk-card-title">Media Top</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="uk-card uk-card-default" style="border-radius:6px; ">
+            <div class="uk-card-media-top  card-img">
+                <img src="~/WallPaper/Wallpaper2.jpg" alt="" style="border-radius: 6px 6px 0px 0px;">
+            </div>
+            <div class="uk-card-body">
+                <h3 class="uk-card-title">Media Top</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="uk-card uk-card-default" style="border-radius:6px; ">
+            <div class="uk-card-media-top card-img ">
+                <img src="~/WallPaper/Wallpaper5.jpg" alt="" style="border-radius: 6px 6px 0px 0px;">
+            </div>
+            <div class="uk-card-body">
+                <h3 class="uk-card-title">Media Top</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 @*FAQ Section*@
-<h2 class="uk-margin-small-bottom" style="text-align:center;">Frequently Asked Questions</h2>
-<div class="uk-margin-large-right uk-margin-large-left uk-margin-medium-top faq-card">
+<div class="uk-margin-large-top faq-img" style="display:flex; justify-content:center; ">
+    <img src="~/WallPaper/faq.png" alt="faq" style="height:100px;" />
+</div>
+@*<h2 class="uk-margin-small-bottom" style="text-align:center;">Frequently Asked Questions</h2>*@
+<div class="uk-margin-medium-right uk-margin-medium-left uk-margin-medium-top faq-card">
     <div class="faq-title">
         General Questions
     </div>
@@ -117,40 +151,203 @@
         </li>
     </ul>
 </div>
+    </div>
 
 
 
+@*Testimonials*@
+<section id="testimonial-area">
+    <div class="container uk-margin-large-top">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="section-heading text-center">
+                    <h2>A Word From Our Customers</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="testi-wrap">
+
+            <div class="client-single active position-1" data-position="position-1">
+                <div class="client-img">
+                    <img src="https://cdn.dribbble.com/users/2132253/avatars/small/1799e2c9badff08058551384763e284c.jpg?1568268299" alt="">
+                </div>
+                <div class="client-comment">
+                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h3>
+                    <span><i class="fa fa-quote-left"></i></span>
+                </div>
+                <div class="client-info">
+                    <h3>Design By</h3>
+                    <p><a href="https://manjaygupta.com">Manjay Gupta</a></p>
+                </div>
+            </div>
+
+            <div class="client-single inactive position-2" data-position="position-2">
+                <div class="client-img">
+                    <img src="https://cdn.dribbble.com/users/2132253/avatars/small/1799e2c9badff08058551384763e284c.jpg?1568268299" alt="">
+                </div>
+                <div class="client-comment">
+                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h3>
+                    <span><i class="fa fa-quote-left"></i></span>
+                </div>
+                <div class="client-info">
+                    <h3>Design By</h3>
+                    <p><a href="https://manjaygupta.com">Manjay Gupta</a></p>
+                </div>
+            </div>
+
+            <div class="client-single inactive position-3" data-position="position-3">
+                <div class="client-img">
+                    <img src="https://cdn.dribbble.com/users/2132253/avatars/small/1799e2c9badff08058551384763e284c.jpg?1568268299" alt="">
+                </div>
+                <div class="client-comment">
+                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h3>
+                    <span><i class="fa fa-quote-left"></i></span>
+                </div>
+                <div class="client-info">
+                    <h3>Design By</h3>
+                    <p><a href="https://manjaygupta.com">Manjay Gupta</a></p>
+                </div>
+            </div>
+
+            <div class="client-single inactive position-4" data-position="position-4">
+                <div class="client-img">
+                    <img src="https://media.licdn.com/dms/image/C4E03AQFbvYtvSeyw-g/profile-displayphoto-shrink_100_100/0?e=1574294400&v=beta&t=49_VH9HRvqymP-VLETlFhFt4idmunZPhIQfALwaTrmA" alt="">
+                </div>
+                <div class="client-comment">
+                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h3>
+                    <span><i class="fa fa-quote-left"></i></span>
+                </div>
+                <div class="client-info">
+                    <h3>Design By</h3>
+                    <p><a href="https://manjaygupta.com">Manjay Gupta</a></p>
+                </div>
+            </div>
+
+            <div class="client-single inactive position-5" data-position="position-5">
+                <div class="client-img">
+                    <img src="https://cdn.dribbble.com/users/2132253/avatars/small/1799e2c9badff08058551384763e284c.jpg?1568268299" alt="">
+                </div>
+                <div class="client-comment">
+                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h3>
+                    <span><i class="fa fa-quote-left"></i></span>
+                </div>
+                <div class="client-info">
+                    <h3>Design By</h3>
+                    <p><a href="https://manjaygupta.com">Manjay Gupta</a></p>
+                </div>
+            </div>
+
+            <div class="client-single inactive position-6" data-position="position-6">
+                <div class="client-img">
+                    <img src="https://cdn.dribbble.com/users/2132253/avatars/small/1799e2c9badff08058551384763e284c.jpg?1568268299" alt="">
+                </div>
+                <div class="client-comment">
+                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h3>
+                    <span><i class="fa fa-quote-left"></i></span>
+                </div>
+                <div class="client-info">
+                    <h3>Design By</h3>
+                    <p><a href="https://manjaygupta.com">Manjay Gupta</a></p>
+                </div>
+            </div>
+
+            <div class="client-single inactive position-7" data-position="position-7">
+                <div class="client-img">
+                    <img src="https://cdn.dribbble.com/users/2132253/avatars/small/1799e2c9badff08058551384763e284c.jpg?1568268299" width="40px" alt="">
+                </div>
+                <div class="client-comment">
+                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h3>
+                    <span><i class="fa fa-quote-left"></i></span>
+                </div>
+                <div class="client-info">
+                    <h3>Design By</h3>
+                    <p><a href="https://manjaygupta.com">Manjay Gupta</a></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
 
+@*Contact*@
+<section id="contact">
+    <div class="uk-child-width-expand@s uk-padding" uk-grid style="min-height:50vh;">
+        <div style="">
+            <h1 style="color: #111; font-size: 5rem;font-weight: 600;text-align: center; margin-bottom:110px;">
+                CastingNepal
+            </h1>
+            <div class="uk-child-width-expand uk-text-center uk-margin-top " uk-grid>
+                <div class="uk-width-1-3@s uk-text-center">
+                    <div class="social-icon">
+                        <a href="https://www.facebook.com/zookti.makeitsimple/" target="_blank" uk-icon="icon: location">
+                        </a>
+                    </div>
+                    <h2>Location</h2>
+                    <span>3rd floor, Karki Bhawan, Anamnagar, Kathmandu, Nepal</span>
+                </div>
+                <div class="uk-width-1-3@s">
+                    <div class="social-icon">
+
+                        <a href="https://www.facebook.com/zookti.makeitsimple/" target="_blank" uk-icon="icon: receiver">
+                        </a>
+                    </div>
+                    <h2>Phone</h2>
+                    <span>
+                        9851187463<br />
+                        9828888954
+                    </span>
+                </div>
+                <div class="uk-width-1-3@s">
+                    <div class="social-icon">
+                        <a href="https://www.facebook.com/zookti.makeitsimple/" target="_blank" uk-icon="mail">
+                            @*<i uk-icon="icon: mail ratio: 2"></i>*@
+                        </a>
+                    </div>
+                    <h2>Email</h2>
+                    <span>
+                        info@zookti.com<br />
+                        zooktico@gmail.com
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="uk-width-1-3@s" style="background-color:#ffcc33; padding:36px 45px;  border-radius:7px;">
+            <h3 style="text-align: center;font-weight: 600;font-size: 23px;">Contact Us</h3>
+            <form class="uk-form-stacked">
+                <div class="uk-margin">
+                    <label class="uk-form-label label-name" for="form-stacked-text">Name</label>
+                    <div class="uk-form-controls input-section">
+                        <input class="uk-input" id="form-stacked-text" type="text" placeholder="Name">
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label label-name" for="form-stacked-text">Email</label>
+                    <div class="uk-form-controls input-section">
+                        <input class="uk-input" id="form-stacked-text" type="text" placeholder="Email">
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label label-name" for="form-stacked-text">Phone</label>
+                    <div class="uk-form-controls input-section">
+                        <input class="uk-input" id="form-stacked-text" type="number" placeholder="Phone">
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label label-name" for="form-stacked-text">Message</label>
+                    <textarea class="uk-textarea textarea-section" rows="3" placeholder="Your Message,Comment,Feedback"></textarea>
+                </div>
+                <button class="uk-button contact-btn">Send</button>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+@*Location Map*@
+<div id="location" class="uk-margin-medium-left uk-margin-medium-right uk-margin-large-bottom uk-margin-medium-top">
+    <span style="font-size:17px; margin-bottom:20px;"><strong>Schedule a free consulting session with us.</strong> You can simply contact us by email or call. <br />Or leave your details in the form and we’ll be in touch.</span>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.645518677061!2d85.32702261443413!3d27.6973489325395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb199756bed2e3%3A0xdd682247ffbc7355!2sZookti!5e0!3m2!1sen!2snp!4v1647758332989!5m2!1sen!2snp" width="100%" height="500" style="border:0; margin-top:10px;" allowfullscreen="" loading="lazy"></iframe>
 </div>
-
-
-
-
-
-
-
-
-
-
-@*<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-    <div class="carousel-inner">
-    <div class="carousel-item active">
-    <img src="/Image/1.jpg" class="d-block w-100" style="height:50% " alt="...">
-    </div>
-    <div class="carousel-item">
-    <img src="/Image/2.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-    <img src="/Image/3.jpg" class="d-block w-100" alt="...">
-    </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-    </button>
-    </div>*@
