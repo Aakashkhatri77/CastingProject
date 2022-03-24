@@ -10,9 +10,9 @@
 }
 
 
-    <div style="margin-top:50px;">
-        <h4 class="uk-margin-medium-left uk-margin-medium-right" style="background-color:#ffcc33;  padding: 6px 8px;"> Personal Information</h4>
-    </div>
+<div style="margin-top:50px;">
+    <h4 class="uk-margin-medium-left uk-margin-medium-right" style="background-color:#ffcc33;  padding: 6px 8px;"> Personal Information</h4>
+</div>
 <form class="uk-grid-small uk-margin-medium-left uk-margin-medium-right" uk-grid style="margin-bottom:100px" asp-action="Create" enctype="multipart/form-data">
     <div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Name</label>
@@ -34,15 +34,21 @@
     </div>
     <div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Roles</label>
-        <select multiple class="uk-input s2" name="SelectedRoleId" asp-items="@(new SelectList (roles,"Id", "Name"))"></select>
+        <div class="uk-grid" uk-grid>
+            <select multiple class="uk-input s2 uk-grid" name="SelectedRoleId" asp-items="@(new SelectList (roles,"Id", "Name"))" ></select>
+        </div>
     </div>
     <div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Hobbies</label>
-        <select multiple class="uk-input s2" name="SelectedHobbyId" asp-items="@(new SelectList (hobbies,"Id", "Name"))"></select>
+        <div class="uk-grid" uk-grid>
+            <select multiple class=" uk-input s2 "  name="SelectedHobbyId" asp-items="@(new SelectList (hobbies,"Id", "Name") )"></select>
+        </div>
     </div>
     <div class="uk-width-1-2@s">
         <label class="uk-form-label" for="form-stacked-text">Skills</label>
-        <select multiple class="uk-input s2" name="SelectedSkillID" asp-items="@(new SelectList (skills,"Id", "Name"))"></select>
+        <div class="uk-grid" uk-grid>
+            <select multiple class="uk-input s2 uk-grid" name="SelectedSkillID" asp-items="@(new SelectList (skills,"Id", "Name"))" ></select>
+        </div>
     </div>
     <div class="uk-width-1-4@s" uk-form>
         <label class="uk-form-label" for="form-stacked-text">Date-of-Birth</label>

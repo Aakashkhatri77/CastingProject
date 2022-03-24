@@ -52,41 +52,50 @@ $(".load-btn").on("click", function () {
     }
 })
 
-//js for testimonials
 
-$(document).ready(
-    (function () {
-        $(".client-single").on("click", function (event) {
-            event.preventDefault();
+//-------------------js for testimonialsssss------------------
 
-            var active = $(this).hasClass("active");
+var galleryThumbs = new Swiper('.gallery-thumbs', {
+    effect: 'coverflow',
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: '2',
+    // coverflowEffect: {
+    //   rotate: 50,
+    //   stretch: 0,
+    //   depth: 100,
+    //   modifier: 1,
+    //   slideShadows : true,
+    // },
 
-            var parent = $(this).parents(".testi-wrap");
+    coverflowEffect: {
+        rotate: 0,
+        stretch: 0,
+        depth: 50,
+        modifier: 6,
+        slideShadows: false,
+    },
 
-            if (!active) {
-                var activeBlock = parent.find(".client-single.active");
+});
 
-                var currentPos = $(this).attr("data-position");
 
-                var newPos = activeBlock.attr("data-position");
-
-                activeBlock
-                    .removeClass("active")
-                    .removeClass(newPos)
-                    .addClass("inactive")
-                    .addClass(currentPos);
-                activeBlock.attr("data-position", currentPos);
-
-                $(this)
-                    .addClass("active")
-                    .removeClass("inactive")
-                    .removeClass(currentPos)
-                    .addClass(newPos);
-                $(this).attr("data-position", newPos);
-            }
-        });
-    })(jQuery)
-);
+var galleryTop = new Swiper('.swiper-container.testimonial', {
+    speed: 400,
+    spaceBetween: 50,
+    autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+    },
+    direction: 'vertical',
+    pagination: {
+        clickable: true,
+        el: '.swiper-pagination',
+        type: 'bullets',
+    },
+    thumbs: {
+        swiper: galleryThumbs
+    }
+});
 
 
 

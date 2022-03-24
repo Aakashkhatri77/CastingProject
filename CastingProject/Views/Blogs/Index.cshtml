@@ -1,0 +1,92 @@
+﻿@model IEnumerable<CastingProject.Models.Blogs>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@*Blogs section*@
+
+<h2 class="uk-margin-medium-left" style="margin-bottom:-40px; margin-top:20px;">Blogs</h2>
+<div class="uk-grid-small uk-child-width-expand@s uk-margin-top uk-padding" uk-grid>
+
+    @foreach (var item in Model)
+    {
+        <div>
+            <div class="uk-card uk-card-default" style="border-radius:6px; ">
+                <div class="uk-card-media-top card-img">
+                    <a asp-action="Details" asp-route-id="@item.Id"><img src="@(ImageSize.Get(item.Picture,"medium"))" alt="" style="border-radius: 6px 6px 0px 0px; object-fit:cover"></a>
+                </div>
+                <div class="uk-card-body">
+                    <a asp-action="Details" asp-route-id="@item.Id"><h3 class="uk-card-title">@item.Title</h3></a>
+                    <p>@item.HighlightLine</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*
+    <p>
+    <a asp-action="Create">Create New</a>
+    </p>
+
+    @foreach (var item in Model) {
+    <tr>
+    <td>
+    @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Content)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.HighlightLine)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.PostStatus)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.PublishDate)
+    </td>
+
+    <td>
+    <img src="@(CastingProject.Helper.ImageSize.Get(item.Picture,"medium"))"/>
+    </td>
+    <td>
+    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+    <a asp-action="Delete"  asp-route-id="@item.Id">Delete</a>
+    </td>
+    </tr>
+    }
+*@

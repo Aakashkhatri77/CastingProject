@@ -45,7 +45,7 @@ body {
     font-weight: 700;
     text-transform: capitalize;
     font-size: 0.9rem;
-    color: #111;
+  /*  color: #111;*/
     transition: .1s ease-in-out;
     transition-property: color,background-color;
 }

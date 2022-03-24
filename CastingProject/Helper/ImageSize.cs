@@ -1,9 +1,15 @@
-﻿namespace CastingProject.Helper
+﻿using Azure.Core;
+using System.Web;
+
+
+namespace CastingProject.Helper
 {
     public class ImageSize
     {
         public static string Get(string url, string resize)
         {
+       
+
             if (url != null)
             {
                 string imgPath = url.Split('.')[0];

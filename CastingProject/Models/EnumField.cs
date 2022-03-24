@@ -61,5 +61,11 @@ namespace CastingProject.Models
             Married,
             Unmarried
         }
+
+        public enum PostStatus
+        {
+            Publish,
+            Trash
+        }
     }
 }

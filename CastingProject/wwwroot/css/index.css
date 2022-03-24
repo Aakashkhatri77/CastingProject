@@ -162,6 +162,7 @@
         justify-content:center;
     }
 
+
     .artist-name a{
         display:flex;
         justify-content:center;
@@ -176,11 +177,11 @@
             transition: width 1s, height 1s, transform 1s;
         }
 
-.artist-name a h3:hover{
+/*.artist-name a h3:hover{
     color: #ffcc33;
     font: 30px;
     background-color: black;
-}
+}*/
 
 .img-area {
     height: 100%;

@@ -3,11 +3,11 @@
 
 }
 <section id="home">
-    <div class="uk-position-top" style="uk-margin-bottom ">
-        <img src="~/WallPaper/image.jpg" alt="Wallpaper" style="height:100vh; width:100%; object-fit:cover;" />
+    <div class="uk-position-top" style="background-color:black;">
+        <img src="~/WallPaper/kumari.jpg" alt="Wallpaper" style="height:100vh; object-fit:contain; position:relative; right:-50%" ; />
         <div id="box2">
             <div id="text">
-                Welcome<br> To Casting Nepal<br>
+                Welcome<br> To CastingNepal<br>
                 <div class="uk-flex">
                     <button class="btn modelhire-btn">Hire Model</button>
                     <button class="btn join-btn">Join</button>
@@ -22,8 +22,8 @@
 <div class="uk-margin-small-left uk-margin-small-right" style="margin-top:610px;">
     <div style="display:flex; justify-content:space-between; align-items:center;">
         <h2 style="font-size: 35px;font-weight: 600;margin-left: 25px;">Featured Models</h2>
-        <span><a asp-action="Index" asp-controller="Artist" uk-icon="chevron-right">See more</a></span>
-     
+        <span><a asp-action="Index" asp-controller="Artist" uk-icon="chevron-right" style="color:#505050">See more</a></span>
+
     </div>
     @await Component.InvokeAsync("Artist");
 </div>
@@ -33,7 +33,7 @@
 <div id="aboutUs">
     <div class="uk-margin-bottom about" style="margin-top:10px;">
         <div class="main">
-            <img src="~/WallPaper/Wallpaper3.jpg" />
+            <img src="~/WallPaper/10.jpg" />
             <div class="all-text">
                 <h4 class="uk-margin-bottom-remove ">About Us</h4>
                 <h1>A Platform for hiring a models.</h1>
@@ -47,226 +47,168 @@
     </div>
 </div>
 
+@await Component.InvokeAsync("Blogs")
 
 
-@*Blogs section*@
-
-<h2 class="uk-margin-medium-left" style="margin-bottom:-40px; margin-top:20px;">Blogs</h2>
-<div class="uk-grid-small uk-child-width-expand@s uk-margin-top uk-padding" uk-grid>
-
-    <div>
-        <div class="uk-card uk-card-default" style="border-radius:6px; ">
-            <div class="uk-card-media-top card-img">
-                <img src="~/WallPaper/Wallpaper4.jpg" alt="" style="border-radius: 6px 6px 0px 0px;">
-            </div>
-            <div class="uk-card-body">
-                <h3 class="uk-card-title">Media Top</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-            </div>
-        </div>
-    </div>
-    <div>
-        <div class="uk-card uk-card-default" style="border-radius:6px; ">
-            <div class="uk-card-media-top  card-img">
-                <img src="~/WallPaper/Wallpaper2.jpg" alt="" style="border-radius: 6px 6px 0px 0px;">
-            </div>
-            <div class="uk-card-body">
-                <h3 class="uk-card-title">Media Top</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-            </div>
-        </div>
-    </div>
-    <div>
-        <div class="uk-card uk-card-default" style="border-radius:6px; ">
-            <div class="uk-card-media-top card-img ">
-                <img src="~/WallPaper/Wallpaper5.jpg" alt="" style="border-radius: 6px 6px 0px 0px;">
-            </div>
-            <div class="uk-card-body">
-                <h3 class="uk-card-title">Media Top</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-            </div>
-        </div>
-    </div>
-</div>
 
 @*FAQ Section*@
-<div class="uk-margin-large-top faq-img" style="display:flex; justify-content:center; ">
-    <img src="~/WallPaper/faq.png" alt="faq" style="height:100px;" />
-</div>
-@*<h2 class="uk-margin-small-bottom" style="text-align:center;">Frequently Asked Questions</h2>*@
-<div class="uk-margin-medium-right uk-margin-medium-left uk-margin-medium-top faq-card">
-    <div class="faq-title">
-        General Questions
-    </div>
-    <ul class="faq-list" uk-accordion>
-        <li>
-            <a class="uk-accordion-title" href="#">Is account registration required?</a>
-            <div class="uk-accordion-content">
-                <p>
-                    Account registration at CastingNepal is only required if you will be casting or hiring models
-                    Account registration at CastingNepal is only required if you will be casting or hiring models
-                    Account registration at CastingNepal is only required if you will be casting or hiring models
-                    Account registration at CastingNepal is only required if you will be casting or hiring models
-                    Account registration at CastingNepal is only required if you will be casting or hiring models
-                    Account registration at CastingNepal is only required if you will be casting or hiring models.
-                </p>
-            </div>
-        </li>
-        <li class="uk-margin-small-top">
-            <a class="uk-accordion-title" href="#">What is the process for casting a model?</a>
-            <div class="uk-accordion-content">
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor reprehenderit.</p>
-            </div>
-        </li>
-        <li class="uk-margin-small-top">
-            <a class="uk-accordion-title" href="#">How do I change my Password?</a>
-            <div class="uk-accordion-content">
-                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.</p>
-            </div>
-        </li>
-    </ul>
+<div>
+        <div class="uk-margin-large-top faq-img" style="display:flex; justify-content:center; ">
+        <img src="~/WallPaper/faq1.svg" alt="faq" style="height: 100px;margin-bottom: -30px;color: #ffcc33;width: 140px;" uk-svg />
+        </div>
+    <h2 class="uk-margin-small-bottom" style="text-align:center;">Frequently Asked Questions</h2>
+    <div class="uk-margin-medium-top faq-card">
+        <div class="faq-title">
+            General Questions
+        </div>
+        <ul class="faq-list" uk-accordion>
+            <li>
+                <a class="uk-accordion-title" href="#">Is account registration required?</a>
+                <div class="uk-accordion-content">
+                    <p>
+                        Account registration at CastingNepal is only required if you will be casting or hiring models
+                        Account registration at CastingNepal is only required if you will be casting or hiring models
+                        Account registration at CastingNepal is only required if you will be casting or hiring models
+                        Account registration at CastingNepal is only required if you will be casting or hiring models
+                        Account registration at CastingNepal is only required if you will be casting or hiring models
+                        Account registration at CastingNepal is only required if you will be casting or hiring models.
+                    </p>
+                </div>
+            </li>
+            <li class="uk-margin-small-top">
+                <a class="uk-accordion-title" href="#">What is the process for casting a model?</a>
+                <div class="uk-accordion-content">
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor reprehenderit.</p>
+                </div>
+            </li>
+            <li class="uk-margin-small-top">
+                <a class="uk-accordion-title" href="#">How do I change my Password?</a>
+                <div class="uk-accordion-content">
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.</p>
+                </div>
+            </li>
+        </ul>
 
 
-    <div class="faq-title">
-        Casters
+        <div class="faq-title">
+            Casters
+        </div>
+        <ul class="faq-list" uk-accordion>
+            <li>
+                <a class="uk-accordion-title" href="#">Is account registration required?</a>
+                <div class="uk-accordion-content">
+                    <p>Account registration at CastingNepal is only required if you will be casting or hiring models.</p>
+                </div>
+            </li>
+            <li class="uk-margin-small-top">
+                <a class="uk-accordion-title" href="#">What is the process for casting a model?</a>
+                <div class="uk-accordion-content">
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor reprehenderit.</p>
+                </div>
+            </li>
+            <li class="uk-margin-small-top">
+                <a class="uk-accordion-title" href="#">How do I change my Password?</a>
+                <div class="uk-accordion-content">
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.</p>
+                </div>
+            </li>
+        </ul>
     </div>
-    <ul class="faq-list" uk-accordion>
-        <li>
-            <a class="uk-accordion-title" href="#">Is account registration required?</a>
-            <div class="uk-accordion-content">
-                <p>Account registration at CastingNepal is only required if you will be casting or hiring models.</p>
-            </div>
-        </li>
-        <li class="uk-margin-small-top">
-            <a class="uk-accordion-title" href="#">What is the process for casting a model?</a>
-            <div class="uk-accordion-content">
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor reprehenderit.</p>
-            </div>
-        </li>
-        <li class="uk-margin-small-top">
-            <a class="uk-accordion-title" href="#">How do I change my Password?</a>
-            <div class="uk-accordion-content">
-                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat proident.</p>
-            </div>
-        </li>
-    </ul>
 </div>
-    </div>
+@*</div>*@
+
 
 
 
 @*Testimonials*@
-<section id="testimonial-area">
-    <div class="container uk-margin-large-top">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <div class="section-heading text-center">
-                    <h2>A Word From Our Customers</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. </p>
+<section class=" uk-margin-large-top uk-margin-large-bottom uk-padding spacer">
+    <div class="testimonial-section">
+        <div class="testi-user-img">
+            <div class="swiper-container gallery-thumbs">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img class="u3" src="~/WallPaper/15.jpg" alt="" style="object-fit:cover;">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="u1" src="~/WallPaper/17.jpg" alt="" style="object-fit:cover;">
+                    </div>
+                    <div class="swiper-slide">
+                        <img class="u2" src="~/WallPaper/18.jpg" alt="" style="object-fit:cover;">
+                    </div>
+
+                    <div class="swiper-slide">
+                        <img class="u4" src="~/WallPaper/16.jpg" alt="" style="object-fit:cover;">
+                    </div>
+
                 </div>
             </div>
-
         </div>
-        <div class="testi-wrap">
+        <div class="user-saying">
+            <div class="swiper-container testimonial">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper ">
+                    <!-- Slides -->
+                    <div class="swiper-slide">
+                        <div class="quote">
+                            <img class="quote-icon" src="~/WallPaper/quotation-right-mark.svg" alt="" uk-svg>
+                            <p>
+                                “This is best and biggest unified platform
+                                for instant online admission. We can easily
+                                take admission for any course in any institute..“
+                            </p>
+                            <div class="name">-Ramkishor Verma-</div>
+                            <div class="designation">University Student</div>
 
-            <div class="client-single active position-1" data-position="position-1">
-                <div class="client-img">
-                    <img src="https://cdn.dribbble.com/users/2132253/avatars/small/1799e2c9badff08058551384763e284c.jpg?1568268299" alt="">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="quote">
+                            <img class="quote-icon" src="~/WallPaper/quotation-right-mark.svg" alt="" uk-svg>
+
+                            <p>
+                                “This is best and biggest unified platform
+                                for instant online admission. We can easily
+                                take admission for any course in any institute..“
+                            </p>
+                            <div class="name">-Ramkishor Verma-</div>
+                            <div class="designation">University Student</div>
+
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="quote">
+                            <img class="quote-icon" src="~/WallPaper/quotation-right-mark.svg" alt="" uk-svg>
+
+                            <p>
+                                “This is best and biggest unified platform
+                                for instant online admission. We can easily
+                                take admission for any course in any institute..“
+                            </p>
+                            <div class="name">-Ramkishor Verma-</div>
+                            <div class="designation">University Student</div>
+
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="quote">
+                            <img class="quote-icon" src="~/WallPaper/quotation-right-mark.svg" alt="" uk-svg>
+
+                            <p>
+                                “This is best and biggest unified platform
+                                for instant online admission. We can easily
+                                take admission for any course in any institute..“
+                            </p>
+                            <div class="name">-Ramkishor Verma-</div>
+                            <div class="designation">University Student</div>
+
+                        </div>
+                    </div>
+
                 </div>
-                <div class="client-comment">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                    <span><i class="fa fa-quote-left"></i></span>
-                </div>
-                <div class="client-info">
-                    <h3>Design By</h3>
-                    <p><a href="https://manjaygupta.com">Manjay Gupta</a></p>
-                </div>
+                <!-- If we need pagination -->
+                <div class="swiper-pagination swiper-pagination-white"></div>
+
             </div>
-
-            <div class="client-single inactive position-2" data-position="position-2">
-                <div class="client-img">
-                    <img src="https://cdn.dribbble.com/users/2132253/avatars/small/1799e2c9badff08058551384763e284c.jpg?1568268299" alt="">
-                </div>
-                <div class="client-comment">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                    <span><i class="fa fa-quote-left"></i></span>
-                </div>
-                <div class="client-info">
-                    <h3>Design By</h3>
-                    <p><a href="https://manjaygupta.com">Manjay Gupta</a></p>
-                </div>
-            </div>
-
-            <div class="client-single inactive position-3" data-position="position-3">
-                <div class="client-img">
-                    <img src="https://cdn.dribbble.com/users/2132253/avatars/small/1799e2c9badff08058551384763e284c.jpg?1568268299" alt="">
-                </div>
-                <div class="client-comment">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                    <span><i class="fa fa-quote-left"></i></span>
-                </div>
-                <div class="client-info">
-                    <h3>Design By</h3>
-                    <p><a href="https://manjaygupta.com">Manjay Gupta</a></p>
-                </div>
-            </div>
-
-            <div class="client-single inactive position-4" data-position="position-4">
-                <div class="client-img">
-                    <img src="https://media.licdn.com/dms/image/C4E03AQFbvYtvSeyw-g/profile-displayphoto-shrink_100_100/0?e=1574294400&v=beta&t=49_VH9HRvqymP-VLETlFhFt4idmunZPhIQfALwaTrmA" alt="">
-                </div>
-                <div class="client-comment">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                    <span><i class="fa fa-quote-left"></i></span>
-                </div>
-                <div class="client-info">
-                    <h3>Design By</h3>
-                    <p><a href="https://manjaygupta.com">Manjay Gupta</a></p>
-                </div>
-            </div>
-
-            <div class="client-single inactive position-5" data-position="position-5">
-                <div class="client-img">
-                    <img src="https://cdn.dribbble.com/users/2132253/avatars/small/1799e2c9badff08058551384763e284c.jpg?1568268299" alt="">
-                </div>
-                <div class="client-comment">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                    <span><i class="fa fa-quote-left"></i></span>
-                </div>
-                <div class="client-info">
-                    <h3>Design By</h3>
-                    <p><a href="https://manjaygupta.com">Manjay Gupta</a></p>
-                </div>
-            </div>
-
-            <div class="client-single inactive position-6" data-position="position-6">
-                <div class="client-img">
-                    <img src="https://cdn.dribbble.com/users/2132253/avatars/small/1799e2c9badff08058551384763e284c.jpg?1568268299" alt="">
-                </div>
-                <div class="client-comment">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                    <span><i class="fa fa-quote-left"></i></span>
-                </div>
-                <div class="client-info">
-                    <h3>Design By</h3>
-                    <p><a href="https://manjaygupta.com">Manjay Gupta</a></p>
-                </div>
-            </div>
-
-            <div class="client-single inactive position-7" data-position="position-7">
-                <div class="client-img">
-                    <img src="https://cdn.dribbble.com/users/2132253/avatars/small/1799e2c9badff08058551384763e284c.jpg?1568268299" width="40px" alt="">
-                </div>
-                <div class="client-comment">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                    <span><i class="fa fa-quote-left"></i></span>
-                </div>
-                <div class="client-info">
-                    <h3>Design By</h3>
-                    <p><a href="https://manjaygupta.com">Manjay Gupta</a></p>
-                </div>
-            </div>
-
         </div>
     </div>
 </section>
@@ -351,3 +293,7 @@
     <span style="font-size:17px; margin-bottom:20px;"><strong>Schedule a free consulting session with us.</strong> You can simply contact us by email or call. <br />Or leave your details in the form and we’ll be in touch.</span>
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.645518677061!2d85.32702261443413!3d27.6973489325395!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb199756bed2e3%3A0xdd682247ffbc7355!2sZookti!5e0!3m2!1sen!2snp!4v1647758332989!5m2!1sen!2snp" width="100%" height="500" style="border:0; margin-top:10px;" allowfullscreen="" loading="lazy"></iframe>
 </div>
+
+
+
+

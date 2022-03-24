@@ -1,4 +1,5 @@
 using CastingProject.Data;
+using CastingProject.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,7 @@ builder.Services.AddSession(options => {
     options.Cookie.IsEssential = true;
 });
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<ArtistService>();
 
 var app = builder.Build();
 

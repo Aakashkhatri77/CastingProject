@@ -9,6 +9,10 @@
                     select new { ID = (int)d, Name = d.ToString() };
 
     var filter = ViewBag.filter as CastingProject.Filter.GeneralFilter;
+
+    
+    
+
 }
 
 <input type="hidden" id="details">
@@ -131,6 +135,7 @@
                     <div>
                         <div class="artist-card uk-margin-small-bottom uk-margin-small-right">
                             <div class="img-area uk-inline-clip uk-transition-toggle ">
+                               
                                 <a asp-action="Details" asp-route-id="@item.Id">
                                     <img src="@(CastingProject.Helper.ImageSize.Get(item.Dp, "fullscreen"))" class="uk-transition-scale-up uk-transition-opaque" alt="Display Picture" />
                                 </a>

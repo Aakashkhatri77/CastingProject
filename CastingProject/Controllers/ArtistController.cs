@@ -108,7 +108,6 @@ namespace CastingProject.Controllers
                 {
                     IFormFile postedFile;
                     string artistName = artist.Name.ToString();
-                    //uploading Dp
                     if (artist.ImageFile != null)
                     {
                         postedFile = artist.ImageFile;
@@ -184,7 +183,7 @@ namespace CastingProject.Controllers
                 .Include(x => x.Category)
                 .Include(x => x.ArtistSkills).ThenInclude(x => x.Skill)
                 .Include(x => x.ArtistHobbies).ThenInclude(x => x.Hobby)
-                .Include(x => x.ArtistRoles).ThenInclude(x => x.Role).FirstOrDefault(x => x.Id == id);
+                .Include(x => x.ArtistRoles).ThenInclude(x => x.Role).FirstOrDefault(x => x.Id== id);
 
             ViewBag.Artist = context.Artists.ToList();
             return View(artist);
@@ -397,7 +396,6 @@ namespace CastingProject.Controllers
                 {
                     string imagePath = artist.Dp;
                     DeleteRespondingImage(imagePath);
-
                 }
                 foreach (var item in gallery)
                 {

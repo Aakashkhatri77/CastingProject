@@ -21,6 +21,7 @@ namespace CastingProject.Data
         public DbSet<ArtistRole> ArtistRoles { get; set; }
         public DbSet<Category> Categories{ get; set; }
         public DbSet<ArtistSkills> ArtistSkills{ get; set; }
+        public DbSet<Blogs> Blogs{ get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

@@ -2,24 +2,27 @@
 
 
 <div>
-        <div class="uk-flex uk-flex-wrap uk-flex-center">
-            @foreach (var item in Model)
-            {
-                    <div style="">
-                        <div class="artist-card uk-margin-small-bottom uk-margin-small-right">
-                            <div class="img-area uk-inline-clip uk-transition-toggle ">
-                                <a asp-action="Details" asp-controller="Artist" asp-route-id="@item.Id">
-                                    <img src="@(CastingProject.Helper.ImageSize.Get(@item.Dp, "fullscreen"))" class="uk-transition-scale-up uk-transition-opaque" alt="Display Picture" />
-                                </a>
-                                <div class="artist-name">
-                                    <a asp-action="Details" asp-controller="Artist" asp-route-id="@item.Id">
-                                        <h3>@item.Name</h3>
-                                    </a>
-                                </div>
+    <div class="uk-flex uk-flex-wrap uk-flex-center">
+        @foreach (var item in Model)
+        {
+            <div style="">
+                <div class="artist-card uk-margin-small-bottom uk-margin-small-right">
+                    <div class="img-area uk-inline-clip uk-transition-toggle" tabindex="0">
+
+                        <a asp-action="Details" asp-controller="Artist" asp-route-id="@item.Id">
+                        <img src="@(CastingProject.Helper.ImageSize.Get(@item.Dp, "fullscreen"))" class="uk-transition-scale-up uk-transition-opaque" alt="Display Picture" />
+
+                           @* <div class="uk-transition-slide-bottom-medium uk-position-cover uk-position-bottom uk-overlay uk-overlay-primary uk-light artist-name">
+                                <h3 style="margin-top: 270px;">@item.Name</h3>
+                            </div>*@
+                            <div class="uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-primary uk-light artist-name">
+                                <h3>@item.Name</h3>
                             </div>
-                        </div>
-                        @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                        </a>
                     </div>
-            }
-        </div>
+                </div>
+                @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+            </div>
+        }
+    </div>
 </div>

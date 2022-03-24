@@ -1,6 +1,7 @@
 ﻿<header>
-    <div uk-sticky="animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky;">
-        <nav id="main-navbar" class="uk-navbar-container uk-navbar-transparent uk-navbar uk-position-relative" uk-navbar>
+    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky;">
+        @*<nav id="main-navbar" class="uk-navbar-container uk-navbar-transparent uk-navbar uk-position-relative" uk-navbar style="background: linear-gradient(180deg, black, transparent);">*@
+        <nav id="main-navbar" class="uk-navbar-container uk-navbar-transparent uk-navbar" uk-navbar>
             <div class="uk-navbar-left logo">
                 <ul class="uk-navbar-nav uk-margin-left">
                     <li><a asp-action="Index" asp-controller="Home">Casting</a></li>
@@ -8,12 +9,13 @@
             </div>
             <div class="uk-navbar-left uk-margin-remove nav-header uk-navbar">
                 <ul class="uk-navbar-nav">
-                    <li><a asp-action="Index" asp-controller="Artist">Artist</a></li>
                      <li class="items" ><a href="#home">Home</a></li>
+                    <li><a asp-action="Index" asp-controller="Artist">Artist</a></li>
                      <li class="items" ><a href="#aboutUs">About Us</a></li>
-                     <li class="items" ><a href="#blogs">Blogs</a></li>
+                     @*<li class="items" ><a href="#blogs">Blogs</a></li>*@
                      <li class="items" ><a href="#faq">FAQ</a></li>
                      <li class="items" ><a href="#contact">ContactUs</a></li>
+                    <li><a asp-action="Index" asp-controller="Blogs">Blogs</a></li>
              @*       <li><a asp-action="Index" asp-controller="Ethnicity">Ethnicity</a></li>
                     <li><a asp-action="Index" asp-controller="Category">Category</a></li>
                     <li><a asp-action="Index" asp-controller="Roles">Role</a></li>
@@ -23,18 +25,6 @@
             </div>
             <div class="uk-navbar-right uk-grid account">
                 <partial name="_LoginPartial" />
-            </div>
-            <button class="uk-button uk-button-default uk-hidden@m" type="button" uk-toggle="target: #offcanvas-overlay">Open</button>
-
-            <div id="offcanvas-overlay" uk-offcanvas="overlay: true">
-                <div class="uk-offcanvas-bar">
-
-                    <button class="uk-offcanvas-close" type="button" uk-close></button>
-                    <h3>Title</h3>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-                </div>
             </div>
         </nav>
     </div>
